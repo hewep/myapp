@@ -1,7 +1,7 @@
 package com.app.common;
 
-import com.app.cms.controller.IndexController;
-import com.app.cms.controller.UserController;
+import com.app.controller.IndexController;
+import com.app.controller.UserController;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -11,6 +11,7 @@ import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.tx.TxByRegex;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
@@ -28,7 +29,6 @@ public class AppConfig extends JFinalConfig {
 	@Override
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
-		me.add("/user", UserController.class);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class AppConfig extends JFinalConfig {
 		me.add(cp);
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(cp);
 		me.add(arp);
-		arp.setDialect(new AnsiSqlDialect());
+		arp.setDialect(new MysqlDialect());
 		arp.setShowSql(true);
 		
 	}

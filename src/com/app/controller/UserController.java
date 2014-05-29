@@ -1,4 +1,4 @@
-package com.app.cms.controller;
+package com.app.controller;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
@@ -29,5 +29,6 @@ public class UserController extends BaseController{
 	public void delById() throws Exception{
 
 	}
+	
 	
 }

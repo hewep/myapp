@@ -1,4 +1,4 @@
-package com.app.cms.controller;
+package com.app.controller;
 
 import java.util.HashMap;
 import java.util.Map;

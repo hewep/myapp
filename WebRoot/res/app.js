@@ -1,12 +1,12 @@
 'use strict';
 // Declare app level module which depends on filters, and services
-define(['angular','controllers/user'],function(angular, user){
-	var app =  angular.module('registerApp', ['ngRoute']);
+define(['angular','controllers/index','controllers/user'],function(angular, index, user){
+	var app =  angular.module('myApp', ['ngRoute']);
 		
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
-			  $routeProvider.when('/user/list', {templateUrl: 'core/user/list.html', controller: user.list})
+			  $routeProvider.when('/', {templateUrl: 'core/category.html', controller: index})
 			  				.when('/user/info/:userId', {templateUrl: 'core/user/info.html', controller: user.info})
-			  				.otherwise({redirectTo: '/user/list'});
+			  				.otherwise({redirectTo: '/'});
 			  				
 			  	// configure html5 to get links working on jsfiddle			
 			  	$locationProvider.html5Mode(true);

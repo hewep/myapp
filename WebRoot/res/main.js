@@ -1,28 +1,31 @@
 require.config({
-	baseUrl: 'res/js',
+	baseUrl: 'res/',
 	paths : {
 		angular : 'lib/angular',
 		angularRoute : 'lib/angular-route',
-		jquery : '/js/jquery-1.7.2.min',
-		bootstrap : '/plugins/bootstrap/js/bootstrap'
-		
+		jquery : 'common/js/jquery-1.7.2.min',
+		bootstrap : 'bootstrap/js/bootstrap.min',
+		validate : 'media/js/jquery.validate.min',
+		formValidate: 'media/js/form-validation',
+		application : 'media/js/application'
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
         'bootstrap' : {deps:['jquery']},
-        'common' :['jquery']
+        'validate' : {deps:['jquery']},
+        'formValidate' : {deps:['validate']}
     }
 });
-require(['core/js/config'], function(main){
 	
-	require(['angular',
-			 'controllers/user',
-			 'common',
-			 'angularRoute',
-			 'bootstrap'
-	],function(angular){
-		
-		angular.bootstrap(document, ['registerApp']);
-	});
+require(['angular',
+		 'angularRoute',
+		 'bootstrap',
+		 'formValidate',
+		 'application',
+		 'app'
+],function(angular){
+	Application.initPortletTools();
+	FormValidation.init();
+	angular.bootstrap(document, ['myApp']);
 });

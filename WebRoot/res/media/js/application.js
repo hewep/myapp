@@ -1,7 +1,7 @@
 /**
 Core script to handle the entire layout and base functions
 **/
-var App = function () {
+var Application = function () {
 
     // IE mode
     var isRTL = false;
@@ -747,7 +747,9 @@ var App = function () {
 
             App.addResponsiveHandler(handleChoosenSelect); // reinitiate chosen dropdown on main content resize. disable this line if you don't really use chosen dropdowns.
         },
-
+        initPortletTools: function(){
+            handlePortletTools(); 
+        },
         fixContentHeight: function () {
             handleSidebarAndContentHeight();
         },
