@@ -7,7 +7,6 @@ var FormValidation = function () {
 
             // for more info visit the official plugin documentation: 
             // http://docs.jquery.com/Plugins/Validation
-
             var form1 = $('#submit_form');
             var error1 = $('.alert-error', form1);
             var success1 = $('.alert-success', form1);

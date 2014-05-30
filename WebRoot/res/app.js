@@ -4,12 +4,12 @@ define(['angular','controllers/index','controllers/user'],function(angular, inde
 	var app =  angular.module('myApp', ['ngRoute']);
 		
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
-			  $routeProvider.when('/', {templateUrl: 'core/category.html', controller: index})
-			  				.when('/user/info/:userId', {templateUrl: 'core/user/info.html', controller: user.info})
+			  $routeProvider.when('/', {templateUrl: 'core/category.html', controller: index.categoryList})
+			  				.when('/register', {templateUrl: 'core/register.html', controller: index.register })
 			  				.otherwise({redirectTo: '/'});
 			  				
-			  	// configure html5 to get links working on jsfiddle			
-			  	$locationProvider.html5Mode(true);
+			  	// configure html5		
+			  	//$locationProvider.html5Mode(true);
 			}]);
 	return app;
 });

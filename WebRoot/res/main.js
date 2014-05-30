@@ -21,11 +21,11 @@ require.config({
 require(['angular',
 		 'angularRoute',
 		 'bootstrap',
-		 'formValidate',
+		 //'formValidate',
 		 'application',
 		 'app'
 ],function(angular){
 	Application.initPortletTools();
-	FormValidation.init();
+	//FormValidation.init();
 	angular.bootstrap(document, ['myApp']);
 });

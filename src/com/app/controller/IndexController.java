@@ -7,7 +7,7 @@ public class IndexController extends BaseController{
 		
 	}
 	
-	public void rigster(){
+	public void register(){
 		
 	}
 }

@@ -1,80 +1,65 @@
-<div tabindex="-1" data-width="760">
-		<div class="modal-header">
-
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-
-			<h3>��Աע��</h3>
-
-		</div>
-
-		<div class="modal-body">
-			<div class="row-fluid">
-				<form action="#" class="form-horizontal" id="submit_form" novalidate="novalidate">
-					<div class="alert alert-error hide">
-
-						<button class="close" data-dismiss="alert"></button>
-						You have some form errors. Please check below.
-					</div>
-					<div class="control-group">
-						<label class="control-label">
-							����:
-							<span class="required">*</span>
-						</label>
-						<div class="controls">
-							<input type="text" class="span6 m-wrap" name="email">
-							<span class="help-inline">�����ַ</span>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">
-							�ǳ�:
-							<span class="required">*</span>
-						</label>
-						<div class="controls">
-							<input type="text" class="span6 m-wrap" name="username">
-							<span class="help-inline">������5λ�ַ�</span>
-						</div>
-
-					</div>
-
-					<div class="control-group">
-
-						<label class="control-label">
-							��½����:
-							<span class="required">*</span>
-						</label>
-
-						<div class="controls">
-
-							<input type="password" class="span6 m-wrap" name="password" id="submit_form_password">
-
-							<span class="help-inline">���ȴ��ڵ���6λ</span>
-
-						</div>
-
-					</div>
-
-					<div class="control-group">
-						<label class="control-label">
-							����ȷ��:
-							<span class="required">*</span>
-						</label>
-
-						<div class="controls">
-							<input type="password" class="span6 m-wrap" name="rpassword">
-							<span class="help-inline">�ظ���������</span>
-						</div>
-
-					</div>
-
-					<div class="form-actions">
-						<button type="submit" class="btn purple">�ύ</button>
-						<button type="button" data-dismiss="modal" class="btn">ȡ��</button>
-
-					</div>
-				</form>
+<div class="row-fluid">
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption"> <i class="icon-reorder"></i>
+				会员注册
 			</div>
-
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
 		</div>
 
+		<div class="portlet-body">
+			<form ng-submit="submit()" class="form-horizontal" name="registerForm"
+				>
+				<div class="alert alert-error hide">
+
+					<button class="close" data-dismiss="alert"></button>
+					You have some form errors. Please check below.
+				</div>
+				<div class="control-group">
+					<label class="control-label"> 邮箱: <span class="required">*</span>
+					</label>
+					<div class="controls">
+						<input type="email" class="span6 m-wrap" required name="email" ng-model="user.email">
+						<span class="error help-inline" ng-show="registerForm.email.$error.required">请输入邮箱地址</span><br>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"> 昵称: <span class="required">*</span>
+					</label>
+					<div class="controls">
+						<input type="text" class="span6 m-wrap" name="username" required ng-minlength=5 ng-model="user.user_name"> 
+						<span class="error help-inline" ng-show="registerForm.username.$error.required">请输入用户名称</span>
+						<span class="error help-inline" ng-show="registerForm.username.$error.minlength">不少于5位字符</span>
+					</div>
+
+				</div>
+
+				<div class="control-group">
+
+					<label class="control-label"> 登陆密码: <span class="required">*</span>
+					</label>
+					<div class="controls">
+						<input type="password" class="span6 m-wrap" name="password" required ng-minlength=6 ng-model="user.password"> 
+						<span class="error help-inline" ng-show="registerForm.password.$error.required">请输入密码</span>
+						<span class="error help-inline" ng-show="registerForm.password.$error.minlength">不少于6位字符</span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label"> 密码确认: <span class="required">*</span>
+					</label>
+					<div class="controls">
+						<input type="password" class="span6 m-wrap" name="rpassword" required>
+						<span class="error help-inline" ng-show="registerForm.password.$error.required">重复输入密码</span>
+						
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn purple">立即注册</button>
+				</div>
+			</form>
+		</div>
 	</div>
+</div>
