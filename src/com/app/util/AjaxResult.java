@@ -27,12 +27,16 @@ public class AjaxResult {
 		result.put("status", status);	
 		result.put("msg", msg);
 	}
+	public void setData(String name,Object value){
+		result.put(name, value);
+	}
 	public void setData(String name,Map<?,?> data) {
 		result.put(name, data);
 	}
 	public void setData(String name,String value){
 		result.put(name, value);
 	}
+	
 	public void setData(String name,List<?> list){
 		result.put(name, list);
 	}

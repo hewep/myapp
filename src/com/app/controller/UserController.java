@@ -1,34 +1,51 @@
 package com.app.controller;
 
-import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.activerecord.tx.Tx;
-@Before(Tx.class)
+import com.app.model.User;
+import com.app.util.AjaxResult;
+
 public class UserController extends BaseController{
 	
 	public void list() throws Exception{
-		int pageSize = this.getCookieToInt("pageSize",10);
-		String sql = "select a.id, a.user_name,a.role, b.name as agent_name,"+
-					" a.real_name,a.sex, a.mobile, a.status";
-		Page<Record> recordPage = Db.paginate(getParaToInt(0, 1), pageSize, sql, " from users a left outer join agent b on a.agent_id = b.id order by a.id desc");
 		
-		setAttr("recordPage",recordPage);
-		setAttr("title","用户列表");
-		render("user_list.ftl");
 	}
 	public void addOrUpdate() throws Exception{
-		
+		AjaxResult result = new AjaxResult(1,"注册成功");
+		try {
+			User user0 = User.dao.findFirst("select * from user where email = ?", this.getPara("email",""));
+			if(user0 == null){
+				User user = this.getModel(User.class).setAttrs(this.getParamMap());
+				user.save();
+			}else{
+				result.setFailure(0, "此邮箱已注册");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setFailure(0, "注册失败："+e.getMessage());
+		}finally{
+			this.renderJson(result.toJson());
+		}
 	}
 	
 	public void findById(){
-	
+		
 	}
 	
 	public void delById() throws Exception{
 
 	}
 	
+	public void getByEmail(){
+		
+		AjaxResult result = new AjaxResult(1);
+		String email = this.getPara("email","");
+		User user = User.dao.findFirst("select * from user where email = ?", email);
+		if(user == null){
+			result.setData("exist", false);
+		}else{
+			result.setData("exist", true);
+		}
+		this.renderJson(result.toJson());
+	}
 	
 }

@@ -1,11 +1,15 @@
 'use strict';
 // Declare app level module which depends on filters, and services
-define(['angular','controllers/index','controllers/user'],function(angular, index, user){
-	var app =  angular.module('myApp', ['ngRoute']);
-		
+define(['angular',
+        'index',
+        'user'
+],function(angular){
+	var app =  angular.module('myApp', ['ngRoute','IndexCtrls','UserCtrls']);
+	
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
-			  $routeProvider.when('/', {templateUrl: 'core/category.html', controller: index.categoryList})
-			  				.when('/register', {templateUrl: 'core/register.html', controller: index.register })
+			  $routeProvider.when('/', {templateUrl: 'core/category.html', controller: null})
+			  				.when('/question', {templateUrl:'core/question.html', controller: null})
+			  				.when('/register', {templateUrl: 'core/register.html', controller: 'RegisterCtrl' })
 			  				.otherwise({redirectTo: '/'});
 			  				
 			  	// configure html5		

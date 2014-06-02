@@ -84,3 +84,21 @@ font-weight: 300;
 color: white;
 margin-bottom: 10px;
 }
+
+.page-header-fixed .page-container {
+margin-top: 5px;
+}
+.search{
+	padding: 12px 14px;
+	border:1px solid #EF8476;
+	margin-bottom:10px;
+}
+
+.search p {
+	font-size:16px;
+	display: inline;
+	height:20px;
+	vertical-align: middle;
+	font-family: 微软雅黑,Verdana,sans-serif,宋体;
+	color: #666;
+}

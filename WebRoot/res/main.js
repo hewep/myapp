@@ -7,11 +7,17 @@ require.config({
 		bootstrap : 'bootstrap/js/bootstrap.min',
 		validate : 'media/js/jquery.validate.min',
 		formValidate: 'media/js/form-validation',
-		application : 'media/js/application'
+		application : 'media/js/application',
+		kindEditor : 'plugins/kindeditor/kindeditor',
+		
+		index : 'controllers/index',
+		user : 'controllers/user',
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
+        'index' : {deps:['angular']},
+        'user' : {deps:['angular']},
         'bootstrap' : {deps:['jquery']},
         'validate' : {deps:['jquery']},
         'formValidate' : {deps:['validate']}
@@ -21,7 +27,6 @@ require.config({
 require(['angular',
 		 'angularRoute',
 		 'bootstrap',
-		 //'formValidate',
 		 'application',
 		 'app'
 ],function(angular){
