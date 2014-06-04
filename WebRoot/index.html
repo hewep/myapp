@@ -13,20 +13,8 @@
 <link rel="stylesheet" type="text/css" href="res/media/css/comm.css">
 
 <script data-main="res/main.js" src="res/require.js" ></script>
-<!--  
-<style>
-		#submit_form .control-label {
-			width: 80px;
-		}
-		#submit_form .controls{
-			margin-left:100px;
-		}
-		#submit_form .control-group {
-			margin-bottom: 5px;
-		}
-	</style>-->
 </head>
-<body class="page-header-fixed">
+<body class="page-header-fixed" ng-controller="ComCtrl">
 <!--導航-->
 <div id="navs" class="row-fluid">
 	<div id="navs_area">
@@ -43,13 +31,23 @@
 				</li>
 			</ul>
 		</div>
-		<div class="right">
+		<div class="right" ng-show="show">
 			<ul>
 				<li>
-					<a data-toggle="modal" href="#responsive">登 陆 </a>
+					<a data-toggle="modal" href="#login_modal">登 陆 </a>
 				</li>
 				<li >
 					<a href="#/register" >注 册 </a>
+				</li>
+			</ul>
+		</div>
+		<div class="right" ng-show="!show">
+			<ul>
+				<li>
+					{{user.name}} 
+				</li>
+				<li >
+					<a href="#" ng-click="logout()" >退出 </a>
 				</li>
 			</ul>
 		</div>
@@ -83,27 +81,25 @@
 	<div class="page-container" ng-view></div>
 	
 	<!--登陆-->
-	<div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
+	<div id="login_modal" class="modal hide fade" tabindex="-1" data-width="760">
 
 		<div class="modal-header">
-
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-
-			<h3>会员注册</h3>
+			<h3>会员登陆</h3>
 
 		</div>
 
 		<div class="modal-body">
 
 			<div class="row-fluid">
-				<form action="#" class="form-horizontal" id="submit_form" novalidate="novalidate">
+				<form class="form-horizontal" ng-submit="login();" novalidate="novalidate">
 					<div class="control-group">
 						<label class="control-label">
 							邮箱:
 							<span class="required">*</span>
 						</label>
 						<div class="controls">
-							<input type="text" class="span6 m-wrap" name="email">
+							<input type="text" class="span6 m-wrap" ng-model="user.email" name="email">
 							<span class="help-inline">邮箱地址</span>
 						</div>
 					</div>
@@ -113,25 +109,8 @@
 							<span class="required">*</span>
 						</label>
 						<div class="controls">
-							<input type="text" class="span6 m-wrap" name="username">
+							<input type="text" class="span6 m-wrap" ng-model="user.password" name="password">
 							<span class="help-inline">不少于5位字符</span>
-						</div>
-
-					</div>
-
-					<div class="control-group">
-
-						<label class="control-label">
-							登陆密码:
-							<span class="required">*</span>
-						</label>
-
-						<div class="controls">
-
-							<input type="password" class="span6 m-wrap" name="password" id="submit_form_password">
-
-							<span class="help-inline">长度大于等于6位</span>
-
 						</div>
 
 					</div>
@@ -148,5 +127,22 @@
 
 	</div>
 </div>
-
+<script type="text/javascript">
+require([
+		 'app'
+],function(app){
+	app.controller('ComCtrl',['$scope', '$http', function($scope,$http){
+		$scope.show = true;
+		$scope.user = {email:'hao', password:'123'};
+		$scope.login = function(){
+			$scope.show = false;
+			$scope.user.name="hewep";
+			$("#login_modal").modal('hide');
+		};
+		$scope.logout = function(){
+			$scope.show = true;
+		}
+	}]);
+});
+</script>
 </body>
