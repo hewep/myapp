@@ -9,6 +9,7 @@ define(['angular',
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
 			  $routeProvider.when('/', {templateUrl: 'core/category.html', controller: null})
 			  				.when('/question', {templateUrl:'core/question.html', controller: null})
+			  				.when('/question_list',{templateUrl:'core/question_list.html', controller:null})
 			  				.when('/register', {templateUrl: 'core/register.html', controller: 'RegisterCtrl' })
 			  				.otherwise({redirectTo: '/'});
 			  				
