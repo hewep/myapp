@@ -10,6 +10,7 @@ require.config({
 		application : 'media/js/application',
 		kindEditor : 'plugins/kindeditor/kindeditor',
 		
+		directives : 'common/directives',
 		index : 'controllers/index',
 		user : 'controllers/user',
 	},
@@ -18,6 +19,7 @@ require.config({
         'angularRoute' : {deps:['angular']},
         'index' : {deps:['angular']},
         'user' : {deps:['angular']},
+        'directives':{deps:['angular']},
         'bootstrap' : {deps:['jquery']},
         'validate' : {deps:['jquery']},
         'formValidate' : {deps:['validate']}

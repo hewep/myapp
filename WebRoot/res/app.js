@@ -1,10 +1,11 @@
 'use strict';
 // Declare app level module which depends on filters, and services
 define(['angular',
+        'directives',
         'index',
         'user'
 ],function(angular){
-	var app =  angular.module('myApp', ['ngRoute','IndexCtrls','UserCtrls']);
+	var app =  angular.module('myApp', ['ngRoute','IndexCtrls','UserCtrls','CommDirectives']);
 	
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
 			  $routeProvider.when('/', {templateUrl: 'core/category.html', controller: null})

@@ -6,8 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.jfinal.kit.StringKit;
-
+import com.jfinal.kit.StrKit;
 
 /**
  * 
@@ -15,32 +14,29 @@ import com.jfinal.kit.StringKit;
  */
 public class DateUtils {
 
-	public static String DATETIME_FORMAT = "yyyy-MM-dd HH:mm";
+	public static String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static String DATE_FORMAT = "yyyy-MM-dd";
-
+	public final static long MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
+	
+	public static String getCurrDate(){
+		return getDateFormat(DATE_FORMAT);
+	}
+	
+	public static String getCurrDateTime(){
+		return getDateFormat(DATETIME_FORMAT);
+	}
+	
+	public static String getDateFormat(String format){
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(new Date());
+	}
 	/**
 	 * Get the previous time, from how many days to now.
-	 * 
 	 * @param days
-	 *            How many days.
 	 * @return The new previous time.
 	 */
 	public static Date previous(int days) {
 		return new Date(System.currentTimeMillis() - days * 3600000L * 24L);
-	}
-
-	/**
-	 * Convert date and time to string like "yyyy-MM-dd HH:mm".
-	 */
-	public static String formatDateTime(Date d) {
-		return new SimpleDateFormat(DATETIME_FORMAT).format(d);
-	}
-
-	/**
-	 * Convert date and time to string like "yyyy-MM-dd HH:mm".
-	 */
-	public static String formatDateTime(long d) {
-		return new SimpleDateFormat(DATETIME_FORMAT).format(d);
 	}
 
 	/**
@@ -65,16 +61,6 @@ public class DateUtils {
 		return null;
 	}
 
-	/** 日期 */
-	public final static String DEFAILT_DATE_PATTERN = "yyyy-MM-dd";
-	/** 日期时间 */
-	public final static String DEFAILT_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-	/** 时间 */
-	public final static String DEFAULT_TIME_PATTERN = "HH:mm:ss";
-	/**
-	 * 每天的毫秒数
-	 */
-	public final static long MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
 
 	/**
 	 * 转换日期字符串得到指定格式的日期类型
@@ -86,124 +72,19 @@ public class DateUtils {
 	 * @return
 	 * @throws ParseException
 	 */
-	public static final Date convertString2Date(String formatString,
+	public static final Date parseDate(String format,
 			String targetDate) throws ParseException {
-		if (StringKit.isBlank(targetDate))
+		if (StrKit.isBlank(targetDate))
 			return null;
-		SimpleDateFormat format = null;
+		SimpleDateFormat sdf = null;
 		Date result = null;
-		format = new SimpleDateFormat(formatString);
+		sdf = new SimpleDateFormat(format);
 		try {
-			result = format.parse(targetDate);
+			result = sdf.parse(targetDate);
 		} catch (ParseException pe) {
 			throw new ParseException(pe.getMessage(), pe.getErrorOffset());
 		}
 		return result;
-	}
-
-	public static final Date convertString2Date(String[] formatString,
-			String targetDate) throws ParseException {
-		if (StringKit.isBlank(targetDate)) {
-			return null;
-		}
-		SimpleDateFormat format = null;
-		Date result = null;
-		String errorMessage = null;
-		Integer errorOffset = null;
-		for (String dateFormat : formatString) {
-			try {
-				format = new SimpleDateFormat(dateFormat);
-				result = format.parse(targetDate);
-			} catch (ParseException pe) {
-				result = null;
-				errorMessage = pe.getMessage();
-				errorOffset = pe.getErrorOffset();
-			} finally {
-				if (result != null && result.getTime() > 1) {
-					break;
-				}
-			}
-		}
-		if (result == null) {
-			throw new ParseException(errorMessage, errorOffset);
-		}
-		return result;
-	}
-
-	/**
-	 * 转换字符串得到默认格式的日期类型
-	 * 
-	 * @param strDate
-	 * @return
-	 * @throws ParseException
-	 */
-	public static Date convertString2Date(String strDate) throws ParseException {
-		Date result = null;
-		try {
-			result = convertString2Date(DEFAILT_DATE_PATTERN, strDate);
-		} catch (ParseException pe) {
-			throw new ParseException(pe.getMessage(), pe.getErrorOffset());
-		}
-		return result;
-	}
-
-	/**
-	 * 转换日期得到指定格式的日期字符串
-	 * 
-	 * @param formatString
-	 *            需要把目标日期格式化什么样子的格式。例如,yyyy-MM-dd HH:mm:ss
-	 * @param targetDate
-	 *            目标日期
-	 * @return
-	 */
-	public static String convertDate2String(String formatString, Date targetDate) {
-		SimpleDateFormat format = null;
-		String result = null;
-		if (targetDate != null) {
-			format = new SimpleDateFormat(formatString);
-			result = format.format(targetDate);
-		} else {
-			return null;
-		}
-		return result;
-	}
-
-	/**
-	 * 转换日期,得到默认日期格式字符串
-	 * 
-	 * @param targetDate
-	 * @return
-	 */
-	public static String convertDate2String(Date targetDate) {
-		return convertDate2String(DEFAILT_DATE_PATTERN, targetDate);
-	}
-
-	/**
-	 * 比较日期大小
-	 * 
-	 * @param src
-	 * @param src
-	 * @return int; 1:DATE1>DATE2;
-	 */
-	public static int compare_date(Date src, Date src1) {
-
-		String date1 = convertDate2String(DEFAILT_DATE_TIME_PATTERN, src);
-		String date2 = convertDate2String(DEFAILT_DATE_TIME_PATTERN, src1);
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			Date dt1 = df.parse(date1);
-			Date dt2 = df.parse(date2);
-			if (dt1.getTime() > dt2.getTime()) {
-				return 1;
-			} else if (dt1.getTime() < dt2.getTime()) {
-				return -1;
-			} else {
-				return 0;
-			}
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		}
-		return 0;
 	}
 
 	/**
@@ -248,66 +129,6 @@ public class DateUtils {
 		}
 	}
 
-	/**
-	 * 比较当前时间与时间date2的天相等 时间格式 2008-11-25 16:30:10 如:当前时间是2008-11-25
-	 * 16:30:10与传入时间2008-11-25 15:31:20 相比较,返回true即相等
-	 * 
-	 * @param date1
-	 * @param date2
-	 * @return boolean; true:相等
-	 * @author zhangjl
-	 */
-	public static boolean equalDate(String date2) {
-		try {
-			String date1 = convertDate2String(DEFAILT_DATE_TIME_PATTERN,
-					new Date());
-			date1.equals(date2);
-			Date d1 = convertString2Date(DEFAILT_DATE_PATTERN, date1);
-			Date d2 = convertString2Date(DEFAILT_DATE_PATTERN, date2);
-			return d1.equals(d2);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-	}
-
-	/**
-	 * 比较时间date1与时间date2的天相等 时间格式 2008-11-25 16:30:10
-	 * 
-	 * @param date1
-	 * @param date2
-	 * @return boolean; true:相等
-	 * @author zhangjl
-	 */
-	public static boolean equalDate(String date1, String date2) {
-		try {
-
-			Date d1 = convertString2Date(DEFAILT_DATE_PATTERN, date1);
-			Date d2 = convertString2Date(DEFAILT_DATE_PATTERN, date2);
-
-			return d1.equals(d2);
-		} catch (ParseException e) {
-			return false;
-		}
-	}
-
-	/**
-	 * 比较时间date1是否在时间date2之前 时间格式 2008-11-25 16:30:10
-	 * 
-	 * @param date1
-	 * @param date2
-	 * @return boolean; true:在date2之前
-	 * @author 胡建国
-	 */
-	public static boolean beforeDate(String date1, String date2) {
-		try {
-			Date d1 = convertString2Date(DEFAILT_DATE_PATTERN, date1);
-			Date d2 = convertString2Date(DEFAILT_DATE_PATTERN, date2);
-			return d1.before(d2);
-		} catch (ParseException e) {
-			return false;
-		}
-	}
 
 	/**
 	 * 获取上个月开始时间
@@ -581,19 +402,6 @@ public class DateUtils {
 	}
 
 	/**
-	 * 获取今天最大的时间
-	 * 
-	 * @return
-	 */
-	public static String getMaxDateTimeForToDay() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, calendar
-				.getMaximum(Calendar.HOUR_OF_DAY));
-		calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
-		return convertDate2String(DEFAILT_DATE_TIME_PATTERN, calendar.getTime());
-	}
-
-	/**
 	 * 获取日期最大的时间
 	 * 
 	 * @return
@@ -605,19 +413,6 @@ public class DateUtils {
 				.getMaximum(Calendar.HOUR_OF_DAY));
 		calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
 		return calendar.getTime();
-	}
-
-	/**
-	 * 获取今天最小时间
-	 * 
-	 * @return
-	 */
-	public static String getMinDateTimeForToDay() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, calendar
-				.getMinimum(Calendar.HOUR_OF_DAY));
-		calendar.set(Calendar.MINUTE, calendar.getMinimum(Calendar.MINUTE));
-		return convertDate2String(DEFAILT_DATE_TIME_PATTERN, calendar.getTime());
 	}
 
 	/**
@@ -687,39 +482,8 @@ public class DateUtils {
 
 		return hour.intValue();
 	}
-
-	/**
-	 * 格式化日期
-	 */
-	public static String dateFormat(Date date) {
-		if (date == null) {
-			return null;
-		}
-		return DateFormat.getDateInstance().format(date);
-	}
-
-	/**
-	 * @see 取得指定时间的给定格式()
-	 * @return String
-	 * @throws ParseException
-	 */
-	public static String setDateFormat(Date myDate, String strFormat)
-			throws ParseException {
-		if (myDate == null) {
-			return null;
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
-		String sDate = sdf.format(myDate);
-		return sDate;
-	}
-
-	public static String setDateFormat(String myDate, String strFormat)
-			throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
-		String sDate = sdf.format(myDate);
-
-		return sDate;
-	}
+	
+	
 
 	/*****************************************
 	 * @功能 计算某年某月的结束日期
@@ -771,97 +535,6 @@ public class DateUtils {
 		}
 		return isLeep;
 	}
-
-	/**
-	 * 格式化日期
-	 * 
-	 * @throws ParseException
-	 * 
-	 *             例: DateUtils.formatDate("yyyy-MM-dd HH",new Date())
-	 *             "yyyy-MM-dd HH:00:00"
-	 */
-	public static Date formatDate(String formatString, Date date)
-			throws ParseException {
-		if (date == null) {
-			date = new Date();
-		}
-		if (StringKit.isBlank(formatString))
-			formatString = DateUtils.DEFAILT_DATE_PATTERN;
-
-		date = DateUtils.convertString2Date(formatString, DateUtils
-				.convertDate2String(formatString, date));
-
-		return date;
-	}
-
-	/**
-	 * 格式化日期 yyyy-MM-dd
-	 * 
-	 * @throws ParseException
-	 *             例： DateUtils.formatDate(new Date()) "yyyy-MM-dd 00:00:00"
-	 */
-	public static Date formatDate(Date date) throws ParseException {
-		date = formatDate(DateUtils.DEFAILT_DATE_PATTERN, date);
-		return date;
-	}
-
-	/**
-	 * @throws ParseException
-	 *             根据日期获得 星期一的日期
-	 * 
-	 */
-	public static Date getMonDay(Date date) throws ParseException {
-
-		Calendar cal = Calendar.getInstance();
-		if (date == null)
-			date = new Date();
-		cal.setTime(date);
-		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
-			cal.add(Calendar.WEEK_OF_YEAR, -1);
-
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-
-		date = formatDate(cal.getTime());
-
-		return date;
-	}
-
-	/**
-	 * @throws ParseException
-	 *             根据日期获得 星期日 的日期
-	 * 
-	 */
-	public static Date getSunDay(Date date) throws ParseException {
-
-		Calendar cal = Calendar.getInstance();
-		if (date == null)
-			date = new Date();
-		cal.setTime(date);
-		if (cal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
-			cal.add(Calendar.WEEK_OF_YEAR, 1);
-
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-
-		date = formatDate(cal.getTime());
-		return date;
-	}
-
-	/**
-	 * 获得 下个月的第一天
-	 * 
-	 * @param date
-	 * @return
-	 * @throws ParseException
-	 */
-	public static Date getNextDay(Date date) throws ParseException {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.add(Calendar.MONTH, 1);
-		cal.set(Calendar.DATE, 1);
-		return formatDate(cal.getTime());
-	}
-
-	
 
 
 }

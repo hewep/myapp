@@ -2,6 +2,7 @@ package com.app.controller;
 
 import com.app.model.User;
 import com.app.util.AjaxResult;
+import com.app.util.DateUtils;
 
 public class UserController extends BaseController{
 	
@@ -14,6 +15,7 @@ public class UserController extends BaseController{
 			User user0 = User.dao.findFirst("select * from user where email = ?", this.getPara("email",""));
 			if(user0 == null){
 				User user = this.getModel(User.class).setAttrs(this.getParamMap());
+				user.set("register_time", DateUtils.getCurrDate());
 				user.save();
 			}else{
 				result.setFailure(0, "此邮箱已注册");

@@ -2,7 +2,6 @@
 var UserCtrls = angular.module('UserCtrls',[]);
 	UserCtrls.controller('RegisterCtrl',['$scope', '$http' ,'$location',function($scope, $http,$location){
 		$scope.user = {};
-		$scope.unique = false;
 		$scope.register = function(){
 			var rpassword = $("input[name=rpassword]").val();
 			if(rpassword != $scope.user.password){
@@ -25,19 +24,23 @@ var UserCtrls = angular.module('UserCtrls',[]);
 	UserCtrls.directive('uniqueEmail', ['$http',function($http){
 		return function($scope, $element, $attr, $ctrl){
 			$element.on('focusout', function(){
-				$http({
-					method : 'POST',
-					url : '/user/getByEmail',
-					params : {
-						'email' : $("input[name=email]").val()
-					}
-				}).success(function(result, status, headers, cfg) {
-					if(result.exist){
-						$scope.unique = true;
-					}else{
-						$scope.unique = false;
-					}
-				});
+				var email = $scope.user.email;
+				if(email){
+					$http({
+						method : 'POST',
+						url : '/user/getByEmail',
+						params : {
+							'email' : $("input[name=email]").val()
+						}
+					}).success(function(result, status, headers, cfg) {
+						if(result.exist){
+							$scope.unique = true;
+						}else{
+							$scope.unique = false;
+						}
+					});
+				}
+				
 			});
 		};
 	}]);
