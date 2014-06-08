@@ -50,4 +50,17 @@ public class UserController extends BaseController{
 		this.renderJson(result.toJson());
 	}
 	
+	public void getByUserName(){
+		
+		AjaxResult result = new AjaxResult(1);
+		String userName = this.getPara("user_name","");
+		User user = User.dao.findFirst("select * from user where user_name = ?", userName);
+		if(user == null){
+			result.setData("exist", false);
+		}else{
+			result.setData("exist", true);
+		}
+		this.renderJson(result.toJson());
+	}
+	
 }

@@ -24,16 +24,17 @@
 						<input type="email" class="span6 m-wrap" required name="email" ensure-unique="email:user/getByEmail" ng-model="user.email">
 						<span class="error help-inline" ng-show="registerForm.email.$error.required">请输入邮箱地址</span>
 						<span class="error help-inline" ng-show="registerForm.email.$error.email">邮箱地址无效！</span>
-						<span class="error help-inline" ng-show="unique">邮箱已存在！</span>
+						<span class="error help-inline" ng-show="email_unique">邮箱已存在！</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label"> 昵称: <span class="required">*</span>
 					</label>
 					<div class="controls">
-						<input type="text" class="span6 m-wrap" name="username" required ng-minlength=5 ng-model="user.user_name"> 
-						<span class="error help-inline" ng-show="registerForm.username.$error.required">请输入用户名称</span>
-						<span class="error help-inline" ng-show="registerForm.username.$error.minlength">不少于5位字符</span>
+						<input type="text" class="span6 m-wrap" name="user_name" ensure-unique="user_name:user/getByUserName" required ng-minlength=5 ng-model="user.user_name"> 
+						<span class="error help-inline" ng-show="registerForm.user_name.$error.required">请输入用户名称</span>
+						<span class="error help-inline" ng-show="registerForm.user_name.$error.minlength">不少于5位字符</span>
+						<span class="error help-inline" ng-show="user_name_unique">昵称已存在！</span>
 					</div>
 
 				</div>

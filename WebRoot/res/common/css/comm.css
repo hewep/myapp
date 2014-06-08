@@ -103,3 +103,28 @@ margin-top: 5px;
 	font-family: 微软雅黑,Verdana,sans-serif,宋体;
 	color: #666;
 }
+
+.question .qa_type{
+	float: left;
+	padding: 0 12px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	border: 2px solid #AAA;
+	background-color: white;
+	font-size: 10.5pt;
+	margin: 0 5px 0 0;
+	color: #666;
+	text-decoration: none;
+	outline: none;
+	font-weight: bold;
+}
+.question .qa_type:hover{
+	border-color: #40AA53;
+	background-color: #DFD;
+}
+.question a.selected{
+	border: 2px solid #40AA53;
+	color: #40AA53;
+	background: url('../image/sel.gif') no-repeat right bottom;
+}

@@ -21,30 +21,6 @@ var UserCtrls = angular.module('UserCtrls',[]);
 		
 	}]);
 	
-	UserCtrls.directive('uniqueEmail', ['$http',function($http){
-		return function($scope, $element, $attr, $ctrl){
-			$element.on('focusout', function(){
-				var email = $scope.user.email;
-				if(email){
-					$http({
-						method : 'POST',
-						url : '/user/getByEmail',
-						params : {
-							'email' : $("input[name=email]").val()
-						}
-					}).success(function(result, status, headers, cfg) {
-						if(result.exist){
-							$scope.unique = true;
-						}else{
-							$scope.unique = false;
-						}
-					});
-				}
-				
-			});
-		};
-	}]);
-	
 /* Controllers 
 define( function(){
 	var UserListCtrl = ['$scope', '$http', function($scope, $http){

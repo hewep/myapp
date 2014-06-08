@@ -17,7 +17,6 @@ require.config({
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
-        'index' : {deps:['angular']},
         'user' : {deps:['angular']},
         'directives':{deps:['angular']},
         'bootstrap' : {deps:['jquery']},
@@ -33,6 +32,5 @@ require(['angular',
 		 'app'
 ],function(angular){
 	Application.initPortletTools();
-	//FormValidation.init();
 	angular.bootstrap(document, ['myApp']);
 });
