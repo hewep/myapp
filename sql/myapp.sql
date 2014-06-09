@@ -3,7 +3,7 @@
 -- Server version:               5.0.22-community-nt - MySQL Community Edition (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-06-05 17:40:59
+-- Date/time:                    2014-06-09 19:47:04
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -29,7 +29,9 @@ CREATE TABLE IF NOT EXISTS `category` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table myapp.category: ~0 rows (approximately)
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 
 -- Dumping structure for table myapp.reply
@@ -44,7 +46,9 @@ CREATE TABLE IF NOT EXISTS `reply` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table myapp.reply: ~0 rows (approximately)
+/*!40000 ALTER TABLE `reply` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reply` ENABLE KEYS */;
 
 
 -- Dumping structure for table myapp.topic
@@ -58,11 +62,14 @@ CREATE TABLE IF NOT EXISTS `topic` (
   `content` text COMMENT '内容',
   `view_count` int(10) default NULL COMMENT '查看次数',
   `reply_count` int(10) default NULL COMMENT '回复数量',
+  `create_time` datetime default NULL COMMENT '创建时间',
   `remark` text COMMENT '备注',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table myapp.topic: ~0 rows (approximately)
+/*!40000 ALTER TABLE `topic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 
 
 -- Dumping structure for table myapp.user
@@ -80,6 +87,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
--- Data exporting was unselected.
+-- Dumping data for table myapp.user: ~1 rows (approximately)
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`id`, `user_name`, `password`, `email`, `register_time`, `last_login_time`, `login_count`, `pic_url`, `remark`) VALUES
+	(1, 'hewep', 'hao123', '553912407@qq.com', '2014-06-06 00:00:00', NULL, NULL, NULL, NULL);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,6 +1,7 @@
 package com.app.common;
 
 import com.app.controller.IndexController;
+import com.app.controller.TopicController;
 import com.app.controller.UserController;
 import com.app.model.User;
 import com.jfinal.config.Constants;
@@ -31,6 +32,7 @@ public class AppConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
 		me.add("/user", UserController.class);
+		me.add("/topic", TopicController.class);
 	}
 
 	@Override
@@ -55,6 +57,7 @@ public class AppConfig extends JFinalConfig {
 		arp.setDialect(new MysqlDialect());
 		
 		arp.addMapping("user", User.class);
+		arp.addMapping("topic", User.class);
 		arp.setShowSql(true);
 		
 	}
