@@ -24,7 +24,7 @@ public class AppConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		me.setDevMode(true);			
 		me.setViewType(ViewType.FREE_MARKER);
-		me.setFreeMarkerViewExtension(".ftl");
+		me.setFreeMarkerViewExtension(".html");
 		me.setBaseViewPath("/WEB-INF/view/");
 	}
 	

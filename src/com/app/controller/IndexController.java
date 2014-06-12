@@ -23,4 +23,8 @@ public class IndexController extends BaseController{
 		}
 		
 	}
+	
+	public void admin(){
+		this.render("index.html");
+	}
 }
