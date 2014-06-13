@@ -2,6 +2,7 @@ package com.app.controller;
 
 import com.app.model.User;
 import com.app.util.AjaxResult;
+import com.jfinal.kit.StrKit;
 
 
 public class IndexController extends BaseController{
@@ -25,6 +26,12 @@ public class IndexController extends BaseController{
 	}
 	
 	public void admin(){
-		this.render("index.html");
+		String type = this.getPara("type","");
+		if(type.equals("login")){
+			this.render("dashboard.html");
+		}else{
+			
+			this.render("index.html");
+		}
 	}
 }

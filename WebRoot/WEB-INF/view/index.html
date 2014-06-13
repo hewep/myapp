@@ -26,7 +26,7 @@
 		
 		<div class="login_box">
 			
-			<form action="dashboard.htm" method="post" id="login_form">
+			<form action="/admin?type=login" method="post" id="login_form">
 				<div class="top_b">Sign in to Gebo Admin</div>    
 				<div class="alert alert-info alert-login">
 					Clear username and password field to see validation.
@@ -122,12 +122,11 @@
 		</div>
 		 
         <script src="common/js/jquery-1.7.2.min.js" ></script>
-        <!--  <script src="js/jquery.actual.min.js" ></script>-->
+        <script src="common/js/jquery.actual.min.js" ></script>
         <script src="plugins/validation/jquery.validate.js" ></script>
 		<script src="bootstrap/js/bootstrap.min.js" ></script>
         <script>
             $(document).ready(function(){
-                
 				//* boxes animation
 				form_wrapper = $('.login_box');
 				function boxHeight() {
