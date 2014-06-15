@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="res/plugins/kindeditor/default/default.css">
 <link rel="stylesheet" type="text/css" href="res/common/css/comm.css">
 
-<script data-main="res/main.js" src="res/require.js" ></script>
+<script data-main="res/media/main.js" src="res/require.js" ></script>
 </head>
 <body class="page-header-fixed" ng-controller="ComCtrl">
 <!--導航-->
@@ -129,7 +129,7 @@
 </div>
 <script type="text/javascript">
 require([
-		 'app'
+         'app'
 ],function(app){
 	app.controller('ComCtrl',['$scope', '$http', function($scope,$http){
 		$scope.show = true;
