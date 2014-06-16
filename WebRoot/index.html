@@ -31,7 +31,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="right" ng-show="show">
+		<div class="right" ng-show="showLogin">
 			<ul>
 				<li>
 					<a data-toggle="modal" href="#login_modal">登 陆 </a>
@@ -41,10 +41,10 @@
 				</li>
 			</ul>
 		</div>
-		<div class="right" ng-show="!show">
+		<div class="right" ng-show="!showLogin">
 			<ul>
 				<li>
-					{{user.name}} 
+					{{user.user_name}} 
 				</li>
 				<li >
 					<a href="#" ng-click="logout()" >退出 </a>
@@ -86,21 +86,23 @@
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 			<h3>会员登陆</h3>
-
 		</div>
 
 		<div class="modal-body">
 
 			<div class="row-fluid">
-				<form class="form-horizontal" ng-submit="login();" novalidate="novalidate">
+				<div class="alert alert-error" ng-show="showError" >
+					用户名或密码错误!
+				</div>
+				<form class="form-horizontal" ng-submit="login();" name="loginForm" novalidate="novalidate">
 					<div class="control-group">
 						<label class="control-label">
 							邮箱:
 							<span class="required">*</span>
 						</label>
 						<div class="controls">
-							<input type="text" class="span6 m-wrap" ng-model="user.email" name="email">
-							<span class="help-inline">邮箱地址</span>
+							<input type="text" class="span6 m-wrap" required ng-model="user.email" name="email">
+							<span class="error help-inline" ng-show="loginForm.email.$error.required">请输入邮箱地址</span>
 						</div>
 					</div>
 					<div class="control-group">
@@ -109,14 +111,14 @@
 							<span class="required">*</span>
 						</label>
 						<div class="controls">
-							<input type="text" class="span6 m-wrap" ng-model="user.password" name="password">
-							<span class="help-inline">不少于5位字符</span>
+							<input type="text" class="span6 m-wrap" required ng-model="user.password" name="password">
+							<span class="error help-inline" ng-show="loginForm.password.$error.required">请输入密码</span>
 						</div>
 
 					</div>
 
 					<div class="form-actions">
-						<button type="submit" class="btn purple">登陆</button>
+						<button type="submit" ng-disabled="loginForm.$invalid" class="btn purple">登陆</button>
 						<button type="button" data-dismiss="modal" class="btn">取消</button>
 
 					</div>
@@ -132,23 +134,27 @@ require([
          'app'
 ],function(app){
 	app.controller('ComCtrl',['$scope', '$http', function($scope,$http){
-		$scope.show = true;
+		$scope.showLogin = true;	// 显示 登陆 按钮
+		$scope.showError = false;	// 显示错误信息
 		$scope.user = {};
 		$scope.login = function(){
-			
 			$http({method:'post',url:"login", params:$scope.user}).success(function(result){
-				alert(result.msg);
+				
 				if(result.status == 1){
-					$scope.show = false;
+					$scope.showLogin = false;
+					$("#login_modal").modal('hide');
+					$scope.user = result.user;
+				}else{
+					$scope.showError = true;
 				}
 			}).error(function(){
 				alert("网络连接失败");
 			});
-			$("#login_modal").modal('hide');
 		};
+		
 		$scope.logout = function(){
-			$scope.show = true;
-		}
+			$scope.showLogin = true;
+		};
 	}]);
 });
 </script>

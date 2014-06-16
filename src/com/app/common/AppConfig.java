@@ -3,6 +3,7 @@ package com.app.common;
 import com.app.controller.IndexController;
 import com.app.controller.TopicController;
 import com.app.controller.UserController;
+import com.app.model.Topic;
 import com.app.model.User;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -57,7 +58,7 @@ public class AppConfig extends JFinalConfig {
 		arp.setDialect(new MysqlDialect());
 		
 		arp.addMapping("user", User.class);
-		arp.addMapping("topic", User.class);
+		arp.addMapping("topic", Topic.class);
 		arp.setShowSql(true);
 		
 	}
