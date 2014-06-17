@@ -12,8 +12,11 @@ import com.jfinal.kit.JsonKit;
 public class CategoryController extends BaseController{
 	
 	public void list(){
+		AjaxResult result = new AjaxResult(1,"添加成功");
 		List<Category> list = Category.dao.find("select * from category");
-		this.renderJson(JsonKit.listToJson(list, 2));
+		result.setData("data", list);
+		System.out.println(result.toJson());
+		this.renderJson(result.toJson());
 	}
 	
 	public void addOrUpdate() throws Exception{
