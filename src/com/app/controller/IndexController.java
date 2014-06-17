@@ -29,7 +29,9 @@ public class IndexController extends BaseController{
 	}
 	
 	public void logout(){
+		AjaxResult result = new AjaxResult(1);
 		this.getSession().invalidate();
+		this.renderJson(result.toJson());
 	}
 	
 	public void admin(){

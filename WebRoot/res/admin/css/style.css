@@ -490,11 +490,11 @@ div.dataTables_paginate{float:right;margin:0}
 .dataTables_wrapper{position:relative;overflow:hidden}
 .dataTables_wrapper table.table {clear:both;margin-bottom:6px!important;max-width:inherit}
 .dataTables_wrapper table.table thead .sorting,table.table thead .sorting_asc,table.table thead .sorting_desc,table.table thead .sorting_asc_disabled,table.table thead .sorting_desc_disabled{cursor:hand;cursor:pointer}
-.dataTables_wrapper table.table thead .sorting{background: #e9f3f8 url("../lib/datatables/images/sort_both.png") no-repeat center right}
-.dataTables_wrapper table.table thead .sorting_asc{background: #e9f3f8 url("../lib/datatables/images/sort_asc.png") no-repeat center right}
-.dataTables_wrapper table.table thead .sorting_desc{background: #e9f3f8 url("../lib/datatables/images/sort_desc.png") no-repeat center right}
-.dataTables_wrapper table.table thead .sorting_asc_disabled{background: #e9f3f8 url("../lib/datatables/images/sort_asc_disabled.png") no-repeat center right}
-.dataTables_wrapper table.table thead .sorting_desc_disabled{background: #e9f3f8 url("../lib/datatables/images/sort_desc_disabled.png") no-repeat center right}
+.dataTables_wrapper table.table thead .sorting{background: #e9f3f8 url("../../plugins/datatables/images/sort_both.png") no-repeat center right}
+.dataTables_wrapper table.table thead .sorting_asc{background: #e9f3f8 url("../../plugins/datatables/images/sort_asc.png") no-repeat center right}
+.dataTables_wrapper table.table thead .sorting_desc{background: #e9f3f8 url("../../plugins/datatables/images/sort_desc.png") no-repeat center right}
+.dataTables_wrapper table.table thead .sorting_asc_disabled{background: #e9f3f8 url("../../plugins/datatables/images/sort_asc_disabled.png") no-repeat center right}
+.dataTables_wrapper table.table thead .sorting_desc_disabled{background: #e9f3f8 url("../../plugins/datatables/images/sort_desc_disabled.png") no-repeat center right}
 .dataTables_wrapper table.dataTable th:active{outline:none}
 .dataTables_wrapper .row{margin:0 0 5px}
 .dataTables_wrapper select{min-height:inherit}

@@ -5,13 +5,17 @@ require.config({
 		angularRoute : 'lib/angular-route',
 		jquery : 'common/js/jquery.min',
 		bootstrap : 'bootstrap/js/bootstrap.min',
-		qtip: 'plugins/qtip2/jquery.qtip.min',
+		qtip: 'plugins/qtip2/jquery.qtip.min',	
 		colorbox: 'plugins/colorbox/jquery.colorbox.min',
 		cookie:'common/js/jquery.cookie.min',
 		actual:'common/js/jquery.actual.min',
 		antiscroll:'plugins/antiscroll/antiscroll',
 		totop:'plugins/UItoTop/jquery.ui.totop.min',
-		common:'admin/js/common'
+		dataTable: 'plugins/datatables/jquery.dataTables',
+		
+		common:'admin/js/common',
+		category:'admin/controllers/category'
+		
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
@@ -21,7 +25,9 @@ require.config({
         'cookie' : {deps:['jquery']},
         'actual' : {deps:['jquery']},
         'antiscroll' : {deps:['jquery']},
-        'totop' : {deps:['jquery']}
+        'totop' : {deps:['jquery']},
+        'dataTable': {deps:['jquery']},			// 表格
+        'category' : {deps:['dataTable']}
     }
 });
 	

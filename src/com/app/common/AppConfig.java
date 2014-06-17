@@ -1,8 +1,10 @@
 package com.app.common;
 
+import com.app.controller.CategoryController;
 import com.app.controller.IndexController;
 import com.app.controller.TopicController;
 import com.app.controller.UserController;
+import com.app.model.Category;
 import com.app.model.Topic;
 import com.app.model.User;
 import com.jfinal.config.Constants;
@@ -34,6 +36,8 @@ public class AppConfig extends JFinalConfig {
 		me.add("/", IndexController.class);
 		me.add("/user", UserController.class);
 		me.add("/topic", TopicController.class);
+		me.add("/category", CategoryController.class);
+		
 	}
 
 	@Override
@@ -59,6 +63,7 @@ public class AppConfig extends JFinalConfig {
 		
 		arp.addMapping("user", User.class);
 		arp.addMapping("topic", Topic.class);
+		arp.addMapping("category", Category.class);
 		arp.setShowSql(true);
 		
 	}
