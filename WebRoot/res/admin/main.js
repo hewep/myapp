@@ -11,7 +11,6 @@ require.config({
 		actual:'common/js/jquery.actual.min',
 		antiscroll:'plugins/antiscroll/antiscroll',
 		totop:'plugins/UItoTop/jquery.ui.totop.min',
-		dataTable: 'plugins/datatables/jquery.dataTables',
 		
 		common:'admin/js/common',
 		category:'admin/controllers/category'
@@ -25,9 +24,7 @@ require.config({
         'cookie' : {deps:['jquery']},
         'actual' : {deps:['jquery']},
         'antiscroll' : {deps:['jquery']},
-        'totop' : {deps:['jquery']},
-        'dataTable': {deps:['jquery']},			// 表格
-        'category' : {deps:['dataTable']}
+        'totop' : {deps:['jquery']}
     }
 });
 	

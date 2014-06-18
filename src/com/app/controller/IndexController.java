@@ -15,14 +15,14 @@ public class IndexController extends BaseController{
 			User user = User.dao.findFirst("select * from user where email = ? and password = ?",
 					new Object[]{user0.get("email"), user0.get("password")});
 			if(user == null ){
-				result.setFailure(0, "用户名或密码错误!");
+				result.setMsg(0, "用户名或密码错误!");
 			}else{
 				this.getSession().setAttribute("hh", new UserSessionListener(user));
 				result.setData("user", user);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setFailure(0, "登陆失败："+e.getMessage());
+			result.setMsg(0, "登陆失败："+e.getMessage());
 		}finally{
 			this.renderJson(result.toJson());
 		}

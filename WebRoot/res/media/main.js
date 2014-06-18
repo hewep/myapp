@@ -8,17 +8,11 @@ require.config({
 		validate : 'media/js/jquery.validate.min',
 		formValidate: 'media/js/form-validation',
 		application : 'media/js/application',
-		kindEditor : 'plugins/kindeditor/kindeditor',
-		
-		directives : 'common/directives',
-		index : 'controllers/index',
-		user : 'controllers/user',
+		kindEditor : 'plugins/kindeditor/kindeditor'
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
-        'user' : {deps:['angular']},
-        'directives':{deps:['angular']},
         'bootstrap' : {deps:['jquery']},
         'validate' : {deps:['jquery']},
         'formValidate' : {deps:['validate']}

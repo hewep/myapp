@@ -18,12 +18,12 @@ public class UserController extends BaseController{
 				user.set("register_time", DateUtils.getCurrDate());
 				user.save();
 			}else{
-				result.setFailure(0, "此邮箱已注册");
+				result.setMsg(0, "此邮箱已注册");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setFailure(0, "注册失败："+e.getMessage());
+			result.setMsg(0, "注册失败："+e.getMessage());
 		}finally{
 			this.renderJson(result.toJson());
 		}

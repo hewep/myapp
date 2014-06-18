@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.app.model.User;
+import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 
 public class BaseController extends Controller{
@@ -21,7 +22,13 @@ public class BaseController extends Controller{
 		}
 		return record;
 	}
+	/*** json 转化为对象  ***/
+	public <T> T fromJson(String json, Class<T> clazz){
+		Gson gson = new Gson();
+		return gson.fromJson(json, clazz);
+	}
 	
+	/** 获取当前用户 **/
 	public User getCurrUser(){
 		Object obj = this.getSessionAttr("user");
 		if(obj == null){
@@ -30,7 +37,5 @@ public class BaseController extends Controller{
 			return (User)obj;
 		}
 	}
-	/************************ 操作 *********************************/
-	
 	
 }

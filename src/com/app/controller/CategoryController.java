@@ -1,40 +1,85 @@
 package com.app.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.app.model.Category;
-import com.app.model.Topic;
-import com.app.model.User;
 import com.app.util.AjaxResult;
-import com.app.util.DateUtils;
+import com.jfinal.kit.JsonKit;
+import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Record;
 
 public class CategoryController extends BaseController{
 	
 	public void list(){
-		AjaxResult result = new AjaxResult(1,"添加成功");
+		AjaxResult result = new AjaxResult(1);
 		List<Category> list = Category.dao.find("select * from category");
-		result.setData("data", list);
-		System.out.println(result.toJson());
+		
+		
+		if(this.getPara("type","").equals("tree")){
+			result.setData("data", this.getCateTree(list));
+		}else{
+			result.setData("data", list);
+		}
 		this.renderJson(result.toJson());
 	}
 	
 	public void addOrUpdate() throws Exception{
-		AjaxResult result = new AjaxResult(1,"添加成功");
+		AjaxResult result = new AjaxResult(1,"操作成功");
 		try {
-			User user = this.getCurrUser();
-			if(user == null){
-				result.setFailure(0, "请重新登录");
+			String category = this.getPara("category");
+			Map<String, Object> map = this.fromJson(category, new HashMap<String, Object>().getClass());
+			Category record = new Category().setAttrs(map);
+			if(StrKit.notNull(record.get("id"))){
+				record.update();
 			}else{
-				Topic topic = this.getModel(Topic.class).setAttrs(this.getParamMap());
-				topic.set("create_time", DateUtils.getCurrDate());
-				topic.set("user_id", user.get("id"));
-				topic.save();
+				record.save();
+				result.setData("data", record);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setFailure(0, "提交失败："+e.getMessage());
+			result.setMsg(0, "提交失败："+e.getMessage());
 		}finally{
 			this.renderJson(result.toJson());
 		}
+	}
+	
+	public void deleteById(){
+		AjaxResult result = new AjaxResult(1,"删除成功");
+		try {
+			Category.dao.deleteById(this.getPara("id"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setMsg(0, "删除失败");
+		}
+		
+		this.renderJson(result.toJson());
+	}
+	
+	private String getCateTree(List<Category> list){
+		Map<Integer, Record> map = new HashMap<Integer, Record>();
+		for (Category category : list) {
+			map.put(category.getInt("id"), new Record().setColumns(category.getAtts()));
+		}
+		
+		List<Record> records = new ArrayList<Record>();
+		Record temp ;
+		for (Record record : map.values()) {
+			temp = map.get(record.getInt("pid"));
+			if(temp == null){
+				records.add(record);
+			}else{
+				
+				List<Record> subCates = temp.get("subCates");
+				if(subCates == null){
+					subCates = new ArrayList<Record>();
+					temp.set("subCates", subCates);
+				}
+				subCates.add(record);
+			}
+		}
+		return JsonKit.listToJson(records, 4);
 	}
 }

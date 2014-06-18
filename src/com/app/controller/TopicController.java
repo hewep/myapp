@@ -12,7 +12,7 @@ public class TopicController extends BaseController{
 		try {
 			User user = this.getCurrUser();
 			if(user == null){
-				result.setFailure(0, "请重新登录");
+				result.setMsg(0, "请重新登录");
 			}else{
 				Topic topic = this.getModel(Topic.class).setAttrs(this.getParamMap());
 				topic.set("create_time", DateUtils.getCurrDate());
@@ -21,7 +21,7 @@ public class TopicController extends BaseController{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setFailure(0, "提交失败："+e.getMessage());
+			result.setMsg(0, "提交失败："+e.getMessage());
 		}finally{
 			this.renderJson(result.toJson());
 		}

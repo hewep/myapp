@@ -7,7 +7,8 @@ import java.util.Map;
 import com.jfinal.kit.JsonKit;
 
 public class AjaxResult {
-	private Map<String,Object> result = new LinkedHashMap<String,Object>();	
+	private Map<String,Object> result = new LinkedHashMap<String,Object>();
+	
 	public AjaxResult(int status) {		
 		result.put("status", status);		
 	}
@@ -20,10 +21,15 @@ public class AjaxResult {
 		result.put("status", status);		
 	}
 	
-	public void setMsg(String info){
-		result.put("info", info);	
+	public void setFailure(String msg){
+		result.put("status", 0);
+		result.put("msg", msg);
 	}
-	public void setFailure(int status, String msg){
+	public void setSuccess(String msg){
+		result.put("status", 1);
+		result.put("msg", msg);
+	}
+	public void setMsg(int status, String msg){
 		result.put("status", status);	
 		result.put("msg", msg);
 	}
