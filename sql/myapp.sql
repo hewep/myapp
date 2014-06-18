@@ -3,7 +3,7 @@
 -- Server version:               5.0.22-community-nt - MySQL Community Edition (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-06-09 19:47:04
+-- Date/time:                    2014-06-18 22:57:05
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,7 +11,6 @@
 /*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
 -- Dumping database structure for myapp
-DROP DATABASE IF EXISTS `myapp`;
 CREATE DATABASE IF NOT EXISTS `myapp` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `myapp`;
 
@@ -29,8 +28,14 @@ CREATE TABLE IF NOT EXISTS `category` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table myapp.category: ~0 rows (approximately)
+-- Dumping data for table myapp.category: ~5 rows (approximately)
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` (`id`, `pid`, `name`, `content`, `type`, `topic_count`, `remark`) VALUES
+	(1, 0, '生活服务', 'www', '服务', NULL, NULL),
+	(2, 0, '七嘴八舌', NULL, '交流', NULL, NULL),
+	(3, 1, '食为天', NULL, NULL, NULL, NULL),
+	(4, 2, '世界杯', NULL, NULL, NULL, NULL),
+	(5, 1, '行无疆', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 
@@ -69,6 +74,8 @@ CREATE TABLE IF NOT EXISTS `topic` (
 
 -- Dumping data for table myapp.topic: ~0 rows (approximately)
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
+INSERT INTO `topic` (`id`, `category_id`, `user_id`, `title`, `tags`, `content`, `view_count`, `reply_count`, `create_time`, `remark`) VALUES
+	(1, 5, NULL, 'gg', NULL, 'kkk', NULL, NULL, '2014-06-18 00:00:00', NULL);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 
 
@@ -90,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table myapp.user: ~1 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `user_name`, `password`, `email`, `register_time`, `last_login_time`, `login_count`, `pic_url`, `remark`) VALUES
-	(1, 'hewep', 'hao123', '553912407@qq.com', '2014-06-06 00:00:00', NULL, NULL, NULL, NULL);
+	(1, 'hewep', 'hao123', 'hewephao@163.com', '2014-06-08 00:00:00', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
