@@ -12,9 +12,9 @@
 						class="icon-hand-right"></i> 分类 <i class="icon-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu pull-right">
-
-						<li ng-repeat="category in categorys"><a href="javascript:;" ng-click="changeCate();"> {{category.name}}</a></li>
-
+						<li ng-repeat="category in categorys">
+							<a href="javascript:;" ng-click="changeCate(category);"> {{category.name}}</a>
+						</li>
 					</ul>
 				</div>
 			</div>
