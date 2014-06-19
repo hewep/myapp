@@ -37,46 +37,13 @@
 				</ul>
 				<div class="tab-content">
 					<div  class="tab-pane active" id="portlet_tab1">
-						<div class="row-fluid portfolio-block">
+						
+						<div class="row-fluid portfolio-block" ng-repeat="topic in topics">
 							<div class="span10 portfolio-text">
 								<img src="res/media/image/avatar3.jpg" alt="">
 								<div class="portfolio-text-info">
-									<strong><a href="http://www.oschina.net/question/1426628_157506" target="_blank">PHP数组问题 乱死我了</a></strong>
-									<p>Lorem ipsum dolor sit consectetuer adipiscing elit.</p>
-									<em class="portfolio-bottom"style="margin-right:3px;"><i class="icon-rss"></i> <a href="">iPingtai</a> 发布于
-										19分钟前
-									</em>
-								</div>
-							</div>
-							<div class="span2 ">
-								<p title="浏览次数"><span class="badge badge-info">140</span></p>
-								<p title="回帖数"><span class="badge badge-important">12</span></p>
-							</div>
-						</div>
-						
-						<div class="row-fluid portfolio-block">
-							<div class="span10 portfolio-text">
-								<img src="res/media/image/avatar2.jpg" alt="">
-								<div class="portfolio-text-info">
-									<strong><a href="http://www.oschina.net/question/1426628_157506" target="_blank">PHP数组问题 乱死我了</a></strong>
-									<p>Lorem ipsum dolor sit consectetuer adipiscing elit.</p>
-									<em class="portfolio-bottom"style="margin-right:3px;"><i class="icon-rss"></i> <a href="">iPingtai</a> 发布于
-										19分钟前
-									</em>
-								</div>
-							</div>
-							<div class="span2 ">
-								<p title="浏览次数"><span class="badge badge-info">140</span></p>
-								<p title="回帖数"><span class="badge badge-important">12</span></p>
-							</div>
-						</div>
-						
-						<div class="row-fluid portfolio-block">
-							<div class="span10 portfolio-text">
-								<img src="res/media/image/avatar1.jpg" alt="">
-								<div class="portfolio-text-info">
-									<strong><a href="http://www.oschina.net/question/1426628_157506" target="_blank">PHP数组问题 乱死我了</a></strong>
-									<p>Lorem ipsum dolor sit consectetuer adipiscing elit.</p>
+									<strong><a href="#/topic_info/{{topic.id}}" target="_blank">{{topic.title}}</a></strong>
+									<p>{{topic.content}}</p>
 									<em class="portfolio-bottom"style="margin-right:3px;"><i class="icon-rss"></i> <a href="">iPingtai</a> 发布于
 										19分钟前
 									</em>

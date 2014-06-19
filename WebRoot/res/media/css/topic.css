@@ -1,0 +1,121 @@
+.topic .question .title{
+	
+}
+.topic .question .main{
+
+}
+.topic .question .main .asker {
+	font-size: 9pt;
+	color: #AAA;
+	margin-top: 10px;
+	float: right;
+}
+
+.topic .question .main .asker .ainfo {
+	display: block;
+	float: right;
+	width: 52px;
+}
+
+.topic .question .main .asker .pinfo {
+	display: block;
+	float: left;
+	width: 150px;
+	text-align: right;
+	margin-right: 10px;
+}
+.topic .question .main .tags_toolbars {
+	float: left;
+}
+.topic .question .main .tags_toolbars a.tag {
+	background-color: #CFC;
+	color: #060;
+	border-bottom: 1px solid #B1D3EB;
+	border-right: 1px solid #B1D3EB;
+	-webkit-text-size-adjust: none;
+	font-size: 8pt;
+	line-height: 2.4;
+	margin: 2px 2px 2px 0;
+	padding: 2px 4px;
+	text-decoration: none;
+	white-space: nowrap;
+	position: relative;
+}
+.topic .reply .list{
+	margin-top:7px;
+}
+.topic .reply .list .answer .user {
+	width: 55px;
+	font-size: 9pt;
+	color: #AAA;
+	margin-right: 10px;
+}
+.topic .reply .list .answer .user .user_img {
+	width: 52px;
+}
+
+.topic .reply .list .answer .user .user_info {
+	width: 55px;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.topic .reply .list .answer .user a {
+	display: inline-block;
+	text-decoration: none;
+	color: #AAA;
+}
+.topic .reply .list .answer .body {
+	margin-left: 5px;
+}
+.topic .reply .list .answer .body .detail{
+	padding-bottom: 10px;
+	font-size: 10.5pt;
+	min-height: 22px;
+	margin-left: 10px;
+	word-break: break-word;
+}
+.topic .reply .list .answer .body .replies{
+	margin: 10px 0 10px 10px;
+}
+.topic .reply .list .answer .body .replies ul {
+	margin: 10px 5px 20px 5px;
+	font-size: 8pt;
+	clear: both;
+}
+
+.topic .reply .list .answer .body .replies ul li {
+	margin-bottom: 5px;
+	color: #444;
+}
+
+.topic .reply .list .answer .body .replies ul li .b {
+	width: 535px;
+	margin-left: 5px;
+}
+.topic .reply .list .answer .body .replies ul li .t {
+	position: relative;
+	color: #999;
+	font-size: 8pt;
+	margin: 3px 0 0 3px;
+	-webkit-text-size-adjust: none;
+	white-space: nowrap;
+	display: inline-block;
+}
+
+.topic .reply .list .answer .body .votes {
+	font-size: 9pt;
+	color: #AAA;
+	margin: -10px 0 5px 10px;
+}
+
+.topic .reply .list .answer .body .votes a {
+	color: #AAA;
+	text-decoration: none;
+	padding: 0 4px 0 0;
+}
+.clear {
+	clear: both;
+	font-size: 1px;
+	line-height: 0;
+}

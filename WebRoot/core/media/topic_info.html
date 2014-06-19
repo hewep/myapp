@@ -1,0 +1,139 @@
+<link rel="stylesheet" type="text/css" href="res/media/css/topic.css">
+<div class="row-fluid ">
+	<!-- BEGIN TAB PORTLET-->
+	<div class="portlet box blue tabbable">
+
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="icon-reorder"></i> Portlet Tabs
+			</div>
+		</div>
+
+		<div class="portlet-body" style="padding:20px;">
+			<div class="topic ">
+
+				<div class="question">
+					<div class="title"><h3>angular 指令 scope问题</h3></div>
+					<hr>
+					<div class="main">
+						<div class="detail">
+							<p>1, angualr 的 directive 中的scope
+								&nbsp;与controller的scope有什么区别, 能不能 在directive内部 获取 controller
+								的scope的值?</p>
+							<p>2, directive 与 controller 的执行顺序是什么样的? 官方文档没看懂?</p>
+							<p>求大神赐教!&nbsp;</p>
+							<div class="clear"></div>
+						</div>
+						<div class="asker ">
+							<div class="info" title="hewep">
+								<span class="ainfo"> <a
+									href="http://my.oschina.net/u/1579252" class="ShowUserOutline"
+									target="_blank" title="hewep"><img
+										src="http://static.oschina.net/uploads/user/789/1579252_50.jpg?t=1396164811000"
+										align="absmiddle" alt="hewep" title="hewep"
+										user="1579252"></a>
+								</span> <span class="pinfo"> <a
+									href="http://my.oschina.net/u/1579252" class="Asker-Name"
+									target="_blank">hewep</a><br> <span class="pub_time">发帖于&nbsp;10天前</span><br>
+									<span><a href="#answers" class="answer_count">1</a>回/46阅</span>
+								</span>
+							</div>
+							<div class="clear"></div>
+						</div>
+
+						<div class="tags_toolbars">
+							<div class="Tags" id="tags_nav" style="margin: 15px 0;">
+								<strong>标签：</strong> <a
+									href="http://www.oschina.net/question/tag/angularjs"
+									class="tag project image" data-id="16566"
+									title="HTML的Web框架 AngularJS"><img
+									src="http://static.oschina.net/uploads/logo/angularjs_DolgI.gif"
+									style="height:18px;" class="prj_logo_18">AngularJS</a>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+				</div>
+				<hr>
+				<div class="reply alert alert-block alert-info fade in">
+					<ul class="list" >
+						<li class="answer">
+							<div class="row-fluid ">
+								<div class="span3 user">
+									<span class="user_img"><a
+										href="http://my.oschina.net/arrowing" class="ShowUserOutline"
+										name="AnchorAnswer761708" target="_blank"><img
+											src="http://static.oschina.net/uploads/user/120/241552_50.jpg?t=1368497625000"
+											align="absmiddle" alt="arrowing" title="arrowing"
+											class="SmallPortrait" user="241552"></a></span> <span
+										class="user_info"> <a
+										href="http://my.oschina.net/arrowing" title="arrowing"
+										target="_blank">arrowing</a> <span class="reply-time">10天前</span>
+									</span>
+									<div class="clear"></div>
+								</div>
+								<div class="span9 body">
+									
+									<div class="detail">1，可以继承父控制器的方法，默认的指令参数即可，注意scope这个参数属性。
+										2，控制器比指令早执行</div>
+									<div class="replies" >
+										<div class="clear"></div>
+										<strong>--- 共有 2 条评论 --- </strong>
+										<ul>
+											<li><a href="http://my.oschina.net/arrowing"
+												class="pull-left" name="AnchorAnswer762059">arrowing</a> 
+												<span class="b"> 
+													<span class="c">回复 <a href="http://my.oschina.net/u/1579252" target="_blank">@hewep</a>
+														: 先在控制域里设置值，然后你在html里写进attr就好了，然后用attrs.属性名获取到值
+													</span> 
+													<span class="t"> (9天前)&nbsp;&nbsp; 
+														<span class="opts">
+															<a href="javascript:reply_to_post(761708,241552)">回复</a>
+														</span>
+													</span>
+												</span>
+												<div class="clear"></div>
+											</li>
+											<li id="PostReply_762048" class=""><a
+												href="http://my.oschina.net/u/1579252" class="pull-left"
+												name="AnchorAnswer762048">hewep</a> <span class="b"> <span
+													class="c">兄台解释有点粗略, 不过还是谢谢了; 具体问题是这样的 : 我定义一个
+														directive 用来初始化 kindEditor, 需要设置一个默认值 . 想从controller中的scope
+														获取 这个值, 但是 获取不到</span> <span class="t"> (9天前)&nbsp;&nbsp; <span
+														class="opts"><a
+															href="javascript:reply_to_post(761708,1579252)">回复</a></span>
+												</span>
+											</span>
+												<div class="clear"></div></li>
+										</ul>
+										<div class="PagerLinks"></div>
+									</div>
+		
+									<div class="votes">
+										<span class="a_toolbar"> <a
+											href="javascript:reply_to_post(761708, 0)">评论(2)</a>| <a
+											href="/question/answer?question=157976&amp;answer=761708">引用此答案</a>|
+											<a
+											href="javascript:report('http://www.oschina.net/question/1579252_157976#AnchorAnswer761708',761708,17)">举报</a>|
+											<span class="tail">来自 <a
+												href="http://www.oschina.net/mobile" target="_blank">Windows
+													Phone</a></span>
+										</span>
+									</div>
+									
+									<div class="clear"></div>
+								</div>
+								
+							</div>
+						</li>
+					</ul>
+				</div>
+				<hr>
+				
+				
+			</div>
+		</div>
+	</div>
+	<!-- END TAB PORTLET-->
+</div>

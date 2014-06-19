@@ -1,12 +1,20 @@
 package com.app.controller;
 
 import com.app.model.Topic;
-import com.app.model.User;
 import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Page;
 
 public class TopicController extends BaseController{
+	
+	public void list(){
+		int pageNumber = this.getParaToInt(0,1);
+		int categoryId = this.getParaToInt("category_id");
+		Page<Topic> topics = Topic.dao.paginate(pageNumber, 10, "select * ", "from topic where category_id = ?", categoryId);
+		
+		this.renderJson(topics.getList());
+	}
 	
 	public void addOrUpdate() throws Exception{
 		AjaxResult result = new AjaxResult(1,"操作成功");
@@ -26,5 +34,9 @@ public class TopicController extends BaseController{
 		}finally{
 			this.renderJson(result.toJson());
 		}
+	}
+	
+	public void info(){
+		
 	}
 }
