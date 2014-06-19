@@ -117,8 +117,15 @@
 	text-decoration: none;
 	padding: 0 4px 0 0;
 }
-.topic .question_answer button{
-	margin-top:10px;
+.topic .question_answer {
+	margin-left:0px;
+	position: relative;
+}
+.topic .question_answer .bn{
+	position: absolute;
+	margin:0px 10px;
+	bottom:0px;
+	right:0px;
 }
 .clear {
 	clear: both;
