@@ -50,17 +50,39 @@ define( function(){
 	}];
 	
 	// 话题信息 及 回复
-	var TopicInfoCtrl = ['$scope', '$http','$location','$routeParams', function($scope, $http, $location,$routeParams){
+	var TopicInfoCtrl = ['$scope', '$http','$location','$routeParams','$sce',function($scope, $http, $location,$routeParams, $sce){
+		$scope.topic;
+		$scope.reply = {};   // 回复
+		$scope.replies = [];	// 回复列表
 		
-		
-		/*$http({	method:'post',
+		$http({	method:'post',
 			url:"topic/info",
 			params:{topic_id:$routeParams.topic_id}
-		}).success(function(data){
-			$scope.topics = data;
+		
+		}).success(function(result){
+			$scope.topic = result.topic;
+			$scope.replies = result.replies;
+			//$scope.replies[0].content = $sce.trustAsHtml($scope.replies[0].content);
 		}).error(function(){
 			alert("网络连接失败");
-		});*/
+		});
+		
+		$scope.answer = function(){
+			$scope.reply.content = $scope.editor.html();
+			$scope.reply.topic_id = $scope.topic.id;
+			if($.trim($scope.reply.content)){
+				$http({	method:'post',
+						url:"topic/reply",
+						params:$scope.reply
+				}).success(function(result){
+					alert(angular.toJson(result));
+				}).error(function(){
+					alert("网络连接失败");
+				});
+			}else{
+				alert("请输入内容!");
+			}
+		};
 	}];
 	
 	// 话题列表信息

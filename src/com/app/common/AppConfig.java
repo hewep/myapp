@@ -5,6 +5,7 @@ import com.app.controller.IndexController;
 import com.app.controller.TopicController;
 import com.app.controller.UserController;
 import com.app.model.Category;
+import com.app.model.Reply;
 import com.app.model.Topic;
 import com.app.model.User;
 import com.jfinal.config.Constants;
@@ -63,6 +64,7 @@ public class AppConfig extends JFinalConfig {
 		
 		arp.addMapping("user", User.class);
 		arp.addMapping("topic", Topic.class);
+		arp.addMapping("reply", Reply.class);
 		arp.addMapping("category", Category.class);
 		arp.setShowSql(true);
 		

@@ -4,9 +4,10 @@ define(['angular',
         'media/controllers/index',
         'media/controllers/topic',
         'media/controllers/user',
-        'media/directives/common'
+        'media/directives/common',
+        'media/filters'
 ],function(angular,index, topic){
-	var app =  angular.module('myApp', ['ngRoute','UserCtrls','CommDirectives']);
+	var app =  angular.module('myApp', ['ngRoute','UserCtrls','CommDirectives', 'CommFilters']);
 	
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
 			 $routeProvider.when('/', {templateUrl: 'core/media/category.html', controller: index.categorys})

@@ -8,12 +8,14 @@ require.config({
 		validate : 'media/js/jquery.validate.min',
 		formValidate: 'media/js/form-validation',
 		application : 'media/js/application',
-		kindEditor : 'plugins/kindeditor/kindeditor'
+		kindEditor : 'plugins/kindeditor/kindeditor',
+		prettify : 'plugins/code-prettify/prettify.min'
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
         'bootstrap' : {deps:['jquery']},
+        'prettify' : {deps:['jquery']},
         'validate' : {deps:['jquery']},
         'formValidate' : {deps:['validate']}
     }

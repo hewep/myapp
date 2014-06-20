@@ -1,5 +1,8 @@
 package com.app.controller;
 
+import java.util.List;
+
+import com.app.model.Reply;
 import com.app.model.Topic;
 import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
@@ -37,6 +40,24 @@ public class TopicController extends BaseController{
 	}
 	
 	public void info(){
+		AjaxResult result = new AjaxResult(1);
+		String topicId = this.getPara("topic_id");
+		Topic topic = Topic.dao.findById(topicId);
+		List<Reply> replies = Reply.dao.find("select * from reply where topic_id = ?", topicId);
 		
+		result.setData("topic", topic);
+		result.setData("replies", replies);
+		this.renderJson(result.toJson());
+	}
+	
+	public void reply(){
+		AjaxResult result = new AjaxResult(1,"操作成功");
+		Reply reply = this.getModel(Reply.class).setAttrs(this.getParamMap());
+		reply.set("create_time", DateUtils.getCurrDateTime());
+		//reply.set("user_id", this.getCurrUser().get("id"));
+		reply.set("pid", 0);
+		reply.save();
+		result.setData("data", reply);
+		this.renderJson(result.toJson());
 	}
 }

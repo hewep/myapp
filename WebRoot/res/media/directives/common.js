@@ -37,10 +37,7 @@ define(['angular'], function(){
 				    'kindEditor'
 				],function(){
 					var editor = KindEditor.create('textarea[name='+$element.attr('name')+']', {
-		                /*autoHeightMode : true,
-		                afterCreate : function() {
-		                    this.loadPlugin('autoheight');
-		                },*/
+		                cssPath : ['/res/plugins/kindeditor/prettify.css'],
 		                items : [
 		                        'source', '|', 'undo', 'redo', '|', 'preview', 'code', 'cut', 
 		                        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright','justifyfull', '|',
@@ -56,4 +53,15 @@ define(['angular'], function(){
 				});
 			};
 		}]);
+		
+		directives.directive('prettify', function(){
+			return function($scope, $element, $attr, $ctrl){
+				require([
+				     'prettify'    
+				],function(){
+					prettyPrint();
+				});
+			};
+		});
+//		directives.filter('htmlFilter', ['$http',]);
 });

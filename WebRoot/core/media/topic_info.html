@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="res/media/css/topic.css">
+<link rel="stylesheet" type="text/css" href="res/plugins/code-prettify/prettify.css">
 <div class="row-fluid ">
 	<!-- BEGIN TAB PORTLET-->
 	<div class="portlet box blue tabbable">
@@ -13,16 +14,11 @@
 			<div class="topic ">
 
 				<div class="question">
-					<div class="title"><h3>angular 指令 scope问题</h3></div>
+					<div class="title"><h3>{{topic.title}}</h3></div>
 					<hr>
 					<div class="main">
 						<div class="detail">
-							<p>1, angualr 的 directive 中的scope
-								&nbsp;与controller的scope有什么区别, 能不能 在directive内部 获取 controller
-								的scope的值?</p>
-							<p>2, directive 与 controller 的执行顺序是什么样的? 官方文档没看懂?</p>
-							<p>求大神赐教!&nbsp;</p>
-							<div class="clear"></div>
+							{{topic.content}}
 						</div>
 						<div class="asker ">
 							<div class="info" title="hewep">
@@ -58,7 +54,7 @@
 				<hr>
 				<div class="reply alert alert-block alert-info fade in">
 					<ul class="list" >
-						<li class="answer">
+						<li class="answer" ng-repeat="reply in replies">
 							<div class="row-fluid ">
 								<div class="span3 user">
 									<span class="user_img"><a
@@ -75,8 +71,7 @@
 								</div>
 								<div class="span9 body">
 									
-									<div class="detail">1，可以继承父控制器的方法，默认的指令参数即可，注意scope这个参数属性。
-										2，控制器比指令早执行</div>
+									<div class="detail" ng-bind-html="reply.content | toHtml" prettify></div>
 									<div class="replies" >
 										<div class="clear"></div>
 										<strong>--- 共有 2 条评论 --- </strong>
@@ -135,7 +130,7 @@
 						<textarea id="content" name="content" init-kind-editor info="topic.content"  style="height:200px;"></textarea>
 					</div>
 					<div class="pull-left bn">
-						<button class="btn green "><i class="icon-pencil icon-white"></i> 我要回答</button>
+						<button class="btn green" ng-click="answer();"><i class="icon-pencil icon-white"></i> 我要回答</button>
 					</div>
 					<div class="clear"></div>
 				</div>
