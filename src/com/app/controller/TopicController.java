@@ -57,7 +57,7 @@ public class TopicController extends BaseController{
 		//reply.set("user_id", this.getCurrUser().get("id"));
 		reply.set("pid", 0);
 		reply.save();
-		result.setData("data", reply);
+		result.setData("reply", reply);
 		this.renderJson(result.toJson());
 	}
 }

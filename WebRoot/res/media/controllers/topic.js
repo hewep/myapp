@@ -52,7 +52,7 @@ define( function(){
 	// 话题信息 及 回复
 	var TopicInfoCtrl = ['$scope', '$http','$location','$routeParams','$sce',function($scope, $http, $location,$routeParams, $sce){
 		$scope.topic;
-		$scope.reply = {};   // 回复
+		$scope.reply = {}; // 回复
 		$scope.replies = [];	// 回复列表
 		
 		$http({	method:'post',
@@ -62,7 +62,6 @@ define( function(){
 		}).success(function(result){
 			$scope.topic = result.topic;
 			$scope.replies = result.replies;
-			//$scope.replies[0].content = $sce.trustAsHtml($scope.replies[0].content);
 		}).error(function(){
 			alert("网络连接失败");
 		});
@@ -75,13 +74,17 @@ define( function(){
 						url:"topic/reply",
 						params:$scope.reply
 				}).success(function(result){
-					alert(angular.toJson(result));
+					$scope.replies.push(result.reply);
+					$scope.editor.html("");
 				}).error(function(){
 					alert("网络连接失败");
 				});
 			}else{
 				alert("请输入内容!");
 			}
+		};
+		$scope.comment = function(reply){
+			
 		};
 	}];
 	
