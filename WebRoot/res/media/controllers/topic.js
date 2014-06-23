@@ -55,6 +55,7 @@ define( function(){
 		$scope.reply = {}; // 回复
 		$scope.replies = [];	// 回复列表
 		
+		
 		$http({	method:'post',
 			url:"topic/info",
 			params:{topic_id:$routeParams.topic_id}
@@ -83,8 +84,8 @@ define( function(){
 				alert("请输入内容!");
 			}
 		};
-		$scope.comment = function(reply){
-			
+		$scope.comment = function(){
+			//alert($scope.commont);
 		};
 	}];
 	
