@@ -20,10 +20,10 @@ public class UserController extends BaseController{
 			}else{
 				result.setMsg(0, "此邮箱已注册");
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setMsg(0, "注册失败："+e.getMessage());
+			throw new Exception(e);
 		}finally{
 			this.renderJson(result.toJson());
 		}

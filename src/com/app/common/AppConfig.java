@@ -8,6 +8,7 @@ import com.app.model.Category;
 import com.app.model.Reply;
 import com.app.model.Topic;
 import com.app.model.User;
+import com.app.support.TxProxy;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -48,9 +49,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-		me.add(new TxByRegex(".*add.*"));
-		me.add(new TxByRegex(".*del.*"));
-		me.add(new TxByRegex(".*edit.*"));
+		me.add(new TxByRegex(".*(add|del|edit).*"));
 	}
 
 	@Override
