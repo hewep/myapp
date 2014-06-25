@@ -3,6 +3,7 @@ require.config({
 	paths : {
 		angular : 'lib/angular',
 		angularRoute : 'lib/angular-route',
+		angularCookie : 'lib/angular-cookies.min',
 		jquery : 'common/js/jquery-1.7.2.min',
 		bootstrap : 'bootstrap/js/bootstrap.min',
 		validate : 'media/js/jquery.validate.min',
@@ -14,6 +15,7 @@ require.config({
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
+        'angularCookie' : {deps:['angular']},
         'bootstrap' : {deps:['jquery']},
         'prettify' : {deps:['jquery']},
         'validate' : {deps:['jquery']},
@@ -23,6 +25,7 @@ require.config({
 	
 require(['angular',
 		 'angularRoute',
+		 'angularCookie',
 		 'bootstrap',
 		 'application',
 		 'app'

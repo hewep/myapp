@@ -50,7 +50,7 @@ define( function(){
 	}];
 	
 	// 话题信息 及 回复
-	var TopicInfoCtrl = ['$scope', '$http','$location','$routeParams','$sce',function($scope, $http, $location,$routeParams, $sce){
+	var TopicInfoCtrl = ['$scope','$cookieStore', '$http','$location','$routeParams','$sce',function($scope, $cookieStore,$http, $location,$routeParams, $sce){
 		$scope.topic;
 		$scope.reply = {}; // 回复
 		$scope.replies = [];	// 回复列表
@@ -58,7 +58,6 @@ define( function(){
 		$http({	method:'post',
 			url:"topic/info",
 			params:{topic_id:$routeParams.topic_id}
-		
 		}).success(function(result){
 			$scope.topic = result.topic;
 			$scope.replies = result.replies;
@@ -83,14 +82,35 @@ define( function(){
 				alert("请输入内容!");
 			}
 		};
+		
 		$scope.addComment = function(){
-			alert(angular.toJson($scope.comment));
+			if(!$scope.comment.content){
+				$scope.error = true;return;
+			}
+			$http({	method:'post',
+				url:"topic/comment",
+				params:$scope.comment
+			}).success(function(result){
+				if(result.status == 1){
+					$("#comment_modal").modal('hide');
+				}
+			}).error(function(){
+				alert("网络连接失败");
+			});
 		};
+		
 		$scope.showComment = function(reply){
-			$scope.comment = {};		//  评论
-			$scope.comment.reply_id = reply.id;
-			$scope.user_name = "hhh";
-			$("#comment_modal").modal('show');
+			if($cookieStore.get("current_user")){
+				
+				$scope.comment = {};		//  评论
+				$scope.comment.reply_id = reply.id;
+				$scope.user_name = "hhh";
+				$scope.error = false;
+				
+				$("#comment_modal").modal('show');
+			}else{
+				$("#login_modal").modal('show');
+			}
 		};
 	}];
 	

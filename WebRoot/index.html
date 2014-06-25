@@ -18,7 +18,7 @@
 <!--導航-->
 <div id="navs" class="row-fluid">
 	<div id="navs_area">
-		<div class="left">
+		<div class="pull-left">
 			<ul>
 				<li>
 					<a href="/">首 页</a>
@@ -31,7 +31,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="right" ng-show="showLogin">
+		<div class="pull-right" ng-show="showLogin">
 			<ul>
 				<li>
 					<a data-toggle="modal" href="#login_modal">登 陆 </a>
@@ -41,7 +41,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="right" ng-show="!showLogin">
+		<div class="pull-right" ng-show="!showLogin">
 			<ul>
 				<li>
 					{{user.user_name}} 
@@ -58,16 +58,17 @@
 	<!--   內容區-->
 	<div class="row-fluid" >
 		<div class="search">
-			<div class="input-append" style="margin-bottom:0px;">
+			<div class="pull-left input-append" style="margin-bottom:0px;">
 				<input class="m-wrap" style="width:400px;" type="text" placeholder="Search Mail">
 				<button class="btn green" type="button">搜 索 &nbsp; <i class="m-icon-swapright m-icon-white"></i></button>
 			</div>
-			<div class="right">
+			<div class="pull-right">
 				<p>我要提问</p>
 				<a href="#/topic" class="btn green">
 					发 贴 &nbsp; <i class="icon-comments"></i>
 				</a>
 			</div>
+			<div class="clear"></div>
 		</div>
 			
 	</div>
@@ -133,16 +134,22 @@
 require([
          'app'
 ],function(app){
-	app.controller('ComCtrl',['$scope', '$http', function($scope,$http){
+	app.controller('ComCtrl',['$scope', '$cookieStore','$http', function($scope,$cookieStore,$http){
 		$scope.showLogin = true;	// 显示 登陆 按钮
 		$scope.showError = false;	// 显示错误信息
-		$scope.user = {};
+		$scope.user = $cookieStore.get("current_user");
+		
+		if($scope.user){
+			$scope.showLogin = false;
+		}
 		$scope.login = function(){
 			$http({method:'post',url:"login", params:$scope.user}).success(function(result){
 				
 				if(result.status == 1){
 					$scope.showLogin = false;
 					$("#login_modal").modal('hide');
+					
+					$cookieStore.put("current_user", result.user);
 					$scope.user = result.user;
 				}else{
 					$scope.showError = true;
@@ -156,6 +163,7 @@ require([
 			
 			$http({method:'post',url:"logout"}).success(function(result){
 				$scope.showLogin = true;
+				$cookieStore.remove("current_user");
 			}).error(function(){
 				alert("网络连接失败");
 			});

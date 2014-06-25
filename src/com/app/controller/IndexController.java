@@ -3,6 +3,7 @@ package com.app.controller;
 import com.app.common.UserSessionListener;
 import com.app.model.User;
 import com.app.util.AjaxResult;
+import com.app.util.Const;
 
 
 public class IndexController extends BaseController{
@@ -10,14 +11,14 @@ public class IndexController extends BaseController{
 	public void login(){
 		AjaxResult result = new AjaxResult(1,"登陆成功");
 		try {
-			User user0 = this.getModel(User.class);
-					user0.setAttrs(this.getParamMap());
-			User user = User.dao.findFirst("select * from user where email = ? and password = ?",
-					new Object[]{user0.get("email"), user0.get("password")});
+			User user0 = this.getModel(User.class).setAttrs(this.getParamMap());
+					
+			User user = User.dao.getByEmailAndPwd(user0.getStr("email"), user0.getStr("password"));
 			if(user == null ){
 				result.setMsg(0, "用户名或密码错误!");
 			}else{
-				this.getSession().setAttribute("hh", new UserSessionListener(user));
+				this.getSession().setAttribute("online", new UserSessionListener(user));
+				this.getSession(true).setAttribute(Const.CURRENT_USER, user);
 				result.setData("user", user);
 			}
 		} catch (Exception e) {

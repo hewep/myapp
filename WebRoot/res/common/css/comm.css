@@ -12,11 +12,8 @@ body {
 .content {
     width:990px;
 }
-.right{
-	float: right;
-}
-.left{
-	float: left;
+.clear{
+	clear:both;
 }
 /* 导航 */
  ul, li {
@@ -42,10 +39,10 @@ ul, ol {
     display:inline-block;
     height:40px;
     padding:0 20px;
-    color:#fff;
     text-decoration: none;
 }
 #navs li {
+	color:#fff;
     float: left;
     font-size: 14px;
     height: 40px;
@@ -57,6 +54,10 @@ ul, ol {
 
 
 /**defined*/
+.dashboard-stat {
+margin: 0px 10px 25px 10px;
+margin-bottom: 25px;
+}
 
 .dashboard-stat .visual {
 width: 40px;
@@ -66,10 +67,7 @@ float: left;
 padding-top: 10px;
 padding-left: 15px;
 }
-.dashboard-stat {
-margin: 0px 10px 25px 10px;
-margin-bottom: 25px;
-}
+
 
 .dashboard-stat .visual i {
 font-size: 45px;
@@ -104,6 +102,7 @@ margin-top: 5px;
 	color: #666;
 }
 
+/*** topic ****/
 .question .qa_type{
 	float: left;
 	padding: 0 12px;

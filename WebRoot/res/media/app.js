@@ -7,7 +7,7 @@ define(['angular',
         'media/directives/common',
         'media/filters'
 ],function(angular,index, topic){
-	var app =  angular.module('myApp', ['ngRoute','UserCtrls','CommDirectives', 'CommFilters']);
+	var app =  angular.module('myApp', ['ngRoute','ngCookies','UserCtrls','CommDirectives', 'CommFilters']);
 	
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
 			 $routeProvider.when('/', {templateUrl: 'core/media/category.html', controller: index.categorys})
