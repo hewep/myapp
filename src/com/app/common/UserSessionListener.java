@@ -8,8 +8,9 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
+import com.app.controller.BaseController;
 import com.app.model.User;
-import com.app.util.Constant;
+import com.app.util.Const;
 
 public class UserSessionListener implements HttpSessionBindingListener {
 	
@@ -26,10 +27,10 @@ public class UserSessionListener implements HttpSessionBindingListener {
 		HttpSession session = event.getSession();
 		ServletContext application = session.getServletContext();
 		
-		List<User> onlineUsers = (List<User>)application.getAttribute(Constant.ONLINE_USER_LIST);
+		List<User> onlineUsers = (List<User>)application.getAttribute(Const.ONLINE_USER_LIST);
 		if(onlineUsers == null){
 			onlineUsers = new ArrayList<User>();
-			application.setAttribute(Constant.ONLINE_USER_LIST, onlineUsers);
+			application.setAttribute(Const.ONLINE_USER_LIST, onlineUsers);
 		}
 		onlineUsers.add(this.user);
 	}
@@ -39,7 +40,7 @@ public class UserSessionListener implements HttpSessionBindingListener {
 		// TODO Auto-generated method stub
 		HttpSession session = event.getSession();
 		ServletContext application = session.getServletContext();
-		List<User> onlineUsers = (List<User>)application.getAttribute(Constant.ONLINE_USER_LIST);
+		List<User> onlineUsers = (List<User>)application.getAttribute(Const.ONLINE_USER_LIST);
 		onlineUsers.remove(this.user);
 	}
 

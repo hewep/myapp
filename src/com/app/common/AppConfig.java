@@ -5,10 +5,10 @@ import com.app.controller.IndexController;
 import com.app.controller.TopicController;
 import com.app.controller.UserController;
 import com.app.model.Category;
+import com.app.model.Comment;
 import com.app.model.Reply;
 import com.app.model.Topic;
 import com.app.model.User;
-import com.app.support.TxProxy;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -49,6 +49,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
+		me.add(new AuthInterceptor());
 		me.add(new TxByRegex(".*(add|del|edit).*"));
 	}
 
@@ -65,6 +66,8 @@ public class AppConfig extends JFinalConfig {
 		arp.addMapping("topic", Topic.class);
 		arp.addMapping("reply", Reply.class);
 		arp.addMapping("category", Category.class);
+		arp.addMapping("comment", Comment.class);
+		
 		arp.setShowSql(true);
 		
 	}
