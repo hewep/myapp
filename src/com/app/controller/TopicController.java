@@ -30,8 +30,9 @@ public class TopicController extends BaseController{
 				topic.update();
 			}else{
 				topic.set("create_time", DateUtils.getCurrDate());
-				//topic.set("user_id", this.getCurrUser().get("id"));
+				topic.set("user_id", this.getCurrUser().get("id"));
 				topic.save();
+				result.setData("data", topic);
 			}
 			
 		} catch (Exception e) {

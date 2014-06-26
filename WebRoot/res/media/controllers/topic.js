@@ -1,7 +1,7 @@
 'use strict';
 /* Controllers */
 define( function(){
-	//话题
+	//添加话题
 	var TopicCtrl = ['$scope', '$http','$location','$routeParams', function($scope, $http, $location,$routeParams){
 		$scope.topic = {};
 		$scope.categorys = {};
@@ -12,12 +12,22 @@ define( function(){
 		
 		$scope.save = function(){
 			$scope.topic.content = $scope.editor.html();	// 通过kindEditor  指令引用
+			if(!$scope.topic.content){
+				$scope.topic_content_error = true;
+				return;
+			}else{
+				$scope.topic_content_error = false;
+			}
 			$scope.topic.category_id = $("#type a.selected").attr("type");
 			
 			$http({method:'post',url:"topic/addOrUpdate", params:$scope.topic}).success(function(result){
-				alert(result.msg);
+				
 				if(result.status == 1){
-					$location.path("/");
+					$location.path("topic_list/"+result.data.category_id);
+				}else if(result.type == 'not_login'){
+					$scope.not_login = true;
+				}else{
+					alert(result.msg);
 				}
 			}).error(function(){
 				alert("网络连接失败");
@@ -27,15 +37,6 @@ define( function(){
 		init();
 		
 		function init(){
-			
-			// 初始化 类型选项
-			$("#type").delegate("a","click",function(){
-				$(this).addClass("selected");
-				$(this).closest("li").siblings().each(function(){
-					$(this).find("a").removeClass("selected");
-				});
-			});
-			
 			// 初始化 类别信息
 			$http({	method:'post',
 				url:"category/list?type=tree"

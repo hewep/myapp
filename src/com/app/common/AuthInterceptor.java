@@ -16,7 +16,7 @@ import com.jfinal.render.Render;
 public class AuthInterceptor implements Interceptor{
 	Logger logger = Logger.getLogger(this.getClass());
 	
-	private static String AUTH = ".*(add|del|edit).*";
+	private static String AUTH = ".*(add|del|edit|comment).*";
 	private Pattern pattern = Pattern.compile(AUTH, Pattern.CASE_INSENSITIVE);
 	
 	public void intercept(ActionInvocation ai){
@@ -28,11 +28,12 @@ public class AuthInterceptor implements Interceptor{
 			String method = uri.substring(uri.lastIndexOf("/"));
 			if(pattern.matcher(method).matches() && controller.getSessionAttr(Const.CURRENT_USER) == null){
 				
-				AjaxResult result = new AjaxResult(0,"用户尚未登录");
+				AjaxResult result = new AjaxResult(0,Const.Type.NOT_LOGIN.getValue(),"用户尚未登录");
 				controller.renderJson(result.toJson());
+			}else{
+				ai.invoke();			
 			}
 				
-			ai.invoke();			
 		} catch (Exception e) {	
 			// 统一异常处理
 			logger.error(controller.getClass().getName(),e);

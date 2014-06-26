@@ -63,5 +63,23 @@ define(['angular'], function(){
 				});
 			};
 		});
+		
+		directives.directive('topicType', function(){
+			return {
+		        restrict: "A",
+		            link: function( scope, element, attrs ) {
+		            	if(scope.$first){
+		            		element.find("a").addClass("selected");
+		            	}
+		            	
+		            	$(element).delegate("a","click",function(){
+		    				$(this).addClass("selected");
+		    				$(this).closest("li").siblings().each(function(){
+		    					$(this).find("a").removeClass("selected");
+		    				});
+		    			});
+		        }
+		    }
+		});
 //		directives.filter('htmlFilter', ['$http',]);
 });

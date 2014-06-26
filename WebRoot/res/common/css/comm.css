@@ -127,3 +127,11 @@ margin-top: 5px;
 	color: #40AA53;
 	background: url('../image/sel.gif') no-repeat right bottom;
 }
+
+.error_msg {
+height: 16px;
+color: #A00;
+margin: 10px 0 10px 0;
+background: url('../image/warning.gif') no-repeat left center;
+padding-left: 24px;
+}

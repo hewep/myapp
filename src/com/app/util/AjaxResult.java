@@ -18,8 +18,8 @@ public class AjaxResult {
 	}
 	public AjaxResult(int status, String type, String msg){
 		result.put("status", status);	
-		result.put("msg", msg);	
 		result.put("type", type);
+		result.put("msg", msg);	
 	}
 	public void setStatus(int status){
 		result.put("status", status);		

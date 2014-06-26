@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.app.model.User;
+import com.app.util.Const;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 
@@ -30,7 +31,7 @@ public class BaseController extends Controller{
 	
 	/** 获取当前用户 **/
 	public User getCurrUser(){
-		Object obj = this.getSessionAttr("user");
+		Object obj = this.getSessionAttr(Const.CURRENT_USER);
 		if(obj == null){
 			return null;
 		}else{
