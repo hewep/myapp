@@ -16,7 +16,7 @@ import com.jfinal.render.Render;
 public class AuthInterceptor implements Interceptor{
 	Logger logger = Logger.getLogger(this.getClass());
 	
-	private static String AUTH = ".*(add|del|edit|comment).*";
+	private static String AUTH = ".*(add|del|edit|comment|reply).*";
 	private Pattern pattern = Pattern.compile(AUTH, Pattern.CASE_INSENSITIVE);
 	
 	public void intercept(ActionInvocation ai){
@@ -37,7 +37,7 @@ public class AuthInterceptor implements Interceptor{
 		} catch (Exception e) {	
 			// 统一异常处理
 			logger.error(controller.getClass().getName(),e);
-			Render render = controller.getRender();
+//			Render render = controller.getRender();
 //			if(render == null){
 //				controller.renderFreeMarker("/WEB-INF/view/common/error.ftl");
 //			}

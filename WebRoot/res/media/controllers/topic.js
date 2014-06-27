@@ -2,7 +2,7 @@
 /* Controllers */
 define( function(){
 	//添加话题
-	var TopicCtrl = ['$scope', '$http','$location','$routeParams', function($scope, $http, $location,$routeParams){
+	var TopicCtrl = ['$scope', 'checkUser','$http','$location','$routeParams', function($scope, checkUser, $http, $location,$routeParams){
 		$scope.topic = {};
 		$scope.categorys = {};
 		
@@ -13,19 +13,20 @@ define( function(){
 		$scope.save = function(){
 			$scope.topic.content = $scope.editor.html();	// 通过kindEditor  指令引用
 			if(!$scope.topic.content){
-				$scope.topic_content_error = true;
+				$scope.topic_content_error = true;		// 话题错误信息显示
 				return;
 			}else{
 				$scope.topic_content_error = false;
 			}
 			$scope.topic.category_id = $("#type a.selected").attr("type");
 			
-			$http({method:'post',url:"topic/addOrUpdate", params:$scope.topic}).success(function(result){
+			$http({method:'post',
+				   url:"topic/addOrUpdate", 
+				   params:$scope.topic}
+			).success(function(result){
 				
 				if(result.status == 1){
 					$location.path("topic_list/"+result.data.category_id);
-				}else if(result.type == 'not_login'){
-					$scope.not_login = true;
 				}else{
 					alert(result.msg);
 				}
@@ -51,10 +52,10 @@ define( function(){
 	}];
 	
 	// 话题信息 及 回复
-	var TopicInfoCtrl = ['$scope','$cookieStore', '$http','$location','$routeParams','$sce',function($scope, $cookieStore,$http, $location,$routeParams, $sce){
+	var TopicInfoCtrl = ['$scope','checkUser', '$http','$location','$routeParams','$sce',function($scope, checkUser,$http, $location,$routeParams, $sce){
 		$scope.topic;
-		$scope.reply = {}; // 回复
-		$scope.replies = [];	// 回复列表
+		$scope.commentReply = {};  	// 临时存储要评论的 回复, 便于更新新添加的评论
+		$scope.replies = [];		// 回复列表
 		
 		$http({	method:'post',
 			url:"topic/info",
@@ -67,32 +68,39 @@ define( function(){
 		});
 		
 		$scope.answer = function(){
+			$scope.reply = {}; // 回复
 			$scope.reply.content = $scope.editor.html();
 			$scope.reply.topic_id = $scope.topic.id;
+			
 			if($.trim($scope.reply.content)){
 				$http({	method:'post',
 						url:"topic/reply",
 						params:$scope.reply
 				}).success(function(result){
-					$scope.replies.push(result.reply);
-					$scope.editor.html("");
+					if(result.status == 1){
+						$scope.replies.push(result.reply);	// 显示新添加的回复
+						$scope.editor.html("");
+					}
 				}).error(function(){
 					alert("网络连接失败");
 				});
+				
 			}else{
-				alert("请输入内容!");
+				$scope.answer_content_error = true;		// 回复错误信息显示
 			}
 		};
 		
 		$scope.addComment = function(){
+			
 			if(!$scope.comment.content){
-				$scope.error = true;return;
+				$scope.comment_content_error = true;return;
 			}
 			$http({	method:'post',
 				url:"topic/comment",
 				params:$scope.comment
 			}).success(function(result){
 				if(result.status == 1){
+					$scope.commentReply.comments.push(result.comment);	// 显示 新添加的 评论
 					$("#comment_modal").modal('hide');
 				}
 			}).error(function(){
@@ -101,12 +109,13 @@ define( function(){
 		};
 		
 		$scope.showComment = function(reply){
-			if($cookieStore.get("current_user")){
-				
+			
+			if(checkUser.isLogin()){
+				$scope.commentReply = reply;
 				$scope.comment = {};		//  评论
 				$scope.comment.reply_id = reply.id;
-				$scope.user_name = "hhh";
-				$scope.error = false;
+				
+				$scope.comment_content_error = false;
 				
 				$("#comment_modal").modal('show');
 			}else{

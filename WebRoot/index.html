@@ -31,7 +31,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="pull-right" ng-show="showLogin">
+		<div class="pull-right" ng-show="!isLogin">
 			<ul>
 				<li>
 					<a data-toggle="modal" href="#login_modal">登 陆 </a>
@@ -41,13 +41,13 @@
 				</li>
 			</ul>
 		</div>
-		<div class="pull-right" ng-show="!showLogin">
+		<div class="pull-right" ng-show="isLogin">
 			<ul>
 				<li>
-					{{user.user_name}} 
+					{{currentUser.user_name}} 
 				</li>
 				<li >
-					<a href="#" ng-click="logout()" >退出 </a>
+					<a href="javascript:;" ng-click="logout()" >退出 </a>
 				</li>
 			</ul>
 		</div>
@@ -134,23 +134,16 @@
 require([
          'app'
 ],function(app){
-	app.controller('ComCtrl',['$scope', '$cookieStore','$http', function($scope,$cookieStore,$http){
-		$scope.showLogin = true;	// 显示 登陆 按钮
+	app.controller('ComCtrl',['$scope', 'checkUser', '$http', function($scope,checkUser,$http){
 		$scope.showError = false;	// 显示错误信息
-		$scope.user = $cookieStore.get("current_user");
 		
-		if($scope.user){
-			$scope.showLogin = false;
-		}
 		$scope.login = function(){
 			$http({method:'post',url:"login", params:$scope.user}).success(function(result){
 				
 				if(result.status == 1){
-					$scope.showLogin = false;
+					$scope.showError = false;
 					$("#login_modal").modal('hide');
-					
-					$cookieStore.put("current_user", result.user);
-					$scope.user = result.user;
+					checkUser.login(result.user);
 				}else{
 					$scope.showError = true;
 				}
@@ -160,16 +153,15 @@ require([
 		};
 		
 		$scope.logout = function(){
-			
 			$http({method:'post',url:"logout"}).success(function(result){
-				$scope.showLogin = true;
-				$cookieStore.remove("current_user");
+				checkUser.logout();	
 			}).error(function(){
 				alert("网络连接失败");
 			});
 			
 		};
 	}]);
+	
 
 });
 </script>

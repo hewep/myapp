@@ -59,7 +59,7 @@ public class TopicController extends BaseController{
 		AjaxResult result = new AjaxResult(1,"回复成功");
 		Reply reply = this.getModel(Reply.class).setAttrs(this.getParamMap());
 		reply.set("create_time", DateUtils.getCurrDateTime());
-		//reply.set("user_id", this.getCurrUser().get("id"));
+		reply.set("user_id", this.getCurrUser().get("id"));
 		reply.set("pid", 0);
 		reply.save();
 		result.setData("reply", reply);
@@ -69,9 +69,10 @@ public class TopicController extends BaseController{
 	public void comment(){
 		AjaxResult result = new AjaxResult(1,"评论成功");
 		Comment comment = this.getModel(Comment.class).setAttrs(this.getParamMap());
-		//comment.set("user_id", this.getCurrUser().get("id"));
+		comment.set("user_id", this.getCurrUser().get("id"));
 		comment.set("create_time", DateUtils.getCurrDateTime());
 		comment.save();
+		result.setData("comment", comment);
 		this.renderJson(result.toJson());
 		
 	}

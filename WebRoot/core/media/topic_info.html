@@ -127,6 +127,8 @@
 						<textarea id="content" name="content" init-kind-editor info="topic.content"  style="height:200px;"></textarea>
 					</div>
 					<div class="pull-left bn">
+						<span class="error_msg" ng-show="!isLogin">用户尚未登录</span>
+						<span class="error_msg" ng-show="answer_content_error">请输入回复内容</span>
 						<button class="btn green" ng-click="answer();"><i class="icon-pencil icon-white"></i> 我要回答</button>
 					</div>
 					<div class="clear"></div>
@@ -149,7 +151,7 @@
 	<div class="modal-body">
 
 		<div class="row-fluid">
-			<div class="alert alert-error" ng-show="error" >
+			<div class="alert alert-error" ng-show="comment_content_error" >
 				请输入评论内容
 			</div>
 			<div class="controls">
