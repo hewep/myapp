@@ -1,12 +1,25 @@
 package com.app.controller;
 
-import com.app.common.UserSessionListener;
+import com.app.common.UserOnlineListener;
 import com.app.model.User;
 import com.app.util.AjaxResult;
 import com.app.util.Const;
 
 
 public class IndexController extends BaseController{
+	
+	public void index(){
+		this.render("index.html");
+	}
+	
+	public void admin(){
+		String type = this.getPara("type","");
+		if(type.equals("login")){
+			this.render("dashboard.html");
+		}else{
+			this.render("login.html");
+		}
+	}
 	
 	public void login(){
 		AjaxResult result = new AjaxResult(1,"登陆成功");
@@ -17,8 +30,10 @@ public class IndexController extends BaseController{
 			if(user == null ){
 				result.setMsg(0, "用户名或密码错误!");
 			}else{
-				this.getSession().setAttribute("online", new UserSessionListener(user));
-				this.getSession(true).setAttribute(Const.CURRENT_USER, user);
+				this.getSession().setAttribute("online", new UserOnlineListener(user));
+				this.getSession().setAttribute(Const.CURRENT_USER, user);
+				this.setCookie("email", user.getStr("email"), Const.COOKIE_AGE);
+				this.setCookie("password", user.getStr("password"), Const.COOKIE_AGE);
 				result.setData("user", user);
 			}
 		} catch (Exception e) {
@@ -32,15 +47,9 @@ public class IndexController extends BaseController{
 	public void logout(){
 		AjaxResult result = new AjaxResult(1);
 		this.getSession().invalidate();
+		this.removeCookie("email");
+		this.removeCookie("password");
 		this.renderJson(result.toJson());
 	}
 	
-	public void admin(){
-		String type = this.getPara("type","");
-		if(type.equals("login")){
-			this.render("dashboard.html");
-		}else{
-			this.render("login.html");
-		}
-	}
 }

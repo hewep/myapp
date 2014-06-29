@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -8,6 +9,7 @@ import com.app.model.User;
 import com.app.util.Const;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Record;
 
 public class BaseController extends Controller{
 	

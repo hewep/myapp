@@ -54,7 +54,6 @@ define( function(){
 	// 话题信息 及 回复
 	var TopicInfoCtrl = ['$scope','checkUser', '$http','$location','$routeParams','$sce',function($scope, checkUser,$http, $location,$routeParams, $sce){
 		$scope.topic;
-		$scope.commentReply = {};  	// 临时存储要评论的 回复, 便于更新新添加的评论
 		$scope.replies = [];		// 回复列表
 		
 		$http({	method:'post',
@@ -90,6 +89,8 @@ define( function(){
 			}
 		};
 		
+		$scope.currReply;  	// 临时存储要评论的 回复, 便于更新新添加的评论
+		$scope.currComment;  	// 临时存储要回复的 评论, 便于更新新添加的评论
 		$scope.addComment = function(){
 			
 			if(!$scope.comment.content){
@@ -100,20 +101,39 @@ define( function(){
 				params:$scope.comment
 			}).success(function(result){
 				if(result.status == 1){
-					$scope.commentReply.comments.push(result.comment);	// 显示 新添加的 评论
+					if($scope.currComment){
+						if(!$scope.currComment.subComments){
+							$scop.currComment.subComments = [];
+						}
+						$scope.currComment.subComments.push(result.comment);
+					}else{
+						$scope.currReply.comments.push(result.comment);	// 显示 新添加的 评论
+					}
+					
 					$("#comment_modal").modal('hide');
 				}
+				$scope.currComment = null;
 			}).error(function(){
 				alert("网络连接失败");
 			});
 		};
 		
-		$scope.showComment = function(reply){
+		$scope.showComment = function(reply, comment, dest_user_id){
 			
 			if(checkUser.isLogin()){
-				$scope.commentReply = reply;
+				$scope.currReply = reply;
+				$scope.currComment = comment;
+				
 				$scope.comment = {};		//  评论
 				$scope.comment.reply_id = reply.id;
+				if(comment){				// 回复评论 的 pid 为 一级评论的 id
+					$scope.comment.pid = comment.id;
+					if(dest_user_id){		// 回复二级评论 则评论的 目标用户 为subComment 的 src_user_id
+						$scope.comment.dest_user_id = dest_user_id;
+					}else{
+						$scope.comment.dest_user_id = comment.src_user_id;
+					}
+				}
 				
 				$scope.comment_content_error = false;
 				

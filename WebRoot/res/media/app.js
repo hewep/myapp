@@ -21,7 +21,7 @@ define(['angular',
 			  	//$locationProvider.html5Mode(true);
 			 	
 			 	// 配置拦截器
-			 	$httpProvider.interceptors.push('anthInterceptor');
+			 	//$httpProvider.interceptors.push('anthInterceptor');
 			}]);
 		
 		// 处理返回后的数据 , 如果未登录 再次统一处理
@@ -38,30 +38,5 @@ define(['angular',
 			      }
 			};
 		});
-		// 检测用户是否登录 service
-		app.factory('checkUser', ['$rootScope','$cookieStore', function($rootScope, $cookieStore){
-			
-			if($cookieStore.get("current_user")){	 // 第一次进入或 刷新页面 检查用户是否登录
-				$rootScope.isLogin = true;
-				$rootScope.currentUser = $cookieStore.get("current_user");
-			}else{
-				$rootScope.isLogin = false;
-				$rootScope.currentUser = {};
-			}
-			return {
-				login:function(user){
-					$rootScope.isLogin = true;
-					$cookieStore.put("current_user", user);
-					$rootScope.currentUser = user;
-					
-				},logout: function(){
-					$cookieStore.remove("current_user");
-					$rootScope.isLogin = false;
-				},isLogin: function(){
-					return $rootScope.isLogin;
-				}
-			};
-			
-		}]);
 	return app;
 });

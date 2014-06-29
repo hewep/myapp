@@ -93,7 +93,9 @@
 	margin-bottom: 5px;
 	color: #444;
 }
-
+.topic .reply .list .answer .body .replies ul li .comment_item {
+	display:block;
+}
 .topic .reply .list .answer .body .replies ul li .b {
 	width: 535px;
 	margin-left: 5px;

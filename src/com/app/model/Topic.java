@@ -19,6 +19,7 @@ public class Topic extends Model<Topic>{
 	
 	public List<Record> getReplies(){
 		List<Record> replies = Db.find("select * from reply where topic_id = ?", this.getInt("id"));
+		
 		for (Record record : replies) {
 			List<Record> comments = Reply.dao.getComments(record.getInt("id"));
 			record.set("comments", comments);

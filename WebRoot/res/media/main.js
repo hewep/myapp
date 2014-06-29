@@ -10,11 +10,13 @@ require.config({
 		formValidate: 'media/js/form-validation',
 		application : 'media/js/application',
 		kindEditor : 'plugins/kindeditor/kindeditor',
-		prettify : 'plugins/code-prettify/prettify.min'
+		prettify : 'plugins/code-prettify/prettify.min',
+		app : 'media/app'
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
+        'app' : {deps:['angular']},
         'angularCookie' : {deps:['angular']},
         'bootstrap' : {deps:['jquery']},
         'prettify' : {deps:['jquery']},

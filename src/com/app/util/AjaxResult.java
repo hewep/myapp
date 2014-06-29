@@ -54,7 +54,7 @@ public class AjaxResult {
 		result.put(name, arr);
 	}
 	public String toJson(){
-		return JsonKit.mapToJson(result, 4);
+		return JsonKit.mapToJson(result, 8);
 	}
 }
 

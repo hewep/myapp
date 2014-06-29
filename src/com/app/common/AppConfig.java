@@ -44,7 +44,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configHandler(Handlers me) {
-		me.add(new UrlSkipHandler("/", false));
+		//me.add(new UrlSkipHandler("/", false));
 	}
 
 	@Override

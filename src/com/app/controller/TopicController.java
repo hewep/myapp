@@ -69,10 +69,10 @@ public class TopicController extends BaseController{
 	public void comment(){
 		AjaxResult result = new AjaxResult(1,"评论成功");
 		Comment comment = this.getModel(Comment.class).setAttrs(this.getParamMap());
-		comment.set("user_id", this.getCurrUser().get("id"));
+		comment.set("src_user_id", this.getCurrUser().get("id"));
 		comment.set("create_time", DateUtils.getCurrDateTime());
 		comment.save();
-		result.setData("comment", comment);
+		result.setData("comment", Comment.dao.getComment(comment.getInt("id")));
 		this.renderJson(result.toJson());
 		
 	}

@@ -12,13 +12,13 @@ import com.app.controller.BaseController;
 import com.app.model.User;
 import com.app.util.Const;
 
-public class UserSessionListener implements HttpSessionBindingListener {
+public class UserOnlineListener implements HttpSessionBindingListener {
 	
 	private User user;
-	public UserSessionListener(){
+	public UserOnlineListener(){
 		
 	}
-	public UserSessionListener(User user){
+	public UserOnlineListener(User user){
 		this.user = user;
 	}
 	@Override

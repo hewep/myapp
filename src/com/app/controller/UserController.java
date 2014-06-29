@@ -3,12 +3,15 @@ package com.app.controller;
 import com.app.model.User;
 import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
+import com.jfinal.aop.ClearInterceptor;
+import com.jfinal.aop.ClearLayer;
 
 public class UserController extends BaseController{
 	
 	public void list() throws Exception{
 		
 	}
+	@ClearInterceptor(ClearLayer.ALL)
 	public void addOrUpdate() throws Exception{
 		AjaxResult result = new AjaxResult(1,"注册成功");
 		try {
