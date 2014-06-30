@@ -12,8 +12,13 @@ public class Topic extends Model<Topic>{
 	private static final long serialVersionUID = -2998814222448990585L;
 	public static final Topic dao = new Topic();
 	
-	public Page<Topic> paginateByCateId(int pageNumber, int pageSize, int categoryId){
-		Page<Topic> topics = Topic.dao.paginate(pageNumber, pageSize, "select * ", "from topic where category_id = ?", categoryId);
+	public Page<Record> paginateByCateId(int pageNumber, int pageSize, int categoryId){
+		Page<Record> topics = Db.paginate(pageNumber, pageSize, "select a.*, b.user_name ", 
+												"from topic a "+
+												"left outer join user b on a.user_id = b.id where a.category_id = ?", categoryId);
+		for (Record record : topics.getList()) {
+			
+		}
 		return topics;
 	}
 	

@@ -13,11 +13,12 @@ import com.jfinal.plugin.activerecord.Record;
 
 public class TopicController extends BaseController{
 	
-	public void list(){
+	
+	public void findByCateId(){
 		int pageNumber = this.getParaToInt(0,1);
 		int categoryId = this.getParaToInt("category_id");
 		
-		Page<Topic> topics = Topic.dao.paginateByCateId(pageNumber, 10, categoryId);
+		Page<Record> topics = Topic.dao.paginateByCateId(pageNumber, 10, categoryId);
 		
 		this.renderJson(topics.getList());
 	}

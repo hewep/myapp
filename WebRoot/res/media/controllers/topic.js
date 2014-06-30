@@ -149,7 +149,7 @@ define( function(){
 		$scope.topics = {};
 		
 		$http({	method:'post',
-			url:"topic/list",
+			url:"topic/findByCateId",
 			params:{category_id:$routeParams.category_id}
 		}).success(function(data){
 			$scope.topics = data;
