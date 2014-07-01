@@ -11,6 +11,14 @@ require.config({
 		application : 'media/js/application',
 		kindEditor : 'plugins/kindeditor/kindeditor',
 		prettify : 'plugins/code-prettify/prettify.min',
+		common : 'common/js/common',
+		/** 控制层 js 文件**/
+		indexCtrl: 'media/controllers/index',  
+		topicCtrl: 'media/controllers/topic',
+		userCtrl: 'media/controllers/user',
+		directives : 'media/common/directives',
+		filters : 'media/common/filters',
+		
 		app : 'media/app'
 	},
 	shim: {
@@ -18,10 +26,18 @@ require.config({
         'angularRoute' : {deps:['angular']},
         'app' : {deps:['angular']},
         'angularCookie' : {deps:['angular']},
+        
+        'indexCtrl' : {deps:['angular']},
+        'topicCtrl' : {deps:['angular']},
+        'userCtrl' : {deps:['angular']},
+        'directives' : {deps:['angular']},
+        'filters' : {deps:['angular']},
+        
         'bootstrap' : {deps:['jquery']},
         'prettify' : {deps:['jquery']},
         'validate' : {deps:['jquery']},
-        'formValidate' : {deps:['validate']}
+        'formValidate' : {deps:['validate']},
+        'common' : {deps:['jquery']}
     }
 });
 	
@@ -30,6 +46,7 @@ require(['angular',
 		 'angularCookie',
 		 'bootstrap',
 		 'application',
+		 'common',
 		 'app'
 ],function(angular){
 	Application.initPortletTools();

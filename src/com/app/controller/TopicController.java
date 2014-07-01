@@ -20,7 +20,7 @@ public class TopicController extends BaseController{
 		
 		Page<Record> topics = Topic.dao.paginateByCateId(pageNumber, 10, categoryId);
 		
-		this.renderJson(topics.getList());
+		this.renderJson(topics);
 	}
 	
 	public void addOrUpdate() throws Exception{
@@ -30,7 +30,7 @@ public class TopicController extends BaseController{
 			if(StrKit.notNull(topic.get("id"))){
 				topic.update();
 			}else{
-				topic.set("create_time", DateUtils.getCurrDate());
+				topic.set("create_time", DateUtils.getCurrDateTime());
 				topic.set("user_id", this.getCurrUser().get("id"));
 				topic.save();
 				result.setData("data", topic);
@@ -69,11 +69,17 @@ public class TopicController extends BaseController{
 	//评论
 	public void comment(){
 		AjaxResult result = new AjaxResult(1,"评论成功");
-		Comment comment = this.getModel(Comment.class).setAttrs(this.getParamMap());
-		comment.set("src_user_id", this.getCurrUser().get("id"));
-		comment.set("create_time", DateUtils.getCurrDateTime());
-		comment.save();
-		result.setData("comment", Comment.dao.getComment(comment.getInt("id")));
+		try {
+			Comment comment = this.getModel(Comment.class).setAttrs(this.getParamMap());
+			comment.set("src_user_id", this.getCurrUser().get("id"));
+			comment.set("create_time", DateUtils.getCurrDateTime());
+			comment.save();
+			result.setData("comment", Comment.dao.getComment(comment.getInt("id")));
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setFailure("添加失败:"+e.getMessage());
+		}
+		
 		this.renderJson(result.toJson());
 		
 	}

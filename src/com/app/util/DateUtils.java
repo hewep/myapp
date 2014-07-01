@@ -25,10 +25,69 @@ public class DateUtils {
 	public static String getCurrDateTime(){
 		return getDateFormat(DATETIME_FORMAT);
 	}
-	
+	/**
+	 * 按照指定格式获取 当前日期
+	 * @param format
+	 * @return
+	 */
 	public static String getDateFormat(String format){
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		return sdf.format(new Date());
+	}
+	/**
+	 * 按照指定格式(format) 获取 指定日期(dateTime)
+	 * @param format
+	 * @param dateTime
+	 * @return
+	 */
+	public static String getDateFormat(String format, String dateTime){
+		Date date = parseDateTime(dateTime);
+		return getDateFormat(format, date);
+	}
+	public static String getDateFormat(String format, Date dateTime){
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(dateTime);
+	}
+	/**
+	 * 获取 当前日期到 指定日期的 时间段, 并自动根据时间间隔返回 结果
+	 * @param dateTime
+	 * @return
+	 */
+	public static String getDiffDate(Date dateTime){
+		String times = "";
+		Date date = dateTime;	// 指定日期
+		Date currDate = new Date();				// 当前日期
+		
+		long time = date.getTime();
+		long currTime = currDate.getTime();
+		long diff = (currTime -time)/1000;
+		if(diff < 60){
+			times = diff+"秒前";
+		}else if((diff /= 60) < 60){
+			times = diff + "分前";
+		}else if((diff /= 60) < 24){
+			times = diff + "小时前";
+		}else if((diff /= 24) < 30){
+			if(diff == 1){
+				times = "昨天("+getDateFormat("HH:mm",dateTime)+")";
+			}else{
+				times = diff + "天前";
+			}
+		}else{
+			Calendar cal1 = Calendar.getInstance();
+			Calendar cal2 = Calendar.getInstance();
+			cal1.setTime(date);
+			cal2.setTime(currDate);
+			
+			int years = cal2.get(Calendar.YEAR) - cal1.get(Calendar.YEAR);
+			int months = cal2.get(Calendar.MONTH) - cal1.get(Calendar.MONTH);
+			if( years <= 0){
+				times = months + "月前"; 
+			}else{
+				times = years + "年前";
+			}
+		}
+		return times;
 	}
 	/**
 	 * Get the previous time, from how many days to now.
@@ -46,17 +105,19 @@ public class DateUtils {
 		try {
 			return new SimpleDateFormat(DATE_FORMAT).parse(d);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
 
 	/**
-	 * Parse date and time like "yyyy-MM-dd hh:mm".
+	 * Parse date and time like "yyyy-MM-dd hh:mm:ss".
 	 */
 	public static Date parseDateTime(String dt) {
 		try {
 			return new SimpleDateFormat(DATETIME_FORMAT).parse(dt);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

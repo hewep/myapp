@@ -8,4 +8,10 @@ define(['angular'], function(){
 			};
 		}]);
 		
+		filters.filter('diffDate', function(){
+			
+			return function(text){
+				return $.getDiffDate(text);
+			};
+		});
 });

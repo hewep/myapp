@@ -101,12 +101,12 @@ define( function(){
 				params:$scope.comment
 			}).success(function(result){
 				if(result.status == 1){
-					if($scope.currComment){
+					if($scope.currComment){				// 回复评论
 						if(!$scope.currComment.subComments){
-							$scop.currComment.subComments = [];
+							$scope.currComment.subComments = [];
 						}
 						$scope.currComment.subComments.push(result.comment);
-					}else{
+					}else{								// 评论回复
 						$scope.currReply.comments.push(result.comment);	// 显示 新添加的 评论
 					}
 					
@@ -126,6 +126,7 @@ define( function(){
 				
 				$scope.comment = {};		//  评论
 				$scope.comment.reply_id = reply.id;
+				$scope.comment.pid = 0;
 				if(comment){				// 回复评论 的 pid 为 一级评论的 id
 					$scope.comment.pid = comment.id;
 					if(dest_user_id){		// 回复二级评论 则评论的 目标用户 为subComment 的 src_user_id
@@ -147,12 +148,13 @@ define( function(){
 	// 话题列表信息
 	var TopicListCtrl = ['$scope', '$http','$location','$routeParams', function($scope, $http, $location,$routeParams){
 		$scope.topics = {};
-		
+		$scope.page = {};
 		$http({	method:'post',
 			url:"topic/findByCateId",
 			params:{category_id:$routeParams.category_id}
 		}).success(function(data){
-			$scope.topics = data;
+			$scope.topics = data.list;
+			$scope.page = data;
 		}).error(function(){
 			alert("网络连接失败");
 		});

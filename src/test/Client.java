@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
+import com.app.util.DateUtils;
+
 public class Client {
 	enum Type{
 		RED("red"),BULE("");
@@ -15,8 +17,7 @@ public class Client {
 	}
 	@Test
 	public void testDate(){
-			//System.out.println(DateUtils.g);
-		System.out.println(Type.BULE);
+		//System.out.println(DateUtils.getDiffDate("2014-06-30 13:31:00"));
 	}
 	@Test
 	public void testReg(){

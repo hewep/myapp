@@ -79,7 +79,11 @@ define(['angular'], function(){
 		    				});
 		    			});
 		        }
-		    }
+		    };
 		});
-//		directives.filter('htmlFilter', ['$http',]);
+		directives.directive('mediaPagination', function(){
+			return function($scope, $element, $attr, $ctrl){
+				
+			}; 
+		});
 });

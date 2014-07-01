@@ -4,8 +4,8 @@ define(['angular',
         'media/controllers/index',
         'media/controllers/topic',
         'media/controllers/user',
-        'media/directives/common',
-        'media/filters'
+        'media/common/directives',
+        'media/common/filters'
 ],function(angular,index, topic){
 	var app =  angular.module('myApp', ['ngRoute','ngCookies','UserCtrls','CommDirectives', 'CommFilters']);
 	

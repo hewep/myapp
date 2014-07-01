@@ -30,7 +30,7 @@
 										user="1579252"></a>
 								</span> <span class="pinfo"> <a
 									href="http://my.oschina.net/u/1579252" class="Asker-Name"
-									target="_blank">hewep</a><br> <span class="pub_time">发帖于&nbsp;10天前</span><br>
+									target="_blank">hewep</a><br> <span class="pub_time">发帖于&nbsp;{{topic.create_time | diffDate}}</span><br>
 									<span><a href="#answers" class="answer_count">1</a>回/46阅</span>
 								</span>
 							</div>
@@ -65,7 +65,7 @@
 											class="SmallPortrait" user="241552"></a></span> <span
 										class="user_info"> <a
 										href="http://my.oschina.net/arrowing" title="arrowing"
-										target="_blank">arrowing</a> <span class="reply-time">10天前</span>
+										target="_blank">arrowing</a> <span class="reply-time">{{reply.create_time | diffDate}}</span>
 									</span>
 									<div class="clear"></div>
 								</div>
@@ -80,7 +80,7 @@
 												<span class="comment_item">
 													<a href="" class="pull-left">{{comment.src_user_name}}</a> 
 													<span>&nbsp;&nbsp; {{comment.content}}</span> 
-													<span> (9天前)&nbsp;&nbsp; 
+													<span> ({{comment.create_time | diffDate}})&nbsp;&nbsp; 
 														<a href="javascript:;" ng-click="showComment(reply, comment);">回复</a>
 													</span>
 												</span>
@@ -88,7 +88,7 @@
 													<a href="">{{subComment.src_user_name}}{{subComment.id}}</a> 
 													@ <a href="" target="_blank">{{subComment.dest_user_name}}</a>
 														: {{subComment.content}}
-													<span class="t"> (9天前)&nbsp;&nbsp; 
+													<span class="t"> ({{subComment.create_time | diffDate}})&nbsp;&nbsp; 
 														<span class="opts">
 															<a href="javascript:;" ng-click="showComment(reply, comment, subComment.src_user_id);">回复</a>
 														</span>
