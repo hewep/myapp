@@ -82,8 +82,15 @@ define(['angular'], function(){
 		    };
 		});
 		directives.directive('mediaPagination', function(){
-			return function($scope, $element, $attr, $ctrl){
-				
-			}; 
+			return {
+				restrict: "AE",
+				scope : {page : '=page'},
+				templateUrl : "core/media/_pagination.html",
+				link : function(scope, element, attrs){
+					$(element).delegate("li", "click", function(){
+						
+					});
+				}
+			};
 		});
 });

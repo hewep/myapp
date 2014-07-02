@@ -66,6 +66,17 @@ $(function(){
 		},
 		toFloat : function(text,def){
 			return isNaN(parseFloat(text))? (def || 0.0) : parseFloat(text);
+		},
+		handlePage :function(option){
+			
+			option.page.items = [];
+			if(option.page.totalPage){
+				for (var i = 0; i < option.page.totalPage; i++) {
+					option.page.items.push(i+1);
+				}
+			}
+			option.page.url = option.url;
+			return page;
 		}
 	});
 });

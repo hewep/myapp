@@ -38,7 +38,7 @@
 				<div class="tab-content">
 					<div  class="tab-pane active" id="portlet_tab1">
 						
-						<div class="row-fluid portfolio-block" ng-repeat="topic in topics">
+						<div class="row-fluid portfolio-block" ng-repeat="topic in topics.list">
 							<div class="span10 portfolio-text">
 								<img src="res/media/image/avatar3.jpg" alt="">
 								<div class="portfolio-text-info">
@@ -56,18 +56,7 @@
 						</div>
 						
 						<div class="space5"></div>
-						<div class="pagination pagination-right">
-							<ul>
-								<li><a href="#">上一页</a></li>
-								
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li class="active"><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">下一页</a></li>
-							</ul>
-						</div>
+						<media-pagination page="topics"></media-pagination>
 					
 					</div>
 					<div class="tab-pane" id="portlet_tab2">
