@@ -68,7 +68,7 @@ $(function(){
 			return isNaN(parseFloat(text))? (def || 0.0) : parseFloat(text);
 		},
 		handlePage :function(option){
-			
+			option = $.extend({page:{}, url:'', params:{}}, option);
 			option.page.items = [];
 			if(option.page.totalPage){
 				for (var i = 0; i < option.page.totalPage; i++) {
@@ -76,7 +76,8 @@ $(function(){
 				}
 			}
 			option.page.url = option.url;
-			return page;
+			option.page.params = option.params;
+			return option.page;
 		}
 	});
 });

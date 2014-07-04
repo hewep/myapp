@@ -81,16 +81,29 @@ define(['angular'], function(){
 		        }
 		    };
 		});
-		directives.directive('mediaPagination', function(){
+		directives.directive('mediaPagination', ['$http',function($http){
 			return {
 				restrict: "AE",
 				scope : {page : '=page'},
 				templateUrl : "core/media/_pagination.html",
 				link : function(scope, element, attrs){
 					$(element).delegate("li", "click", function(){
-						
+						if($(this).hasClass("disabled") || $(this).hasClass(".active")){
+							return;
+						}
+						var url = $(this).find("a").attr("url");
+						var param = $(this).find("a").attr("param");
+						$http({	method:'post',
+							url:url+"/"+param,
+							params:scope.page.params
+						}).success(function(data){
+							var option = {page : data, url:url, params:scope.page.params};
+							scope.page = $.handlePage(option);
+						}).error(function(){
+							alert("网络连接失败");
+						});
 					});
 				}
 			};
-		});
+		}]);
 });

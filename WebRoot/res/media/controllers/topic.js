@@ -148,11 +148,13 @@ define( function(){
 	// 话题列表信息
 	var TopicListCtrl = ['$scope', '$http','$location','$routeParams', function($scope, $http, $location,$routeParams){
 		$scope.topics = {};
+		$scope.category_name = $routeParams.name;
+		var params = {category_id:$routeParams.category_id};
 		$http({	method:'post',
 			url:"topic/findByCateId",
-			params:{category_id:$routeParams.category_id}
+			params:params
 		}).success(function(data){
-			var option = {page : data, url:"topic/findByCateId"}
+			var option = {page : data, url:"topic/findByCateId",params:params};
 			$scope.topics = $.handlePage(option);
 		}).error(function(){
 			alert("网络连接失败");
