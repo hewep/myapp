@@ -1,9 +1,7 @@
 package com.app.model;
 
-import java.util.Date;
 import java.util.List;
 
-import com.app.util.DateUtils;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
@@ -17,7 +15,8 @@ public class Topic extends Model<Topic>{
 	public Page<Record> paginateByCateId(int pageNumber, int pageSize, int categoryId){
 		Page<Record> topics = Db.paginate(pageNumber, pageSize, "select a.*, b.user_name ", 
 						"from topic a "+
-						"left outer join user b on a.user_id = b.id where a.category_id = ?", categoryId);
+						"left outer join user b on a.user_id = b.id "+
+						"where a.category_id = ? order by a.create_time desc", categoryId);
 		return topics;
 	}
 	

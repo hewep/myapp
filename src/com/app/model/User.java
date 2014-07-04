@@ -8,8 +8,8 @@ public class User extends Model<User>{
 	public static final User dao = new User();
 	
 	public User getByEmailAndPwd(String email, String pwd){
-		User user = dao.findFirst("select * from user where email = ? and password = ?",
-				new Object[]{email, pwd});
+		User user = dao.findFirst("select * from user where (email = ? or user_name=?) and password = ?",
+				new Object[]{email,email, pwd});
 		return user;
 	}
 }

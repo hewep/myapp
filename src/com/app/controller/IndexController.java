@@ -1,8 +1,11 @@
 package com.app.controller;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.app.common.UserOnlineListener;
 import com.app.model.User;
 import com.app.util.AjaxResult;
+import com.app.util.AuthUtils;
 import com.app.util.Const;
 
 
@@ -25,15 +28,13 @@ public class IndexController extends BaseController{
 		AjaxResult result = new AjaxResult(1,"登陆成功");
 		try {
 			User user0 = this.getModel(User.class).setAttrs(this.getParamMap());
-					
-			User user = User.dao.getByEmailAndPwd(user0.getStr("email"), user0.getStr("password"));
+			User user = User.dao.getByEmailAndPwd(user0.getStr("email"), DigestUtils.md5Hex(user0.getStr("password")));
 			if(user == null ){
 				result.setMsg(0, "用户名或密码错误!");
 			}else{
 				this.getSession().setAttribute("online", new UserOnlineListener(user));
 				this.getSession().setAttribute(Const.CURRENT_USER, user);
-				this.setCookie("email", user.getStr("email"), Const.COOKIE_AGE);
-				this.setCookie("password", user.getStr("password"), Const.COOKIE_AGE);
+				this.setCookie(Const.AUTH_TOKEN, AuthUtils.getCookieAuthToken(this.getRequest(), user), Const.COOKIE_AGE);
 				result.setData("user", user);
 			}
 		} catch (Exception e) {
@@ -47,8 +48,7 @@ public class IndexController extends BaseController{
 	public void logout(){
 		AjaxResult result = new AjaxResult(1);
 		this.getSession().invalidate();
-		this.removeCookie("email");
-		this.removeCookie("password");
+		this.removeCookie("auth_token");
 		this.renderJson(result.toJson());
 	}
 	

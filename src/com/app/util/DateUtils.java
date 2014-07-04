@@ -19,20 +19,28 @@ public class DateUtils {
 	public final static long MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
 	
 	public static String getCurrDate(){
-		return getDateFormat(DATE_FORMAT);
+		return getCurrDateFormat(DATE_FORMAT);
 	}
 	
 	public static String getCurrDateTime(){
-		return getDateFormat(DATETIME_FORMAT);
+		return getCurrDateFormat(DATETIME_FORMAT);
 	}
+	
 	/**
 	 * 按照指定格式获取 当前日期
 	 * @param format
 	 * @return
 	 */
-	public static String getDateFormat(String format){
+	public static String getCurrDateFormat(String format){
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		return sdf.format(new Date());
+	}
+	public static String getDateFormat( Date dateTime){
+		return getDateFormat(DATE_FORMAT, dateTime);
+	}
+	
+	public static String getDateTimeFormat( Date dateTime){
+		return getDateFormat(DATETIME_FORMAT, dateTime);
 	}
 	/**
 	 * 按照指定格式(format) 获取 指定日期(dateTime)
@@ -47,6 +55,9 @@ public class DateUtils {
 	public static String getDateFormat(String format, Date dateTime){
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		return sdf.format(dateTime);
+	}
+	public static long getDiffMills(Date bDate, Date eDate){
+		return eDate.getTime() - bDate.getTime();
 	}
 	/**
 	 * 获取 当前日期到 指定日期的 时间段, 并自动根据时间间隔返回 结果

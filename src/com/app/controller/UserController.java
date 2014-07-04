@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.app.model.User;
 import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
@@ -18,6 +20,7 @@ public class UserController extends BaseController{
 			User user0 = User.dao.findFirst("select * from user where email = ?", this.getPara("email",""));
 			if(user0 == null){
 				User user = this.getModel(User.class).setAttrs(this.getParamMap());
+				user.set("password", DigestUtils.md5Hex(user.getStr("password")));
 				user.set("register_time", DateUtils.getCurrDate());
 				user.save();
 			}else{

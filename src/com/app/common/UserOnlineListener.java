@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
-import com.app.controller.BaseController;
 import com.app.model.User;
 import com.app.util.Const;
 

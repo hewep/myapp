@@ -18,7 +18,7 @@ public class TopicController extends BaseController{
 		int pageNumber = this.getParaToInt(0,1);
 		int categoryId = this.getParaToInt("category_id");
 		
-		Page<Record> topics = Topic.dao.paginateByCateId(pageNumber, 10, categoryId);
+		Page<Record> topics = Topic.dao.paginateByCateId(pageNumber, 2, categoryId);
 		
 		this.renderJson(topics);
 	}
