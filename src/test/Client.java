@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
+import com.app.util.Const;
 import com.app.util.DateUtils;
 
 public class Client {
@@ -18,8 +19,7 @@ public class Client {
 	}
 	@Test
 	public void testDate(){
-		//System.out.println(DateUtils.getDiffDate("2014-06-30 13:31:00"));
-		System.out.println(DigestUtils.md5Hex("123456"));
+		System.out.println(Const.ACOUNT_ITEMS.contains("topic/info"));
 	}
 	@Test
 	public void testReg(){
@@ -28,4 +28,5 @@ public class Client {
 		System.out.println(pattern.matcher("savehaha").matches());
 		
 	}
+	
 }

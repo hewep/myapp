@@ -1,4 +1,4 @@
-package com.app.plugin;
+package com.app.plugin.quartz;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -25,9 +25,29 @@
            memoryStoreEvictionPolicy="LFU"
            transactionalMode="off">
     </defaultCache>
+    <!-- 发帖缓存 ：1小时 -->
+    <cache name="topic_acount"
+    	   maxElementsInMemory="50000"
+    	   clearOnFlush="false"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           
+           overflowToDisk="true"
+           
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+           
+           <cacheEventListenerFactory class="com.example.cache.NotNullCacheEventListenerFactory" />
+    </cache>
     
-    <!-- URL缓存 ：1小时 -->
-    <cache name="access_acount"
+    <!-- 站点统计 永久-->
+    <cache name="site_acount"
     	   maxElementsInMemory="50000"
     	   clearOnFlush="false"
            eternal="true"
