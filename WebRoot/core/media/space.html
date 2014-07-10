@@ -65,18 +65,32 @@ space table(Alternative 2)
 /*space Content*/
 .space-content li {
   color:#888;
-  font-size:12px;
   padding:7px 15px;
   border-bottom:solid 1px #f5f9e7;
 }
-.space-content li i {
+.space-content li i{
   top:2px;
   color:#35aa47;
-  font-size:16px;
+  font-size:14px;
   margin-right:5px;
   position:relative;
 }
+.space-content li a{
+  top:2px;
+  color:#888;
+  font-size:14px;
+  margin-right:5px;
+  position:relative;
+  text-decoration: none;
+}
 
+.space-content li a:hover{
+  color:#1D943B;
+}
+/*tabbable */
+.tabbable .tab-content .tab-pane p{
+	color:#888;
+}
 /*space Footer*/
 .space-footer {
   color:#777;
@@ -118,6 +132,8 @@ space table(Alternative 2)
 .profile-head ul{
 	margin-left:10px;
 }
+
+
 </style>
 <div class="row-fluid margin-bottom-40">
 
@@ -130,16 +146,16 @@ space table(Alternative 2)
 									 alt="hewep" title="hewep"/>
 				<ul class="pull-left unstyled">
 					<li>hewep</li>
-					<li>男</li>
+					<li>修改信息</li>
 				</ul>
 				<div class="clear"></div>
 			</h3>
 
 			<h4>
 				<div>
-					<a>关注(0)</a>
-					<a>粉丝(0)</a>
-					<a>积分(0)</a>
+					<a href="#">关注(0)</a>
+					<a href="#">粉丝(0)</a>
+					<a href="#">积分(0)</a>
 				</div>
 			</h4>
 
@@ -147,18 +163,33 @@ space table(Alternative 2)
 
 		<ul class="space-content unstyled">
 
-			<li><i class="icon-tags"></i> At vero eos</li>
-
-			<li><i class="icon-asterisk"></i> No Support</li>
-
-			<li><i class="icon-heart"></i> Fusce condimentum</li>
-
-			<li><i class="icon-star"></i> Ut non libero</li>
-
-			<li><i class="icon-shopping-cart"></i> Consecte adiping elit</li>
+			<li><i class="icon-tags"></i><a href="#"> 修改个人资料</a></li>
+			<li><i class="icon-asterisk"></i><a href="#"> 修改登录密码</a></li>
+			<li><i class="icon-heart"></i><a ui-sref=".message_list"> 空间留言板</a></li>
 
 		</ul>
-
+		<div class="tabbable tabbable-custom">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#tab_1_1">访客统计</a></li>
+				<li class=""><a data-toggle="tab" href="#tab_1_2">备用区域</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="tab_1_1" class="tab-pane active">
+					<p>今日访问:0</p>
+					<p>昨日访问:0</p>
+					<p>本周访问:0</p>
+					<p>本月访问:0</p>
+					<p>所有访问:0</p>
+				</div>
+				<div id="tab_1_2" class="tab-pane">
+					<p>Howdy, I'm in Section 2.</p>
+					<p>
+						Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
+					</p>
+				</div>
+			</div>
+		</div>
+		
 		<div class="space-footer">
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
@@ -173,7 +204,7 @@ space table(Alternative 2)
 
 	</div>
 	
-	<div class="span9">
-	
+	<div class="span9 page-content" >
+		<ui-view></ui-view>
 	</div>
 </div>

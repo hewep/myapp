@@ -3,6 +3,7 @@ require.config({
 	paths : {
 		angular : '../lib/angular',
 		angularRoute : '../lib/angular-route',
+		uiRouter : '../lib/angular-ui-router',
 		angularCookie : '../lib/angular-cookies.min',
 		jquery : '../common/js/jquery-1.7.2.min',
 		bootstrap : '../bootstrap/js/bootstrap.min',
@@ -15,6 +16,7 @@ require.config({
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
+        'uiRouter' : {deps:['angular']},
         'app' : {deps:['angular']},
         'angularCookie' : {deps:['angular']},
         
@@ -25,7 +27,7 @@ require.config({
     }
 });
 	
-require(['angular',
+require(['uiRouter',
 		 'angularRoute',
 		 'angularCookie',
 		 'bootstrap',
@@ -33,7 +35,7 @@ require(['angular',
 		 'application',
 		 'jqueryUtils',
 		 'app'
-],function(angular){
+],function(){
 	Application.initPortletTools();
 	Application.initToTop();
 	angular.bootstrap(document, ['myApp']);

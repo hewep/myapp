@@ -2,7 +2,7 @@
 /* Controllers */
 define( function(){
 	//添加话题
-	var TopicCtrl = ['$scope', 'checkUser','$http','$location','$routeParams', function($scope, checkUser, $http, $location,$routeParams){
+	var TopicCtrl = ['$scope', 'checkUser','$http','$location', function($scope, checkUser, $http, $location){
 		$scope.topic = {};
 		$scope.categorys = {};
 		
@@ -52,13 +52,13 @@ define( function(){
 	}];
 	
 	// 话题信息 及 回复
-	var TopicInfoCtrl = ['$scope','checkUser', '$http','$location','$routeParams','$sce',function($scope, checkUser,$http, $location,$routeParams, $sce){
+	var TopicInfoCtrl = ['$scope','checkUser', '$http','$location','$stateParams',function($scope, checkUser,$http, $location,$stateParams){
 		$scope.topic;
 		$scope.replies = [];		// 回复列表
 		
 		$http({	method:'post',
 			url:"topic/info",
-			params:{topic_id:$routeParams.topic_id}
+			params:{topic_id:$stateParams.topic_id}
 		}).success(function(result){
 			$scope.topic = result.topic;
 			$scope.replies = result.replies;
@@ -148,10 +148,11 @@ define( function(){
 	}];
 	
 	// 话题列表信息
-	var TopicListCtrl = ['$scope', '$http','$location','$routeParams', function($scope, $http, $location,$routeParams){
+	var TopicListCtrl = ['$scope', '$http','$location','$stateParams', function($scope, $http, $location,$stateParams){
 		$scope.topics = {};
-		$scope.category_name = $routeParams.name;
-		var params = {category_id:$routeParams.category_id};
+		$scope.category_name = $stateParams.category_name;
+		
+		var params = {category_id:$stateParams.category_id};
 		$http({	method:'post',
 			url:"topic/findByCateId",
 			params:params

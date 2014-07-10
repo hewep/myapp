@@ -20,7 +20,7 @@
 	<div id="navs_area">
 		<div class="pull-left">
 			<ul>
-				<li><a href="/">首 页</a></li>
+				<li><a ui-sref="home">首 页</a></li>
 				<li ><a href="#">讨论区</a></li>
 				<li ><a href="#">博 客</a></li>
 			</ul>
@@ -28,7 +28,7 @@
 		<div class="pull-right" ng-show="!isLogin">
 			<ul>
 				<li><a data-toggle="modal" href="#login_modal">登 陆 </a></li>
-				<li ><a href="#/register" >注 册 </a></li>
+				<li ><a ui-sref="home.register" >注 册 </a></li>
 			</ul>
 		</div>
 		<div class="pull-right" ng-show="isLogin">
@@ -37,7 +37,7 @@
 					欢迎 {{currentUser.user_name}} :
 				</li>
 				<li >
-					<a href="#/space" >我的空间 </a>
+					<a ui-sref="space" >我的空间 </a>
 				</li>
 				<li >
 					<a href="javascript:;" ng-click="logout()" >退出 </a>
@@ -49,30 +49,7 @@
 </div>
 <div class="content">
 	<!--   內容區-->
-	<div class="row-fluid" >
-		<div class="search">
-			<div class="pull-left input-append" style="margin-bottom:0px;">
-				<input class="m-wrap" style="width:400px;" type="text" placeholder="Search Mail">
-				<button class="btn green" type="button">搜 索 &nbsp; <i class="m-icon-swapright m-icon-white"></i></button>
-			</div>
-			<div class="pull-right">
-				<p>我要提问</p>
-				<a href="#/topic" class="btn green">
-					发 贴 &nbsp; <i class="icon-comments"></i>
-				</a>
-			</div>
-			<div class="clear"></div>
-		</div>
-			
-	</div>
-
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="alert alert-block alert-success fade in" style="margin:0px;padding:2px 4px;">今日:1234 | 昨日:123 | 帖子:22222 | 会员:9888 | 欢迎新会员:aaa</div>
-			<!-- END PAGE TITLE & BREADCRUMB-->
-		</div>
-	</div>
-	<div class="page-container" ng-view></div>
+	<div ui-view></div>
 	
 	<!--登陆-->
 	<div id="login_modal" class="modal hide fade" tabindex="-1" data-width="760">
