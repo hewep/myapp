@@ -1,0 +1,179 @@
+<style>
+/***
+space table(Alternative 2)
+***/
+.space {
+  position:relative;
+  margin-bottom:15px;
+  border:3px solid #eee;
+}
+.space-active {
+  border:3px solid #35aa47;
+}
+.space:hover {
+  border:3px solid #35aa47;
+}
+.space:hover h4 {
+  color:#35aa47;
+}
+.space-head {
+  text-align:center;
+}
+.space-head h3,
+.space-head h4 {
+  margin:0;
+  line-height:normal;
+}
+.space-head h3 span, 
+.space-head h4 span {
+  display:block;
+  margin-top:5px;
+  font-size:14px;
+  font-style:italic;
+}
+.space-head h3 {
+  color:#fafafa;
+  padding:12px 0;
+  font-size:14px;
+  background:#35aa47;
+  border-bottom:solid 1px #41b91c;
+}
+.space-head h4 {
+  color:#bac39f;
+  padding:5px 0;
+  font-size:12px;
+  font-weight:300;
+  background:#fbfef2;
+  border-bottom:solid 1px #f5f9e7;
+}
+.space-head-active h4 {
+  color:#35aa47;
+}
+.space-head h4 i {
+  top:-8px;
+  font-size:28px;
+  font-style:normal;
+  position:relative;
+}
+.space-head h4 span {
+  top:-10px;
+  font-size:14px;
+  font-style:normal;
+  position:relative;
+}
+  
+/*space Content*/
+.space-content li {
+  color:#888;
+  font-size:12px;
+  padding:7px 15px;
+  border-bottom:solid 1px #f5f9e7;
+}
+.space-content li i {
+  top:2px;
+  color:#35aa47;
+  font-size:16px;
+  margin-right:5px;
+  position:relative;
+}
+
+/*space Footer*/
+.space-footer {
+  color:#777;
+  font-size:11px;
+  line-height:17px;
+  text-align:center;
+  padding:0 20px 19px;
+}
+
+/*Priceing Active*/
+.price-active,
+.space:hover {
+  z-index:9;
+}
+.price-active h4 {
+  color:#35aa47;
+}
+
+.no-space-space .space:hover {
+  -webkit-transition:box-shadow 0.3s ease-in-out;
+  -moz-transition:box-shadow 0.3s ease-in-out;
+  -o-transition:box-shadow 0.3s ease-in-out;
+  transition:box-shadow 0.2s ease-in-out;
+}
+.no-space-space .price-active .space-head h4,
+.no-space-space .space:hover .space-head h4 {
+  color:#35aa47;
+  padding:15px 0;
+  font-size:80px;
+  -webkit-transition:color 0.5s ease-in-out;
+  -moz-transition:color 0.5s ease-in-out;
+  -o-transition:color 0.5s ease-in-out;
+  transition:color 0.5s ease-in-out;
+}
+.profile-head img{
+	margin-left:10px;
+	border:2px solid #fff;
+}
+.profile-head ul{
+	margin-left:10px;
+}
+</style>
+<div class="row-fluid margin-bottom-40">
+
+	<div class="span3 space space-active hover-effect">
+
+		<div class="space-head space-head-active">
+
+			<h3 class="profile-head">
+				<img class="pull-left" src="http://static.oschina.net/uploads/user/789/1579252_50.jpg?t=1396164811000"
+									 alt="hewep" title="hewep"/>
+				<ul class="pull-left unstyled">
+					<li>hewep</li>
+					<li>男</li>
+				</ul>
+				<div class="clear"></div>
+			</h3>
+
+			<h4>
+				<div>
+					<a>关注(0)</a>
+					<a>粉丝(0)</a>
+					<a>积分(0)</a>
+				</div>
+			</h4>
+
+		</div>
+
+		<ul class="space-content unstyled">
+
+			<li><i class="icon-tags"></i> At vero eos</li>
+
+			<li><i class="icon-asterisk"></i> No Support</li>
+
+			<li><i class="icon-heart"></i> Fusce condimentum</li>
+
+			<li><i class="icon-star"></i> Ut non libero</li>
+
+			<li><i class="icon-shopping-cart"></i> Consecte adiping elit</li>
+
+		</ul>
+
+		<div class="space-footer">
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
+				non libero magna psum olor .</p>
+
+			<a href="#" class="btn green"> Sign Up <i
+				class="m-icon-swapright m-icon-white"></i>
+
+			</a>
+
+		</div>
+
+	</div>
+	
+	<div class="span9">
+	
+	</div>
+</div>
