@@ -2,6 +2,7 @@ package com.app.controller;
 
 import java.util.List;
 
+import com.app.model.Category;
 import com.app.model.Comment;
 import com.app.model.Reply;
 import com.app.model.Topic;
@@ -33,6 +34,9 @@ public class TopicController extends BaseController{
 				topic.set("create_time", DateUtils.getCurrDateTime());
 				topic.set("user_id", this.getCurrUser().get("id"));
 				topic.save();
+				
+				Category.dao.updateTopicCount(topic.get("category_id")); // 更新对应类别的话题数量
+				
 				result.setData("data", topic);
 			}
 			
@@ -50,24 +54,37 @@ public class TopicController extends BaseController{
 		Topic topic = Topic.dao.findById(topicId);
 		List<Record> replies = topic.getReplies();
 		
+		// 更新查询次数
+		Topic.dao.updateViewCount(topic);
+		
 		result.setData("topic", topic);
 		result.setData("replies", replies);
 		this.renderJson(result.toJson());
 	}
 	
-	// 回复
-	public void reply(){
+	// 回复话题
+	public void addReply() throws Exception{
 		AjaxResult result = new AjaxResult(1,"回复成功");
-		Reply reply = this.getModel(Reply.class).setAttrs(this.getParamMap());
-		reply.set("create_time", DateUtils.getCurrDateTime());
-		reply.set("user_id", this.getCurrUser().get("id"));
-		reply.set("pid", 0);
-		reply.save();
-		result.setData("reply", reply);
-		this.renderJson(result.toJson());
+		try {
+			Reply reply = this.getModel(Reply.class).setAttrs(this.getParamMap());
+			reply.set("create_time", DateUtils.getCurrDateTime());
+			reply.set("user_id", this.getCurrUser().get("id"));
+			reply.set("pid", 0);
+			reply.save();
+			// 更新回复次数
+			Topic.dao.updateReplyCount(reply.get("topic_id"));
+			
+			result.setData("reply", reply);
+			
+		} catch (Exception e) {
+			result.setFailure("回复失败:"+e.getMessage());
+			throw new Exception(e);
+		}finally{
+			this.renderJson(result.toJson());
+		}
 	}
-	//评论
-	public void comment(){
+	//评论回复
+	public void addComment(){
 		AjaxResult result = new AjaxResult(1,"评论成功");
 		try {
 			Comment comment = this.getModel(Comment.class).setAttrs(this.getParamMap());
@@ -77,7 +94,7 @@ public class TopicController extends BaseController{
 			result.setData("comment", Comment.dao.getComment(comment.getInt("id")));
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.setFailure("添加失败:"+e.getMessage());
+			result.setFailure("评论失败:"+e.getMessage());
 		}
 		
 		this.renderJson(result.toJson());

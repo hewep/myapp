@@ -1,13 +1,11 @@
 package test;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
-
-import com.app.util.Const;
-import com.app.util.DateUtils;
 
 public class Client {
 	enum Type{
@@ -19,7 +17,13 @@ public class Client {
 	}
 	@Test
 	public void testDate(){
-		System.out.println(Const.ACOUNT_ITEMS.contains("topic/info"));
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("hh", "kkkk");
+		Map<String, String> map1 = new HashMap<String, String>();
+		map1.putAll(map);
+		map1.put("hh", "22");
+		System.out.println(map.get("hh"));
+		
 	}
 	@Test
 	public void testReg(){

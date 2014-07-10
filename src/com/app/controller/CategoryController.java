@@ -15,7 +15,7 @@ public class CategoryController extends BaseController{
 	
 	public void list(){
 		AjaxResult result = new AjaxResult(1);
-		List<Category> list = Category.dao.find("select * from category");
+		List<Category> list = Category.dao.find("select *,IFNULL(topic_count, 0) as topic_count from category");
 		
 		
 		if(this.getPara("type","").equals("tree")){
@@ -61,7 +61,7 @@ public class CategoryController extends BaseController{
 	private String getCateTree(List<Category> list){
 		Map<Integer, Record> map = new HashMap<Integer, Record>();
 		for (Category category : list) {
-			map.put(category.getInt("id"), new Record().setColumns(category.getAtts()));
+			map.put(category.getInt("id"), this.getRecordFromModel(category));
 		}
 		
 		List<Record> records = new ArrayList<Record>();

@@ -5,7 +5,7 @@
          updateCheck="true" monitoring="autodetect"
          dynamicConfig="true">
 
-    <diskStore path="java.io.tmpdir"/>
+    <diskStore path="./cache"/>
 
     <!-- 系统默认缓存 ：1小时 -->
     <defaultCache
@@ -43,7 +43,7 @@
            memoryStoreEvictionPolicy="LFU"
            transactionalMode="off">
            
-           <cacheEventListenerFactory class="com.example.cache.NotNullCacheEventListenerFactory" />
+           <cacheEventListenerFactory class="com.app.support.cache.UpdateCacheEventListenerFactory" properties="topic" />
     </cache>
     
     <!-- 站点统计 永久-->
