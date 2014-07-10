@@ -1,25 +1,16 @@
 require.config({
-	baseUrl: 'res/',
+	baseUrl: 'res/media/',
 	paths : {
-		angular : 'lib/angular',
-		angularRoute : 'lib/angular-route',
-		angularCookie : 'lib/angular-cookies.min',
-		jquery : 'common/js/jquery-1.7.2.min',
-		bootstrap : 'bootstrap/js/bootstrap.min',
-		validate : 'media/js/jquery.validate.min',
-		formValidate: 'media/js/form-validation',
-		application : 'media/js/application',
-		kindEditor : 'plugins/kindeditor/kindeditor',
-		prettify : 'plugins/code-prettify/prettify.min',
-		common : 'common/js/common',
-		/** 控制层 js 文件**/
-		indexCtrl: 'media/controllers/index',  
-		topicCtrl: 'media/controllers/topic',
-		userCtrl: 'media/controllers/user',
-		directives : 'media/common/directives',
-		filters : 'media/common/filters',
-		
-		app : 'media/app'
+		angular : '../lib/angular',
+		angularRoute : '../lib/angular-route',
+		angularCookie : '../lib/angular-cookies.min',
+		jquery : '../common/js/jquery-1.7.2.min',
+		bootstrap : '../bootstrap/js/bootstrap.min',
+		totop:'../plugins/UItoTop/jquery.ui.totop.min',
+		application : 'js/application',
+		kindEditor : '../plugins/kindeditor/kindeditor',
+		prettify : '../plugins/code-prettify/prettify.min',
+		jqueryUtils : '../common/js/jquery-utils'
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
@@ -27,17 +18,10 @@ require.config({
         'app' : {deps:['angular']},
         'angularCookie' : {deps:['angular']},
         
-        'indexCtrl' : {deps:['angular']},
-        'topicCtrl' : {deps:['angular']},
-        'userCtrl' : {deps:['angular']},
-        'directives' : {deps:['angular']},
-        'filters' : {deps:['angular']},
-        
         'bootstrap' : {deps:['jquery']},
         'prettify' : {deps:['jquery']},
-        'validate' : {deps:['jquery']},
-        'formValidate' : {deps:['validate']},
-        'common' : {deps:['jquery']}
+        'totop' : {deps:['jquery']},
+        'jqueryUtils' : {deps:['jquery']}		// jquery 扩展工具
     }
 });
 	
@@ -45,10 +29,12 @@ require(['angular',
 		 'angularRoute',
 		 'angularCookie',
 		 'bootstrap',
+		 'totop',
 		 'application',
-		 'common',
+		 'jqueryUtils',
 		 'app'
 ],function(angular){
 	Application.initPortletTools();
+	Application.initToTop();
 	angular.bootstrap(document, ['myApp']);
 });

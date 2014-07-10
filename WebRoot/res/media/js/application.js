@@ -750,6 +750,10 @@ var Application = function () {
         initPortletTools: function(){
             handlePortletTools(); 
         },
+        initToTop: function(){
+        	//* to top
+    		$().UItoTop({inDelay:200,outDelay:200,scrollSpeed: 500});
+        },
         fixContentHeight: function () {
             handleSidebarAndContentHeight();
         },

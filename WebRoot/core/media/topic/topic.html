@@ -1,0 +1,72 @@
+<div class="row-fluid">
+	<div class="portlet box blue">
+
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="icon-reorder"></i>信息
+			</div>
+			<div class="actions">
+
+				<div class="btn-group">
+					<a class="btn blue" href="#" data-toggle="dropdown"> <i
+						class="icon-hand-right"></i> 分类 <i class="icon-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu pull-right">
+						<li ng-repeat="category in categorys">
+							<a href="javascript:;" ng-click="changeCate(category);"> {{category.name}}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form ng-submit="save()" class="form-horizontal" name="topicForm">
+				<div class="control-group ">
+					<label class="control-label">标题</label>
+					<div class="controls">
+						<input type="text" class="span6 m-wrap" required name="title" ng-model="topic.title">
+						<span class="error help-inline" ng-show="topicForm.title.$error.required">请输入标题</span>
+					</div>
+				</div>
+
+				<div class="control-group ">
+					<label class="control-label">分类</label>
+					<div class="controls">
+						<ul class="question" id="type" topic-type>
+							<li  ng-repeat="subCate in category.subCates"  >
+								<!--  <a href="javascript:;"  type="{{subCate.id}}" title="问技术相关的问题"  class="qa_type {{$index == 0 ? 'selected': ''}}" >{{subCate.name}}</a>-->
+								<a href="javascript:;"  type="{{subCate.id}}" title="问技术相关的问题"  ng-class="{qa_type: true, selected: $index == 0}" >{{subCate.name}}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="control-group ">
+					<label class="control-label">标签</label>
+					<div class="controls">
+						<input type="text" class="span6 m-wrap" ng-model="topic.tags">
+					</div>
+				</div>
+
+				<div class="control-group ">
+					<label class="control-label">内容</label>
+					<div class="controls">
+						<textarea id="content" name="content" init-kind-editor info="topic.content" class="span6" style="height:200px;"></textarea>
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<button type="submit" class="btn blue">发表</button>
+					<span >
+						<span class="error_msg" ng-show="!isLogin">用户尚未登录</span>
+						<span class="error_msg" ng-show="topic_content_error">请填写内容</span>
+					</span>
+				</div>
+			</form>
+			<!-- END FORM-->
+		</div>
+	</div>
+</div>

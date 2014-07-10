@@ -73,12 +73,14 @@ define( function(){
 			
 			if($.trim($scope.reply.content)){
 				$http({	method:'post',
-						url:"topic/reply",
+						url:"topic/addReply",
 						params:$scope.reply
 				}).success(function(result){
 					if(result.status == 1){
 						$scope.replies.push(result.reply);	// 显示新添加的回复
 						$scope.editor.html("");
+					}else{
+						alert(result.msg);
 					}
 				}).error(function(){
 					alert("网络连接失败");
@@ -97,7 +99,7 @@ define( function(){
 				$scope.comment_content_error = true;return;
 			}
 			$http({	method:'post',
-				url:"topic/comment",
+				url:"topic/addComment",
 				params:$scope.comment
 			}).success(function(result){
 				if(result.status == 1){

@@ -5307,3 +5307,8 @@ Datatables Plugin(in v1.3)
 .dataTable .details tr:nth-child(even) th {
   background-color: #eee !important;
 }
+
+/* to top */
+#toTop{display:none;text-decoration:none;position:fixed;bottom:10px;right:0;overflow:hidden;width:29px;height:32px;border:none;text-indent:100%;background:url("./ui.totop.png") no-repeat 0 0}
+#toTopHover{background:url("./ui.totop.png") no-repeat 0 -32px;width:29px;height:32px;display:block;overflow:hidden;float:left;opacity:0;-moz-opacity:0;filter:alpha(opacity=0)}
+#toTop:active,#toTop:focus{outline:none}

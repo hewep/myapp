@@ -13,5 +13,31 @@ define( function(){
 			alert("网络连接失败");
 		});
 	}];
-	return {categorys: CategoryListCtrl};
+	
+	//用户注册
+	var RegisterCtrl = ['$scope', '$http' ,'$location',function($scope, $http,$location){
+		$scope.user = {};
+		$scope.register = function(){
+			var rpassword = $("input[name=rpassword]").val();
+			if(rpassword != $scope.user.password){
+				alert("密码输入不一致");return;
+			}
+			
+			$http({method:'post',url:"user/addOrUpdate", params:$scope.user}).success(function(result){
+				alert(result.msg);
+				if(result.status == 1){
+					$location.path("/");
+				}
+			}).error(function(){
+				alert("网络连接失败");
+			});
+		};
+		
+	}];
+	
+	var SpaceCtrl = ['$scope', '$http', function($scope, $http){
+		
+		
+	}];
+	return {categorys: CategoryListCtrl, register: RegisterCtrl, space:SpaceCtrl};
 });
