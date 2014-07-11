@@ -11,7 +11,9 @@ require.config({
 		application : 'js/application',
 		kindEditor : '../plugins/kindeditor/kindeditor',
 		prettify : '../plugins/code-prettify/prettify.min',
-		jqueryUtils : '../common/js/jquery-utils'
+		jqueryUtils : '../common/js/jquery-utils',
+		emotions:'../plugins/emotions/emotions',
+		emotion:'../plugins/emotions/emotion'
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
@@ -19,7 +21,7 @@ require.config({
         'uiRouter' : {deps:['angular']},
         'app' : {deps:['angular']},
         'angularCookie' : {deps:['angular']},
-        
+        'emotion':{deps:['jquery']},
         'bootstrap' : {deps:['jquery']},
         'prettify' : {deps:['jquery']},
         'totop' : {deps:['jquery']},
@@ -34,6 +36,8 @@ require(['uiRouter',
 		 'totop',
 		 'application',
 		 'jqueryUtils',
+		 'emotions',
+		 'emotion',
 		 'app'
 ],function(){
 	Application.initPortletTools();

@@ -17,9 +17,7 @@
 					<div class="title"><h3>{{topic.title}}</h3></div>
 					<hr>
 					<div class="main">
-						<div class="detail">
-							{{topic.content}}
-						</div>
+						<div class="detail" ng-bind-html="topic.content | toHtml" prettify></div>
 						<div class="asker ">
 							<div class="info" title="hewep">
 								<span class="ainfo"> <a

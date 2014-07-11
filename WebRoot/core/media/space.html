@@ -108,32 +108,24 @@ space table(Alternative 2)
 .price-active h4 {
   color:#35aa47;
 }
-
-.no-space-space .space:hover {
-  -webkit-transition:box-shadow 0.3s ease-in-out;
-  -moz-transition:box-shadow 0.3s ease-in-out;
-  -o-transition:box-shadow 0.3s ease-in-out;
-  transition:box-shadow 0.2s ease-in-out;
+/** state **/
+.state {
+  padding:2px;
+  margin-left:0px;
+  width:70%;
 }
-.no-space-space .price-active .space-head h4,
-.no-space-space .space:hover .space-head h4 {
-  color:#35aa47;
-  padding:15px 0;
-  font-size:80px;
-  -webkit-transition:color 0.5s ease-in-out;
-  -moz-transition:color 0.5s ease-in-out;
-  -o-transition:color 0.5s ease-in-out;
-  transition:color 0.5s ease-in-out;
+.state .content {
+  padding:4px;
+  margin-bottom:0px;
+  height:50px;
+  width:100%;
+  border:2px solid #35aa47;
+  resize:none;
 }
-.profile-head img{
-	margin-left:10px;
-	border:2px solid #fff;
+.state .opts li{
+  display: inline;
+  margin-right: 5px;
 }
-.profile-head ul{
-	margin-left:10px;
-}
-
-
 </style>
 <div class="row-fluid margin-bottom-40">
 
@@ -205,6 +197,31 @@ space table(Alternative 2)
 	</div>
 	
 	<div class="span9 page-content" >
-		<ui-view></ui-view>
+		<ui-view>
+			<div class="state" >
+				<div class="content" id="state" contentEditable=true></div>
+				<div class="tools">
+					<ul class="opts pull-left">
+						<li class="t">插入：</li>
+						<li class="emotion"><a href="javascript:;" id="emotions">表情</a></li>
+						<li class="img"><a href="javascript:insert_images()">图片</a></li>
+						<li class="code"><a href="javascript:insert_code_snippet()">代码片段</a></li>
+						<li class="app"><a href="javascript:insert_projects()">开源软件</a></li>
+					</ul>
+					<button type="button" class="pull-right btn green">发表</button>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div>
+				
+			</div>
+		</ui-view>
 	</div>
 </div>
+<script>
+require([
+		 'emotion'
+],function(emotions){
+	$("#emotions").emotion({destId:"state"});
+});
+</script>

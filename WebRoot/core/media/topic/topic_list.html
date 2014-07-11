@@ -43,8 +43,9 @@
 								<img src="res/media/image/avatar3.jpg" alt="">
 								<div class="portfolio-text-info">
 									<strong><a ui-sref="home.topic_info({topic_id:topic.id})" target="_blank">{{topic.title}}</a></strong>
-									<p>{{topic.content}}</p>
-									<em class="portfolio-bottom"style="margin-right:3px;"><i class="icon-rss"></i> <a href="">{{topic.user_name}}</a> 发布于
+									<div  ng-bind-html="topic.content | toHtml" prettify></div>
+									<div class="clear"></div>
+									<em class="portfolio-bottom" style="margin-right:3px;display:block;"><i class="icon-rss"></i> <a href="">{{topic.user_name}}</a> 发布于
 										{{topic.create_time | diffDate}}
 									</em>
 								</div>
