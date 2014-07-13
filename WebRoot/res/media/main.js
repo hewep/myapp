@@ -5,26 +5,29 @@ require.config({
 		angularRoute : '../lib/angular-route',
 		uiRouter : '../lib/angular-ui-router',
 		angularCookie : '../lib/angular-cookies.min',
-		jquery : '../common/js/jquery-1.7.2.min',
+		
+		jquery : '../common/js/jquery.min',
+		jqueryUtils : '../common/js/jquery-utils',
 		bootstrap : '../bootstrap/js/bootstrap.min',
+		
 		totop:'../plugins/UItoTop/jquery.ui.totop.min',
-		application : 'js/application',
 		kindEditor : '../plugins/kindeditor/kindeditor',
 		prettify : '../plugins/code-prettify/prettify.min',
-		jqueryUtils : '../common/js/jquery-utils',
-		emotions:'../plugins/emotions/emotions',
-		emotion:'../plugins/emotions/emotion'
+		emotion:'../plugins/emotions/emotion',		// qq表情
+		
+		application : 'js/application'
 	},
 	shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute' : {deps:['angular']},
         'uiRouter' : {deps:['angular']},
-        'app' : {deps:['angular']},
         'angularCookie' : {deps:['angular']},
-        'emotion':{deps:['jquery']},
+        'app' : {deps:['angular']},
+        
         'bootstrap' : {deps:['jquery']},
         'prettify' : {deps:['jquery']},
         'totop' : {deps:['jquery']},
+        'emotion':{deps:['jquery']},
         'jqueryUtils' : {deps:['jquery']}		// jquery 扩展工具
     }
 });
@@ -36,8 +39,6 @@ require(['uiRouter',
 		 'totop',
 		 'application',
 		 'jqueryUtils',
-		 'emotions',
-		 'emotion',
 		 'app'
 ],function(){
 	Application.initPortletTools();

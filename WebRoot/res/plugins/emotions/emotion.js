@@ -1,4 +1,4 @@
-/**JQuery combox **/
+/**JQuery emotion **/
 (function($){
 	
 	$.fn.extend({
@@ -12,28 +12,29 @@
 		
 	});
 	$.fn.emotion.defaults = {
+		path:"",
 		allowPreview:true,
 		destId:"",
 		param:{}
 	}
-	var Emotion = function(self, options){		// Combox 的构造函数
+	var Emotion = function(self, options){		// Emotion 的构造函数
 		
-		var offset = self.offset();
+		var offset = self.offset();				//当前对象的位移
 		var destObj = $("#"+options.destId);  	//插入的目标对象; 
 		
-		var path = "res/plugins/kindeditor/plugins/emoticons/images/",
-		currentPageNum = 1;
+		var path = options.path;
 		var rows = 5, cols = 9, total = 135, startNum = 0,
 			cells = rows * cols, pages = Math.ceil(total / cells),
 			colsHalf = Math.floor(cols / 2),
-			menuDiv = $('<div class="ke-menu-default ke-shadow ke-menu" style="overflow:auto;padding:2px 4px;" unselectable="on"></div>'),
+			currentPageNum = 1,
+			menuDiv = $('<div class="ke-menu-default ke-shadow ke-menu"></div>'),
 			wrapperDiv = $('<div class="ke-plugin-emoticons"></div>'),
 			elements = [];
 		
 		menuDiv.css('position','absolute');
 	    menuDiv.append(wrapperDiv);
-	    var previewDiv, previewImg;
 	    
+	    var previewDiv, previewImg;
 		if (options.allowPreview) {		// 是否允许预览
 			previewDiv = $('<div class="ke-preview"></div>').css('right', 0);
 			previewImg = $('<img class="ke-preview-img" src="' + path + startNum + '.gif" />');
@@ -41,10 +42,16 @@
 			previewDiv.append(previewImg);
 		}
 		//输入框绑定
-		self.bind('click',function(event){alert("kk");
-			createPageTable(currentPageNum);
-			menuDiv.css({left:(offset.left)+"px", top:(offset.top + self.outerHeight())+ "px"});
-			self.after(menuDiv);
+		self.bind('click',function(event){
+			var menu = self.data("menu");
+			if(!menu){
+				createPageTable(currentPageNum);
+				self.after(menuDiv);
+				menu = menuDiv;
+				self.data("menu",menuDiv);
+			}
+			menu.css({left:(offset.left)+"px", top:(offset.top + self.outerHeight())+ "px"}).slideDown("fast");
+			$("body").bind("mousedown", onBodyDown);
 		});
 		
 		function bindCellEvent(cell, j, num) {
@@ -69,8 +76,9 @@
 				$(this).removeClass('ke-on');
 			});
 			cell.click(function(e) {
-				destObj.html('<img src="' + path + num + '.gif" border="0" alt="" />');
-				menuDiv.hide();
+				var oldHtml = destObj.html();
+				destObj.html(oldHtml+'<img src="' + path + num + '.gif" border="0" alt="" />');
+				hideMenu();		// hide menu
 			});
 		}
 		function createEmoticonsTable(pageNum, parentDiv) {
@@ -109,7 +117,7 @@
 		var table = createEmoticonsTable(currentPageNum, wrapperDiv);
 		function removeEvent() {
 			$.each(elements, function() {
-				//this.unbind();
+				this.unbind();
 			});
 		}
 		var pageDiv;
@@ -139,6 +147,17 @@
 				pageDiv.append($('<span>&nbsp;</span>'));
 			}
 		}
+		
+		/**鼠标事件触发**/
+		function onBodyDown(event) {
+			var target = event.srcElement || event.target;
+			if (!(target.id == self.attr("id") || target == menuDiv || $(target).parents(".ke-menu-default").length>0)) {
+				hideMenu();
+			}
+		}
+		function hideMenu() {
+			menuDiv.slideUp("fast");
+			$("body").unbind("mousedown", onBodyDown);
+		}
 	};
 })(jQuery);
-

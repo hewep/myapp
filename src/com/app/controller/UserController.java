@@ -1,5 +1,10 @@
 package com.app.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.app.model.User;
@@ -7,13 +12,15 @@ import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.aop.ClearLayer;
+import com.jfinal.kit.PathKit;
+import com.jfinal.upload.UploadFile;
 
 public class UserController extends BaseController{
 	
 	public void list() throws Exception{
 		
 	}
-	@ClearInterceptor(ClearLayer.ALL)
+	@ClearInterceptor(ClearLayer.ALL)	// 跳过鉴权
 	public void addOrUpdate() throws Exception{
 		AjaxResult result = new AjaxResult(1,"注册成功");
 		try {
@@ -69,4 +76,15 @@ public class UserController extends BaseController{
 		this.renderJson(result.toJson());
 	}
 	
+	public void uploadImg(){
+		AjaxResult result = new AjaxResult(1);
+		UploadFile uploadFile = this.getFile("files[]", PathKit.getWebRootPath()+"/download");
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("name", uploadFile.getFileName());
+		List list = new ArrayList();
+		list.add(map);
+		result.setData("files", list);
+		System.out.println(result.toJson());
+		this.renderJson(result.toJson());
+	}
 }
