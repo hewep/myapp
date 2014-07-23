@@ -2,9 +2,10 @@
 // Declare app level module which depends on filters, and services
 define(['controllers/index',
         'controllers/topic',
+        'controllers/profile',
         'common/directives',
         'common/filters'
-],function(index, topic){
+],function(index, topic, profile){
 	var app =  angular.module('myApp', ['ngRoute','ui.router','ngCookies','CommDirectives', 'CommFilters']);
 		/*
 		app.config(['$routeProvider','$locationProvider', '$httpProvider', function($routeProvider, $locationProvider,$httpProvider) {
@@ -34,6 +35,7 @@ define(['controllers/index',
 						  .state('home.topic_info',{url:'/topic_info/:topic_id', templateUrl:'core/media/topic/topic_info.html', controller:topic.topicInfo})
 						  
 						  .state('space',{url:'/space',templateUrl: 'core/media/space.html'})
+						  .state('space.profile',{url:'/profile', templateUrl:'core/media/admin/profile.html', controller: profile.userInfo})
 						  .state('space.message_list',{url:'/message_list',templateUrl:'core/media/admin/message_list.html'});
 						  
 						  

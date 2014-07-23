@@ -15,6 +15,8 @@ require.config({
 		prettify : '../plugins/code-prettify/prettify.min',
 		emotion:'../plugins/emotions/emotion',		// qq表情
 		
+		datepicker:'../plugins/datepicker/bootstrap-datepicker',
+		
 		application : 'js/application'
 	},
 	shim: {
@@ -28,6 +30,9 @@ require.config({
         'prettify' : {deps:['jquery']},
         'totop' : {deps:['jquery']},
         'emotion':{deps:['jquery']},
+        
+        'datepicker':{deps:['jquery']},
+        
         'jqueryUtils' : {deps:['jquery']}		// jquery 扩展工具
     }
 });

@@ -135,3 +135,11 @@ margin: 10px 0 10px 0;
 background: url('../image/comm/warning.gif') no-repeat left center;
 padding-left: 24px;
 }
+
+/*** user info ****/
+
+.user_pic{
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+	border-radius: 50% !important;
+}

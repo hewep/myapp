@@ -7,11 +7,6 @@
 		-moz-border-radius: 9px!important;
 		border-radius: 9px!important;
 	}
-	img{
-		-webkit-border-radius: 50% !important;
-		-moz-border-radius: 50% !important;
-		border-radius: 50% !important;
-	}
 	.portfolio-bottom{
 		font-style: normal;
 		font-size: 12px;
@@ -40,7 +35,7 @@
 						
 						<div class="row-fluid portfolio-block" ng-repeat="topic in topics.list">
 							<div class="span10 portfolio-text">
-								<img src="res/media/image/avatar3.jpg" alt="">
+								<img class="user_pic" src="res/media/image/avatar3.jpg" alt="">
 								<div class="portfolio-text-info">
 									<strong><a ui-sref="home.topic_info({topic_id:topic.id})" target="_blank">{{topic.title}}</a></strong>
 									<div  ng-bind-html="topic.content | toHtml" prettify></div>

@@ -81,6 +81,8 @@ define(['angular'], function(){
 		        }
 		    };
 		});
+		
+		/** 前端页面的分页 **/
 		directives.directive('mediaPagination', ['$http',function($http){
 			return {
 				restrict: "AE",
@@ -106,4 +108,17 @@ define(['angular'], function(){
 				}
 			};
 		}]);
+		
+		directives.directive('datePicker', function(){
+			return {
+		        restrict: "A",
+		            link: function( scope, element, attrs ) {
+		            	require([
+	    				     'datepicker'    
+	    				],function(){
+	    					$(element).datepicker();
+	    				});
+		        }
+		    };
+		});
 });

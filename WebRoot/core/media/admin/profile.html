@@ -1,17 +1,125 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>profile.html</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<link rel="stylesheet" type="text/css" href="res/plugins/datepicker/datepicker.css">
+<style>
+div.radio {
+	margin-right: 3px;
+	display: inline-block;
+	zoom: 1;
+	vertical-align: middle;
+}
 
-  </head>
-  
-  <body>
-    This is my HTML page. <br>
-  </body>
-</html>
+div.radio, div.radio span, div.radio input {
+	width: 18px;
+	height: 18px;
+}
+.radio input[type="radio"]{
+	margin-left:0px;
+}
+</style>
+<ul class="breadcrumb">
+	<li><i class="icon-home"></i> <a href="index.html">个人空间</a> <i
+		class="icon-angle-right"></i></li>
+	<li><a href="#">用户资料</a></li>
+</ul>
+<div class="tabbable tabbable-custom">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#basic_info">基本资料</a></li>
+		<li class=""><a data-toggle="tab" href="#contact_info">联系信息</a></li>
+		<li class=""><a data-toggle="tab" href="#profession">职业技能</a></li>
+		<li class=""><a data-toggle="tab" href="#password">密码修改</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="basic_info" class="tab-pane active">
+				<form ng-submit="saveBasicInfo()" class="form-horizontal" name="basicInfoForm"
+					novalidate >
+					
+					<div class="control-group">
+						<label class="control-label"> 邮箱: <span class="required">*</span>
+						</label>
+						<div class="controls">
+							<input type="email" class="span6 m-wrap" required name="email" ng-model="currentUser.email">
+							<span class="error help-inline" ng-show="registerForm.email.$error.required">请输入邮箱地址</span>
+							<span class="error help-inline" ng-show="registerForm.email.$error.email">邮箱地址无效！</span>
+							<span class="error help-inline" ng-show="email_unique">邮箱已存在！</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"> 昵称: <span class="required">*</span>
+						</label>
+						<div class="controls">
+							<input type="text" class="span6 m-wrap" name="user_name" required ng-minlength=5 ng-model="currentUser.user_name"> 
+							<span class="error help-inline" ng-show="registerForm.user_name.$error.required">请输入用户名称</span>
+							<span class="error help-inline" ng-show="registerForm.user_name.$error.minlength">不少于5位字符</span>
+							<span class="error help-inline" ng-show="user_name_unique">昵称已存在！</span>
+						</div>
+	
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label"> 性别: <span class="required">*</span>
+						</label>
+						<div class="controls">
+							<label class="radio">
+								<div class="radio">
+									<span><input type="radio" name="gender" value="0" ></span>
+								</div> 男
+							</label> 
+							<label class="radio">
+								<div class="radio">
+									<span><input type="radio" name="gender" value="1"></span>
+								</div> 女
+							</label>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"> 出生年月: <span class="required">*</span>
+						</label>
+						<div class="controls">
+							<div class="input-append date" date-picker data-date-format="yyyy-mm-dd">
+								<input name="birthday" class="m-wrap m-ctrl-medium date-picker" placeholder="生日" readonly="" size="16" type="text">
+								<span class="add-on"><i class="icon-calendar"></i></span>
+								<label style="display:inline;color:red;margin-left:10px;">*</label>
+							</div>
+						</div>
+	
+					</div>
+					<div class="control-group">
+						<label class="control-label"> 居住地址:
+						</label>
+						<div class="controls">
+							<input type="text" class="span6 m-wrap" name="user_name" > 
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn purple">保存修改</button>
+					</div>
+				</form>
+		</div>
+		
+		<div id="contact_info" class="tab-pane">
+			<p>Howdy, I'm in Section 2.</p>
+			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
+				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+				consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
+				velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
+				nostrud exerci tation.</p>
+		</div>
+		
+		<div id="profession" class="tab-pane">
+			<p>Howdy, I'm in Section 2.</p>
+			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
+				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+				consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
+				velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
+				nostrud exerci tation.</p>
+		</div>
+		<div id="password" class="tab-pane">
+			<p>Howdy, I'm in Section 2.</p>
+			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
+				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+				consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
+				velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
+				nostrud exerci tation.</p>
+		</div>
+	</div>
+</div>
+

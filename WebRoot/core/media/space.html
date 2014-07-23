@@ -146,6 +146,22 @@ space table(Alternative 2)
     height: 18px;
     background: green;
 }
+
+
+/** action **/
+
+.portfolio-text{
+	padding-top:5px;
+	padding-bottom:5px;
+	border-bottom: 1px dashed #D5D5D5;
+}
+.portfolio-text .msg{
+	margin-bottom:5px;
+}
+
+.portfolio-text .bottom{
+	color:#888;
+}
 </style>
 <div class="row-fluid margin-bottom-40">
 
@@ -175,8 +191,7 @@ space table(Alternative 2)
 
 		<ul class="space-content unstyled">
 
-			<li><i class="icon-tags"></i><a href="#"> 修改个人资料</a></li>
-			<li><i class="icon-asterisk"></i><a href="#"> 修改登录密码</a></li>
+			<li><i class="icon-tags"></i><a ui-sref=".profile"> 修改个人资料</a></li>
 			<li><i class="icon-heart"></i><a ui-sref=".message_list"> 空间留言板</a></li>
 
 		</ul>
@@ -229,15 +244,63 @@ space table(Alternative 2)
 				<div class="clear"></div>
 			</div>
 		</div>
-		<input id="fileupload" type="file" name="files[]"  multiple>
-		<div id="files"></div>
-		<div id="progress">
-		    <div class="bar" style="width: 0%;"></div>
+		
+		<div class="tabbable tabbable-custom">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#tab_2_1">我的动态</a></li>
+				<li class=""><a data-toggle="tab" href="#tab_2_2">系统留言</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="tab_2_1" class="tab-pane active">
+					<div class=" portfolio-text">
+						<img src="res/media/image/avatar3.jpg" alt="">
+						<div class="portfolio-text-info">
+							<div class="msg">
+								<a href="http://my.oschina.net/u/1177133" target="_blank">@微浪科技</a>：你好，公司紧急招聘java、PHP、测试、前端等诸多岗位岗位，工作地点上海浦东能否留个联系方式，或者加我QQ：2262215948(备注开源)
+							</div>
+							
+							<div class="bottom">
+				    			<span class="pull-left">
+				    				1个月前
+				    			</span>
+				    			<span class="pull-right">
+				    				<a href="javascript:sendmsg(1177133,0)">回复</a> |
+				    				<a href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a> |
+				    				<a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
+				    			</span>
+							</div>
+						</div>
+					</div>
+					<div class=" portfolio-text">
+						<img src="res/media/image/avatar3.jpg" alt="">
+						<div class="portfolio-text-info">
+							<div class="msg">
+								<a href="http://my.oschina.net/u/1177133" target="_blank">@微浪科技</a>：你好，公司紧急招聘java、PHP、测试、前端等诸多岗位岗位，工作地点上海浦东能否留个联系方式，或者加我QQ：2262215948(备注开源)
+							</div>
+							
+							<div class="bottom">
+				    			<span class="pull-left">
+				    				1个月前
+				    			</span>
+				    			<span class="pull-right">
+				    				<a href="javascript:sendmsg(1177133,0)">回复</a> |
+				    				<a href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a> |
+				    				<a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
+				    			</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="tab_2_2" class="tab-pane">
+					<p>Howdy, I'm in Section 2.</p>
+					<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
+						ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+						consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
+						velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
+						nostrud exerci tation.</p>
+				</div>
+			</div>
 		</div>
-		<table role="presentation" class="table table-striped">
-	      <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
-	      </tbody>
-	    </table>
 		</ui-view>
 	</div>
 </div>

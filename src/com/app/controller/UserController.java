@@ -43,11 +43,18 @@ public class UserController extends BaseController{
 	}
 	
 	public void findById(){
-		
+		AjaxResult result = new AjaxResult(1, "");
+		//User user = User.dao.findById(id);
 	}
 	
 	public void delById() throws Exception{
 
+	}
+	public void editUser(){
+		AjaxResult result = new AjaxResult(1, "修改成功");
+		User user = new User().setAttrs(this.getParamMap());
+		user.dao.update();
+		this.renderJson(result.toJson());
 	}
 	
 	public void getByEmail(){
