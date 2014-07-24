@@ -131,11 +131,6 @@
 	bottom:0px;
 	right:0px;
 }
-.question img, .reply img{
-	-webkit-border-radius: 50% !important;
-	-moz-border-radius: 50% !important;
-	border-radius: 50% !important;
-}
 
 .reply .list .answer .detail pre{
 	font-size: 9pt;
