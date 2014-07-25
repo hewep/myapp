@@ -1,5 +1,6 @@
 package com.app.common;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpSessionBindingListener;
 import com.app.model.User;
 import com.app.util.Const;
 
-public class UserOnlineListener implements HttpSessionBindingListener {
+public class UserOnlineListener implements HttpSessionBindingListener,Serializable{
+	
+	private static final long serialVersionUID = -3315611425180791427L;
 	
 	private User user;
 	public UserOnlineListener(){
