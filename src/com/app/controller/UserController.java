@@ -1,10 +1,5 @@
 package com.app.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.app.model.User;
@@ -12,8 +7,6 @@ import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.aop.ClearLayer;
-import com.jfinal.kit.PathKit;
-import com.jfinal.upload.UploadFile;
 
 public class UserController extends BaseController{
 	
@@ -50,13 +43,19 @@ public class UserController extends BaseController{
 	public void delById() throws Exception{
 
 	}
-	public void editUser(){
+	// 更新用户信息
+	public void updateUser(){
 		AjaxResult result = new AjaxResult(1, "修改成功");
-		User user = new User().setAttrs(this.getParamMap());
-		user.dao.update();
+		try {
+			User user = new User().setAttrs(this.getParamMap());
+			user.update();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		this.renderJson(result.toJson());
 	}
 	
+	// 邮箱验证
 	public void getByEmail(){
 		
 		AjaxResult result = new AjaxResult(1);
@@ -70,6 +69,7 @@ public class UserController extends BaseController{
 		this.renderJson(result.toJson());
 	}
 	
+	// 用户名称验证
 	public void getByUserName(){
 		
 		AjaxResult result = new AjaxResult(1);
@@ -83,15 +83,4 @@ public class UserController extends BaseController{
 		this.renderJson(result.toJson());
 	}
 	
-	public void uploadImg(){
-		AjaxResult result = new AjaxResult(1);
-		UploadFile uploadFile = this.getFile("files[]", PathKit.getWebRootPath()+"/download");
-		Map<String, String> map = new HashMap<String,String>();
-		map.put("name", uploadFile.getFileName());
-		List list = new ArrayList();
-		list.add(map);
-		result.setData("files", list);
-		System.out.println(result.toJson());
-		this.renderJson(result.toJson());
-	}
 }
