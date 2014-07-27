@@ -4,6 +4,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.app.model.User;
 import com.app.util.AjaxResult;
+import com.app.util.AuthUtils;
+import com.app.util.Const;
 import com.app.util.DateUtils;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.aop.ClearLayer;
@@ -49,6 +51,8 @@ public class UserController extends BaseController{
 		try {
 			User user = new User().setAttrs(this.getParamMap());
 			user.update();
+			this.getSession().setAttribute(Const.CURRENT_USER, user);
+			this.setCookie(Const.AUTH_TOKEN, AuthUtils.getCookieAuthToken(this.getRequest(), user), Const.COOKIE_AGE);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

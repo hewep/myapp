@@ -112,12 +112,33 @@ div.radio, div.radio span, div.radio input {
 				nostrud exerci tation.</p>
 		</div>
 		<div id="password" class="tab-pane">
-			<p>Howdy, I'm in Section 2.</p>
-			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
-				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-				consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-				velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
-				nostrud exerci tation.</p>
+			<form ng-submit="saveBasicInfo()" class="form-horizontal" name="basicInfoForm" novalidate >
+				<div class="control-group">
+					<label class="control-label">原密码: 
+					</label>
+					<div class="controls">
+						<input type="password" class="span6 m-wrap" name="email" >
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">新密码:
+					</label>
+					<div class="controls">
+						<input type="password" class="span6 m-wrap" name="user_name" > 
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">重新输入密码:
+					</label>
+					<div class="controls">
+						<input type="password" class="span6 m-wrap" name="user_name" > 
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<button type="submit" class="btn purple">保 存</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
