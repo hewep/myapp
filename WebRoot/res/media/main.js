@@ -8,6 +8,7 @@ require.config({
 		
 		jquery : '../common/js/jquery.min',
 		jqueryUtils : '../common/js/jquery-utils',
+		region : '../common/js/region',
 		bootstrap : '../bootstrap/js/bootstrap.min',
 		
 		totop:'../plugins/UItoTop/jquery.ui.totop.min',

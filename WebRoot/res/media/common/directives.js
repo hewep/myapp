@@ -108,7 +108,7 @@ define(['angular'], function(){
 				}
 			};
 		}]);
-		
+		/** 日历 **/
 		directives.directive('datePicker', function(){
 			return {
 		        restrict: "A",
@@ -117,6 +117,23 @@ define(['angular'], function(){
 	    				     'datepicker'    
 	    				],function(){
 	    					$(element).datepicker();
+	    				});
+		        }
+		    };
+		});
+		/**区域联动 (select 顺序固定)**/
+		directives.directive('region', function(){
+			return {
+		        restrict: "A",
+		            link: function( scope, element, attrs ) {
+		            	require([
+	    				     'region'    
+	    				],function(){
+		            		var selects = $(element).find("select");
+		            		var province = $(selects[0]).attr("name"),
+		            			city = $(selects[1]).attr("name"),
+		            			area = $(selects[2]).attr("name");
+		            		new PCAS(province,city,area);
 	    				});
 		        }
 		    };

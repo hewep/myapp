@@ -24,7 +24,6 @@ div.radio, div.radio span, div.radio input {
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#basic_info">基本资料</a></li>
 		<li class=""><a data-toggle="tab" href="#contact_info">联系信息</a></li>
-		<li class=""><a data-toggle="tab" href="#profession">职业技能</a></li>
 		<li class=""><a data-toggle="tab" href="#password">密码修改</a></li>
 	</ul>
 	<div class="tab-content">
@@ -75,17 +74,9 @@ div.radio, div.radio span, div.radio input {
 						</label>
 						<div class="controls">
 							<div class="input-append date" date-picker data-date-format="yyyy-mm-dd">
-								<input name="birthday" class="m-wrap m-ctrl-medium date-picker" placeholder="生日" readonly="" size="16" type="text">
+								<input name="birthday" ng_model="user.birthday" class="m-wrap m-ctrl-medium date-picker" placeholder="生日" readonly="" size="16" type="text">
 								<span class="add-on"><i class="icon-calendar"></i></span>
 							</div>
-						</div>
-	
-					</div>
-					<div class="control-group">
-						<label class="control-label"> 居住地址:
-						</label>
-						<div class="controls">
-							<input type="text" class="span6 m-wrap" name="user_name" > 
 						</div>
 					</div>
 					<div class="form-actions">
@@ -95,24 +86,36 @@ div.radio, div.radio span, div.radio input {
 		</div>
 		
 		<div id="contact_info" class="tab-pane">
-			<p>Howdy, I'm in Section 2.</p>
-			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
-				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-				consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-				velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
-				nostrud exerci tation.</p>
+			<form ng-submit="saveContactInfo()" class="form-horizontal" name="contactInfoForm"
+					novalidate >
+				<div class="control-group">
+					<label class="control-label"> 联系电话:</label>
+					<div class="controls">
+						<input type="text" class="span6 m-wrap" name="phone" ng-model="phone"> 
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"> QQ:</label>
+					<div class="controls">
+						<input type="text" class="span6 m-wrap" name="qq" ng-model="qq"> 
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"> 居住地址:</label>
+					<div class="controls" region>
+						<select name="province" style="width:100px;" id="province" ng-model="provice"></select>
+						<select name="city" style="width:100px;" id="city" ng-model="city"></select>
+						<select name="area" style="width:100px;" id="area" ng-model="area" ></select>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn purple">保存修改</button>
+				</div>
+			</form>
 		</div>
 		
-		<div id="profession" class="tab-pane">
-			<p>Howdy, I'm in Section 2.</p>
-			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
-				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-				consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-				velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
-				nostrud exerci tation.</p>
-		</div>
 		<div id="password" class="tab-pane">
-			<form ng-submit="saveBasicInfo()" class="form-horizontal" name="basicInfoForm" novalidate >
+			<form ng-submit="updatePassword()" class="form-horizontal" name="passwordForm" novalidate >
 				<div class="control-group">
 					<label class="control-label">原密码: 
 					</label>
