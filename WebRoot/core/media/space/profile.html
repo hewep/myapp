@@ -23,14 +23,12 @@ div.radio, div.radio span, div.radio input {
 <div class="tabbable tabbable-custom">
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#basic_info">基本资料</a></li>
-		<li class=""><a data-toggle="tab" href="#contact_info">联系信息</a></li>
 		<li class=""><a data-toggle="tab" href="#password">密码修改</a></li>
 	</ul>
 	<div class="tab-content">
 		<div id="basic_info" class="tab-pane active">
 				<form ng-submit="saveBasicInfo()" class="form-horizontal" name="basicInfoForm"
 					novalidate >
-					
 					<div class="control-group">
 						<label class="control-label"><span class="required">*</span> 邮箱: 
 						</label>
@@ -59,12 +57,12 @@ div.radio, div.radio span, div.radio input {
 						<div class="controls">
 							<label class="radio">
 								<div class="radio">
-									<span><input type="radio" name="gender" value="0" ></span>
+									<span><input type="radio" name="gender" ng-model="user.gender" value="0" ></span>
 								</div> 男
 							</label> 
 							<label class="radio">
 								<div class="radio">
-									<span><input type="radio" name="gender" value="1"></span>
+									<span><input type="radio" name="gender" ng-model="user.gender"  value="1"></span>
 								</div> 女
 							</label>
 						</div>
@@ -79,62 +77,56 @@ div.radio, div.radio span, div.radio input {
 							</div>
 						</div>
 					</div>
+					<div class="control-group">
+						<label class="control-label"> 联系电话:</label>
+						<div class="controls">
+							<input type="text" class="span6 m-wrap" name="phone" ng-model="user.phone"> 
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"> QQ:</label>
+						<div class="controls">
+							<input type="text" class="span6 m-wrap" name="qq" ng-model="user.qq"> 
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"> 居住地址:</label>
+						<div class="controls" region="user">
+							<select name="province" style="width:100px;" id="province" ></select>
+							<select name="city" style="width:100px;" id="city" ></select>
+							<select name="district" style="width:100px;" id="district"></select>
+						</div>
+					</div>
 					<div class="form-actions">
 						<button type="submit" class="btn purple">保存修改</button>
 					</div>
 				</form>
 		</div>
 		
-		<div id="contact_info" class="tab-pane">
-			<form ng-submit="saveContactInfo()" class="form-horizontal" name="contactInfoForm"
-					novalidate >
-				<div class="control-group">
-					<label class="control-label"> 联系电话:</label>
-					<div class="controls">
-						<input type="text" class="span6 m-wrap" name="phone" ng-model="phone"> 
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label"> QQ:</label>
-					<div class="controls">
-						<input type="text" class="span6 m-wrap" name="qq" ng-model="qq"> 
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label"> 居住地址:</label>
-					<div class="controls" region>
-						<select name="province" style="width:100px;" id="province" ng-model="provice"></select>
-						<select name="city" style="width:100px;" id="city" ng-model="city"></select>
-						<select name="area" style="width:100px;" id="area" ng-model="area" ></select>
-					</div>
-				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn purple">保存修改</button>
-				</div>
-			</form>
-		</div>
-		
 		<div id="password" class="tab-pane">
+			<div class="alert alert-success" id="tip_info" style="display:none;">
+			</div>
 			<form ng-submit="updatePassword()" class="form-horizontal" name="passwordForm" novalidate >
 				<div class="control-group">
 					<label class="control-label">原密码: 
 					</label>
 					<div class="controls">
-						<input type="password" class="span6 m-wrap" name="email" >
+						<input type="password" class="m-wrap" name="old_password" id="old_password" >
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">新密码:
 					</label>
 					<div class="controls">
-						<input type="password" class="span6 m-wrap" name="user_name" > 
+						<input type="password" class="m-wrap" name="new_password" id="new_password"> 
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">重新输入密码:
 					</label>
 					<div class="controls">
-						<input type="password" class="span6 m-wrap" name="user_name" > 
+						<input type="password" class="m-wrap" name="re_password" id="re_password">
+						<span ng-show="" class="help-inline">两次密码输入不一致</span>
 					</div>
 				</div>
 				

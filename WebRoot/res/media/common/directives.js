@@ -133,9 +133,10 @@ define(['angular'], function(){
 		            		var province = $(selects[0]).attr("name"),
 		            			city = $(selects[1]).attr("name"),
 		            			area = $(selects[2]).attr("name");
-		            		new PCAS(province,city,area);
+		            		new PCAS(province,city,area, scope.user.province, scope.user.city, scope.user.district);
 	    				});
 		        }
 		    };
 		});
+		
 });

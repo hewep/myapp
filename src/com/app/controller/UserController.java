@@ -9,6 +9,7 @@ import com.app.util.Const;
 import com.app.util.DateUtils;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.aop.ClearLayer;
+import com.jfinal.kit.StrKit;
 
 public class UserController extends BaseController{
 	
@@ -45,6 +46,8 @@ public class UserController extends BaseController{
 	public void delById() throws Exception{
 
 	}
+	
+	/*** 更行用户基本信息 , 修改密码 ***/
 	// 更新用户信息
 	public void updateUser(){
 		AjaxResult result = new AjaxResult(1, "修改成功");
@@ -55,11 +58,38 @@ public class UserController extends BaseController{
 			this.setCookie(Const.AUTH_TOKEN, AuthUtils.getCookieAuthToken(this.getRequest(), user), Const.COOKIE_AGE);
 		} catch (Exception e) {
 			e.printStackTrace();
+			result.setFailure("修改失败");
 		}
 		this.renderJson(result.toJson());
 	}
+	// 修改密码
+	public void updatePassword(){
+		AjaxResult result = new AjaxResult(1, "修改成功");
+		try {
+			String oldPassword = this.getPara("oldPassword","");
+			String newPassword = this.getPara("newPassword","");
+			String rePassword = this.getPara("rePassword","");
+			if(!StrKit.notBlank(new String[]{newPassword, rePassword}) || !newPassword.equals(rePassword)){
+				result.setFailure("密码不能为空, 两次密码输入必须一致");
+				return;
+			}
+			User user = this.getCurrUser();
+			String password = user.getStr("password");
+			if(password.equals(DigestUtils.md5Hex(oldPassword))){
+				user.set("password", DigestUtils.md5Hex(newPassword));
+				user.update();
+			}else{
+				result.setFailure("原密码输入错误!");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setFailure("修改失败");
+		} finally{
+			this.renderJson(result.toJson());
+		}
+	}
 	
-	// 邮箱验证
+	/*** 邮箱 和用户名唯一验证 ***/
 	public void getByEmail(){
 		
 		AjaxResult result = new AjaxResult(1);
@@ -73,7 +103,6 @@ public class UserController extends BaseController{
 		this.renderJson(result.toJson());
 	}
 	
-	// 用户名称验证
 	public void getByUserName(){
 		
 		AjaxResult result = new AjaxResult(1);

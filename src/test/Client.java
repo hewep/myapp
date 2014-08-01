@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 public class Client {
@@ -32,5 +33,8 @@ public class Client {
 		System.out.println(pattern.matcher("savehaha").matches());
 		
 	}
-	
+	@Test
+	public void testMd5(){
+		System.out.println(DigestUtils.md5Hex("hao123"));
+	}
 }

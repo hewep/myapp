@@ -8,39 +8,58 @@ define( function(){
 		
 		// 保存用户 基本信息
 		$scope.saveBasicInfo = function(){
-			$scope.user.gender = $("input[name=gender]:checked").val();
+			$scope.user.province = $("#province").val();
+			$scope.user.city = $("#city").val();
+			$scope.user.district = $("#district").val();
+			
 			$http({	method:'post',
 				url:"user/updateUser",
 				params:$scope.user
-				
 			}).success(function(result){
 				if(result.status == 1){
 					angular.copy($scope.user, $rootScope.currentUser);
-					$("li a[href='#contact_info']").tab('show');
+					$("li a[href='#password']").tab('show');
 				}else{
-					alert("保存失败");
+					alert(result.msg);
 				}
 			}).error(function(){
 				alert("网络连接失败");
 			});
 		};
 		
-		// 保存用户联系信息
-		$scope.saveContactInfo = function(){
-			
-		};
-		
 		// 更新用户密码
+		$scope.isConsistent = true;
 		$scope.updatePassword = function(){
+			var oldPassword = $("#old_password").val();
+			var newPassword = $("#new_password").val();
+			var rePassword = $("#re_password").val();
+
+			if(rePassword != newPassword){
+				$scope.isConsistent = false;
+				return;
+			}
 			
+			var params = {"oldPassword":oldPassword, "newPassword":newPassword, "rePassword":rePassword};
+			$http({	method:'post',
+				url:"user/updatePassword",
+				params:params
+			}).success(function(result){
+				$("#tip_info").text(result.msg);
+				$("#tip_info").show();
+			}).error(function(){
+				alert("网络连接失败");
+			});
 		};
 		
-		//初始化页面
+		//初始化
 		init();
 		
-		function  init(){
-			$("input[name=gender][value="+$scope.user.gender+"]").attr('checked',true);
+		function init(){
+			$("#province").val($scope.user.province);
+			$("#city").val($scope.user.city);
+			$("#district").val($scope.user.district);
 		}
+		
 	}];
 	
 	return {userInfo: UserInfoCtrl};
