@@ -2,15 +2,15 @@
 // Declare app level module which depends on filters, and services
 define([
         'angular',
-        'category'
-],function(angular, category){
-	var app =  angular.module('adminApp', ['ngRoute']);
+        'controllers/category',
+        'controllers/user',
+        'common/directives'
+],function(angular, category, user){
+	var app =  angular.module('adminApp', ['ngRoute','CommDirectives']);
 	
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
 			  $routeProvider.when('/', {templateUrl: 'core/admin/topic/category_list.html', controller: category.list})
-			  				.when('/topic', {templateUrl:'core/admin/topic.html', controller: null})
-			  				.when('/topic_list',{templateUrl:'core/admin/topic_list.html', controller:null})
-			  				.when('/register', {templateUrl: 'core/admin/register.html', controller: null })
+			  				.when('/user_list', {templateUrl:'core/admin/user_list.html', controller: user.list})
 			  				.otherwise({redirectTo: '/'});
 			  				
 			  	// configure html5		

@@ -630,7 +630,7 @@ div.dataTables_paginate{float:right;margin:0}
 .antiscroll-scrollbar-shown{opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100)}
 .antiscroll-scrollbar-horizontal{height:7px;margin-left:2px;bottom:2px;left:0}
 .antiscroll-scrollbar-vertical{width:7px;margin:2px 0;left:2px;top:0}
-.antiscroll-inner{overflow-y:scroll}
+/*.antiscroll-inner{overflow-y:scroll}*/
 .antiScroll,.antiscroll-content,.antiscroll-inner{width:240px}
 .antiscroll-inner::-webkit-scrollbar,.antiscroll-inner::scrollbar{width:0;height:0}
 

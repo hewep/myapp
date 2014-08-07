@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.front;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;

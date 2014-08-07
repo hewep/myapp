@@ -1,6 +1,8 @@
 package test;
 
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -35,6 +37,20 @@ public class Client {
 	}
 	@Test
 	public void testMd5(){
-		System.out.println(DigestUtils.md5Hex("hao123"));
+//		System.out.println(DigestUtils.md5Hex("hao123"));
+		
+		try {
+			Class cache = Integer.class.getDeclaredClasses()[0];
+	        Field c = cache.getDeclaredField("cache");
+	        c.setAccessible(true);
+	        Integer[] array = (Integer[]) c.get(cache);
+	        //array[132] = array[136];
+	        
+	        System.out.println(Arrays.toString(array));
+	        System.out.printf("%d",2 + 2); 
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }

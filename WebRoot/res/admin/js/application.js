@@ -4,7 +4,7 @@
 function is_touch_device() {
   return !!('ontouchstart' in window);
 }
-var Common = {
+var Application = {
 	init : function(){
 		//* make active on accordion change
 		$('#side_accordion').on('hidden shown', function () {
@@ -291,4 +291,18 @@ gebo_colorbox_single = {
 			fixed		: true
 		});
 	}
+};
+
+//* breadcrumbs
+gebo_crumbs = {
+    init: function() {
+        $('#jCrumbs').jBreadCrumb({
+            endElementsToLeaveOpen: 0,
+            beginingElementsToLeaveOpen: 0,
+            timeExpansionAnimation: 500,
+            timeCompressionAnimation: 500,
+            timeInitialCollapse: 500,
+            previewWidth: 30
+        });
+    }
 };

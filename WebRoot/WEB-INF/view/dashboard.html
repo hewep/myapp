@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="res/bootstrap/css/bootstrap-responsive.min.css" />
 	<!-- theme color-->
 	<link rel="stylesheet" href="res/admin/css/brown.css" id="link_theme" />
+	<!-- tooltips -->
+	<link rel="stylesheet" href="res/plugins/jBreadcrumbs/css/BreadCrumb.css"  />
 	<!-- tooltips-->
     <link rel="stylesheet" href="res/plugins/qtip2/jquery.qtip.min.css"  />
     <!-- colorbox -->
@@ -307,35 +309,16 @@
 									<div class="accordion-heading">
 										<a href="#collapseTwo" data-parent="#side_accordion"
 											data-toggle="collapse" class="accordion-toggle"> <i
-											class="icon-th"></i> Modules
+											class="icon-th"></i> 基本信息
 										</a>
 									</div>
 									<div class="accordion-body collapse" id="collapseTwo">
 										<div class="accordion-inner">
 											<ul class="nav nav-list">
-												<li><a href="javascript:void(0)">Formbuilder</a></li>
-												<li><a href="javascript:void(0)">Location</a></li>
-												<li><a href="javascript:void(0)">Profiles</a></li>
+												<li><a href="javascript:void(0)">用户列表</a></li>
+												<li><a href="javascript:void(0)">菜单列表</a></li>
+												<li><a href="javascript:void(0)">角色列表</a></li>
 											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="accordion-group">
-									<div class="accordion-heading">
-										<a href="#collapseThree" data-parent="#side_accordion"
-											data-toggle="collapse" class="accordion-toggle"> <i
-											class="icon-user"></i> Account manager
-										</a>
-									</div>
-									<div class="accordion-body collapse" id="collapseThree">
-										<div class="accordion-inner">
-											<ul class="nav nav-list">
-												<li><a href="javascript:void(0)">Members</a></li>
-												<li><a href="javascript:void(0)">Members groups</a></li>
-												<li><a href="javascript:void(0)">Users</a></li>
-												<li><a href="javascript:void(0)">Users groups</a></li>
-											</ul>
-
 										</div>
 									</div>
 								</div>
@@ -343,22 +326,15 @@
 									<div class="accordion-heading">
 										<a href="#collapseFour" data-parent="#side_accordion"
 											data-toggle="collapse" class="accordion-toggle"> <i
-											class="icon-cog"></i> Configuration
+											class="icon-cog"></i> 系统设置
 										</a>
 									</div>
 									<div class="accordion-body collapse" id="collapseFour">
 										<div class="accordion-inner">
 											<ul class="nav nav-list">
-												<li class="nav-header">People</li>
-												<li class="active"><a href="javascript:void(0)">Account
-														Settings</a></li>
-												<li><a href="javascript:void(0)">IP Adress Blocking</a></li>
-												<li class="nav-header">System</li>
-												<li><a href="javascript:void(0)">Site information</a></li>
-												<li><a href="javascript:void(0)">Actions</a></li>
-												<li><a href="javascript:void(0)">Cron</a></li>
-												<li class="divider"></li>
-												<li><a href="javascript:void(0)">Help</a></li>
+												<li><a href="admin#/user_list">用户管理</a></li>
+												<li><a href="javascript:void(0)">菜单管理</a></li>
+												<li><a href="javascript:void(0)">角色管理</a></li>
 											</ul>
 										</div>
 									</div>
@@ -371,12 +347,9 @@
 
 						<div class="sidebar_info">
 							<ul class="unstyled">
-								<li><span class="act act-warning">65</span> <strong>New
-										comments</strong></li>
-								<li><span class="act act-success">10</span> <strong>New
-										articles</strong></li>
-								<li><span class="act act-danger">85</span> <strong>New
-										registrations</strong></li>
+								<li><span class="act act-warning">65</span> <strong>新增评论</strong></li>
+								<li><span class="act act-success">10</span> <strong>新增话题</strong></li>
+								<li><span class="act act-danger">85</span> <strong>新增会员</strong></li>
 							</ul>
 						</div>
 

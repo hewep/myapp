@@ -6,6 +6,12 @@ import java.util.Map;
 
 import com.jfinal.kit.JsonKit;
 
+/**字段说明
+ * 状态  status : 0-失败, 1-成功
+ * 消息  msg
+ * 数据  data 
+ * @author Administrator
+ */
 public class AjaxResult {
 	private Map<String,Object> result = new LinkedHashMap<String,Object>();
 	

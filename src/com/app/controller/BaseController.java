@@ -1,10 +1,11 @@
 package com.app.controller;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.app.model.User;
+import com.app.model.admin.User;
 import com.app.util.Const;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
@@ -26,10 +27,10 @@ public class BaseController extends Controller{
 		}
 		return record;
 	}
-	/*** json 转化为对象  ***/
-	public <T> T fromJson(String json, Class<T> clazz){
+	/***gson方式  json 转化为对象  ***/
+	public <T> T fromJson(String json, Type type){
 		Gson gson = new Gson();
-		return gson.fromJson(json, clazz);
+		return gson.fromJson(json, type);
 	}
 	
 	/** 获取当前用户 **/

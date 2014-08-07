@@ -43,7 +43,7 @@
            memoryStoreEvictionPolicy="LFU"
            transactionalMode="off">
            
-           <cacheEventListenerFactory class="com.app.support.cache.UpdateCacheEventListenerFactory" properties="topic" />
+           <cacheEventListenerFactory class="com.app.common.support.cache.UpdateCacheEventListenerFactory" properties="topic" />
     </cache>
     
     <!-- 站点统计 永久-->

@@ -1,12 +1,12 @@
 'use strict';
 /* Controllers */
 define( function(){
-	var CategoryListCtrl = ['$scope', '$http', function($scope, $http){
-		$scope.categorys = {};
+	var UserListCtrl = ['$scope', '$http', function($scope, $http){
+		$scope.users = {};
 		$scope.category = {};
 		
-		$http({method:'post',url:"category/list"}).success(function(result){
-			$scope.categorys = result.data;
+		$http({method:'post',url:"user/list"}).success(function(result){
+			$scope.users = result.data.list;
 		}).error(function(){
 			alert("网络连接失败");
 		});
@@ -56,5 +56,5 @@ define( function(){
 		};
 	}];
 	
-	return {list : CategoryListCtrl};
+	return {list : UserListCtrl};
 });

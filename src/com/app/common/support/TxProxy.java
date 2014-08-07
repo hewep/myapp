@@ -1,4 +1,4 @@
-package com.app.support;
+package com.app.common.support;
 
 import java.lang.reflect.Method;
 

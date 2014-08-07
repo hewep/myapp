@@ -1,4 +1,4 @@
-package com.app.common;
+package com.app.common.listener;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;

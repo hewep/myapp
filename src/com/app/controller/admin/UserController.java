@@ -1,8 +1,9 @@
-package com.app.controller;
+package com.app.controller.admin;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.app.model.User;
+import com.app.controller.BaseController;
+import com.app.model.admin.User;
 import com.app.util.AjaxResult;
 import com.app.util.AuthUtils;
 import com.app.util.Const;
@@ -10,12 +11,23 @@ import com.app.util.DateUtils;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.aop.ClearLayer;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Page;
 
 public class UserController extends BaseController{
 	
+	/*** 后台操作函数 ****/
 	public void list() throws Exception{
+		AjaxResult result = new AjaxResult(1);
+		int pageNumber = this.getParaToInt("pageNumber", 1);
+		int pageSize = this.getParaToInt("pageSize", 10);
+		Page<User> page = User.dao.paginate(pageNumber, pageSize, "select *", "from user");
+		
+		result.setData("data", page);
+		
+		this.renderJson(result.toJson());
 		
 	}
+	
 	@ClearInterceptor(ClearLayer.ALL)	// 跳过鉴权
 	public void addOrUpdate() throws Exception{
 		AjaxResult result = new AjaxResult(1,"注册成功");
@@ -47,7 +59,7 @@ public class UserController extends BaseController{
 
 	}
 	
-	/*** 更行用户基本信息 , 修改密码 ***/
+	/*** 更新用户基本信息 , 修改密码 ***/
 	// 更新用户信息
 	public void updateUser(){
 		AjaxResult result = new AjaxResult(1, "修改成功");

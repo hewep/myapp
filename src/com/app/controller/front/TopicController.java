@@ -1,11 +1,12 @@
-package com.app.controller;
+package com.app.controller.front;
 
 import java.util.List;
 
-import com.app.model.Category;
-import com.app.model.Comment;
-import com.app.model.Reply;
-import com.app.model.Topic;
+import com.app.controller.BaseController;
+import com.app.model.front.Category;
+import com.app.model.front.Comment;
+import com.app.model.front.Reply;
+import com.app.model.front.Topic;
 import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
 import com.jfinal.kit.StrKit;

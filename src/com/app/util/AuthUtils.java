@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.app.model.User;
+import com.app.model.admin.User;
 
 public class AuthUtils {
 	/**

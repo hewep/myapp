@@ -1,18 +1,21 @@
-package com.app.controller;
+package com.app.controller.front;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.app.model.Category;
+import com.app.controller.BaseController;
+import com.app.model.front.Category;
 import com.app.util.AjaxResult;
+import com.google.gson.reflect.TypeToken;
 import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Record;
 
 public class CategoryController extends BaseController{
 	
+	/** 后台操作 ***/
 	public void list(){
 		AjaxResult result = new AjaxResult(1);
 		List<Category> list = Category.dao.find("select *,IFNULL(topic_count, 0) as topic_count from category");
@@ -30,7 +33,7 @@ public class CategoryController extends BaseController{
 		AjaxResult result = new AjaxResult(1,"操作成功");
 		try {
 			String category = this.getPara("category");
-			Map<String, Object> map = this.fromJson(category, new HashMap<String, Object>().getClass());
+			Map<String, Object> map = this.fromJson(category, new TypeToken<HashMap<String,Object>>(){}.getType());
 			Category record = new Category().setAttrs(map);
 			if(StrKit.notNull(record.get("id"))){
 				record.update();
@@ -57,7 +60,7 @@ public class CategoryController extends BaseController{
 		
 		this.renderJson(result.toJson());
 	}
-	
+	/**前台 操作**/
 	private String getCateTree(List<Category> list){
 		Map<Integer, Record> map = new HashMap<Integer, Record>();
 		for (Category category : list) {

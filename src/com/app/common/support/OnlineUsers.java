@@ -1,4 +1,4 @@
-package com.app.support;
+package com.app.common.support;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import javax.servlet.http.HttpSession;
 
-import com.app.model.User;
+import com.app.model.admin.User;
 
 /**
  * TODO 在线用户管理类.

@@ -1,14 +1,16 @@
 package com.app.common;
 
-import com.app.controller.CategoryController;
 import com.app.controller.IndexController;
-import com.app.controller.TopicController;
-import com.app.controller.UserController;
-import com.app.model.Category;
-import com.app.model.Comment;
-import com.app.model.Reply;
-import com.app.model.Topic;
-import com.app.model.User;
+import com.app.controller.admin.UserController;
+import com.app.controller.front.CategoryController;
+import com.app.controller.front.TopicController;
+import com.app.interceptor.AuthInterceptor;
+import com.app.interceptor.CountInterceptor;
+import com.app.model.admin.User;
+import com.app.model.front.Category;
+import com.app.model.front.Comment;
+import com.app.model.front.Reply;
+import com.app.model.front.Topic;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;

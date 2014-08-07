@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.admin;
 
 import com.jfinal.plugin.activerecord.Model;
 

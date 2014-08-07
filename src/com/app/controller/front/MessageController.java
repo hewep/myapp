@@ -1,4 +1,6 @@
-package com.app.controller;
+package com.app.controller.front;
+
+import com.app.controller.BaseController;
 
 public class MessageController extends BaseController{
 	

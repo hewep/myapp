@@ -1,4 +1,4 @@
-package com.app.common;
+package com.app.interceptor;
 
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Pattern;
@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.app.model.User;
+import com.app.common.listener.UserOnlineListener;
+import com.app.model.admin.User;
 import com.app.util.AjaxResult;
 import com.app.util.AuthUtils;
 import com.app.util.Const;
@@ -30,7 +31,6 @@ public class AuthInterceptor implements Interceptor{
 		controller.setAttr("baseUrl", request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/");
 		
 		try {	
-			
 			this.autoLogin(controller);		// 自动登录
 			
 			if(this.anthUrl(controller, request)){  // 检测是否有权限访问

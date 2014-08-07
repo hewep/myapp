@@ -2,8 +2,8 @@ package com.app.controller;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.app.common.UserOnlineListener;
-import com.app.model.User;
+import com.app.common.listener.UserOnlineListener;
+import com.app.model.admin.User;
 import com.app.util.AjaxResult;
 import com.app.util.AuthUtils;
 import com.app.util.Const;
@@ -17,11 +17,11 @@ public class IndexController extends BaseController{
 	
 	public void admin(){
 		String type = this.getPara("type","");
-		if(type.equals("login")){
+		//if(type.equals("login")){
 			this.render("dashboard.html");
-		}else{
-			this.render("login.html");
-		}
+		//}else{
+		//	this.render("login.html");
+		//}
 	}
 	
 	public void login(){
