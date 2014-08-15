@@ -3,7 +3,7 @@
 -- Server version:               5.0.22-community-nt - MySQL Community Edition (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-07-23 17:58:31
+-- Date/time:                    2014-08-15 18:45:51
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -41,6 +41,53 @@ INSERT INTO `category` (`id`, `pid`, `name`, `content`, `type`, `topic_count`, `
 	(10, 1, '测试1', NULL, NULL, NULL, NULL),
 	(11, 1, '测试2', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
+
+
+-- Dumping structure for table myapp.category1
+DROP TABLE IF EXISTS `category1`;
+CREATE TABLE IF NOT EXISTS `category1` (
+  `id` int(10) NOT NULL auto_increment,
+  `pid` int(10) default NULL COMMENT '父ID',
+  `name` varchar(50) default NULL COMMENT '类别名称',
+  `content` text COMMENT '类别内容',
+  `type` varchar(10) default NULL COMMENT '类型',
+  `topic_count` int(10) default NULL COMMENT '发贴数量',
+  `remark` varchar(50) default NULL COMMENT '备注',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table myapp.category1: ~0 rows (approximately)
+/*!40000 ALTER TABLE `category1` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category1` ENABLE KEYS */;
+
+
+-- Dumping structure for table myapp.category3
+DROP TABLE IF EXISTS `category3`;
+CREATE TABLE IF NOT EXISTS `category3` (
+  `id` int(10) NOT NULL auto_increment,
+  `pid` int(10) default NULL COMMENT '父ID',
+  `u_name` varchar(20) default NULL,
+  `content` text COMMENT '类别内容',
+  `type` varchar(12) default NULL,
+  `topic_count` int(10) default NULL COMMENT '发贴数量',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table myapp.category3: ~0 rows (approximately)
+/*!40000 ALTER TABLE `category3` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category3` ENABLE KEYS */;
+
+
+-- Dumping structure for function myapp.check_table
+DROP FUNCTION IF EXISTS `check_table`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` FUNCTION `check_table`(`tablename` VARCHAR(50)) RETURNS tinyint(1)
+BEGIN
+    DECLARE t_count INT UNSIGNED;
+    SELECT count(1) INTO t_count FROM information_schema.`TABLES` where TABLE_NAME=tablename and TABLE_SCHEMA='myapp';
+    RETURN t_count>0;
+END//
+DELIMITER ;
 
 
 -- Dumping structure for table myapp.comment
@@ -116,6 +163,63 @@ INSERT INTO `reply` (`id`, `pid`, `user_id`, `topic_id`, `content`, `create_time
 /*!40000 ALTER TABLE `reply` ENABLE KEYS */;
 
 
+-- Dumping structure for table myapp.sys_perms
+DROP TABLE IF EXISTS `sys_perms`;
+CREATE TABLE IF NOT EXISTS `sys_perms` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(20) default NULL,
+  `url` varchar(100) default NULL,
+  `type` varchar(20) default NULL,
+  `remark` varchar(100) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table myapp.sys_perms: ~0 rows (approximately)
+/*!40000 ALTER TABLE `sys_perms` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_perms` ENABLE KEYS */;
+
+
+-- Dumping structure for table myapp.sys_perms_role
+DROP TABLE IF EXISTS `sys_perms_role`;
+CREATE TABLE IF NOT EXISTS `sys_perms_role` (
+  `id` int(10) default NULL,
+  `perm_id` int(10) default NULL,
+  `role_id` int(10) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table myapp.sys_perms_role: ~0 rows (approximately)
+/*!40000 ALTER TABLE `sys_perms_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_perms_role` ENABLE KEYS */;
+
+
+-- Dumping structure for table myapp.sys_role
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE IF NOT EXISTS `sys_role` (
+  `id` int(10) NOT NULL auto_increment COMMENT '主键',
+  `name` varchar(20) default NULL COMMENT '角色名称',
+  `code` varchar(20) default NULL COMMENT '角色代码',
+  `remark` varchar(100) default NULL COMMENT '备注',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table myapp.sys_role: ~0 rows (approximately)
+/*!40000 ALTER TABLE `sys_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_role` ENABLE KEYS */;
+
+
+-- Dumping structure for table myapp.sys_user_role
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE IF NOT EXISTS `sys_user_role` (
+  `id` int(10) default NULL,
+  `user_id` int(10) default NULL,
+  `role_id` int(10) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table myapp.sys_user_role: ~0 rows (approximately)
+/*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
+
+
 -- Dumping structure for table myapp.topic
 DROP TABLE IF EXISTS `topic`;
 CREATE TABLE IF NOT EXISTS `topic` (
@@ -137,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `topic` (
 INSERT INTO `topic` (`id`, `category_id`, `user_id`, `title`, `tags`, `content`, `view_count`, `reply_count`, `create_time`, `remark`) VALUES
 	(1, 5, NULL, 'kk', NULL, '你奶奶', NULL, NULL, '2014-06-19 00:00:00', NULL),
 	(2, 5, NULL, 'qqq', NULL, 'mm', NULL, NULL, '2014-06-19 00:00:00', NULL),
-	(3, 7, NULL, 'mmm', 'ggg', 'sdfsdf', NULL, NULL, '2014-06-26 00:00:00', NULL),
+	(3, 7, NULL, 'mmm', 'ggg', 'sdfsdf', 1, NULL, '2014-06-26 00:00:00', NULL),
 	(4, 7, 1, '新闻资讯', '哈哈', '的非官方的', NULL, NULL, '2014-06-26 00:00:00', NULL),
 	(5, 5, 1, 'kkk', '454', '789789798', NULL, NULL, '2014-06-26 00:00:00', NULL),
 	(6, 5, 1, '111', NULL, '45', 1, NULL, '2014-06-27 00:00:00', NULL),
@@ -149,6 +253,26 @@ INSERT INTO `topic` (`id`, `category_id`, `user_id`, `title`, `tags`, `content`,
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 
 
+-- Dumping structure for procedure myapp.update_db
+DROP PROCEDURE IF EXISTS `update_db`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_db`()
+BEGIN
+	
+    IF NOT CheckIsObjectExist('tbl_user_card') THEN
+    	  select '2';
+        CREATE TABLE `tbl_user_card` (
+            `u_id` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `u_status` TINYINT(1) UNSIGNED DEFAULT '0',
+            `u_name` VARCHAR(20) NOT NULL,
+            PRIMARY KEY  (`u_id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+    END IF;
+
+END//
+DELIMITER ;
+
+
 -- Dumping structure for table myapp.user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
@@ -158,6 +282,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(50) default NULL COMMENT '邮件',
   `gender` int(11) default NULL COMMENT '性别',
   `birthday` datetime default NULL COMMENT '生日',
+  `phone` varchar(20) default NULL COMMENT '电话号码',
+  `qq` varchar(20) default NULL COMMENT 'QQ',
+  `province` varchar(20) default NULL COMMENT '省',
+  `city` varchar(20) default NULL COMMENT '市',
+  `district` varchar(20) default NULL COMMENT '区',
   `register_time` datetime default NULL COMMENT '注册时间',
   `last_login_time` datetime default NULL COMMENT '最后登录时间',
   `login_count` int(10) default NULL COMMENT '登录次数',
@@ -167,10 +296,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
--- Dumping data for table myapp.user: ~1 rows (approximately)
+-- Dumping data for table myapp.user: ~2 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `user_name`, `password`, `email`, `gender`, `birthday`, `register_time`, `last_login_time`, `login_count`, `pic_url`, `type`, `remark`) VALUES
-	(4, 'hewep', '06a5ac9504e3a3c83574cf7a6479be2d', '553912407@qq.com', NULL, NULL, '2014-07-04 00:00:00', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `user_name`, `password`, `email`, `gender`, `birthday`, `phone`, `qq`, `province`, `city`, `district`, `register_time`, `last_login_time`, `login_count`, `pic_url`, `type`, `remark`) VALUES
+	(8, 'hewep', '06a5ac9504e3a3c83574cf7a6479be2d', '553912407@qq.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-08-13 00:00:00', NULL, NULL, NULL, NULL, NULL),
+	(9, 'hh', '670b14728ad9902aecba32e22fa4f6bd', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2014-08-13 00:00:00', NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
