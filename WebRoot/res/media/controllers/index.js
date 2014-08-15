@@ -23,7 +23,7 @@ define( function(){
 				alert("密码输入不一致");return;
 			}
 			
-			$http({method:'post',url:"user/addOrUpdate", params:$scope.user}).success(function(result){
+			$http({method:'post',url:"user/register", params:$scope.user}).success(function(result){
 				alert(result.msg);
 				if(result.status == 1){
 					$location.path("/");

@@ -12,6 +12,12 @@ require.config({
 		antiscroll:'../plugins/antiscroll/antiscroll',
 		totop:'../plugins/UItoTop/jquery.ui.totop.min',
 		breadcrumb: '../plugins/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min',
+		/**datatables**/
+		datatables : '../plugins/datatables/js/jquery.dataTables',
+		datatables_bootstrap : '../plugins/datatables/dataTables.bootstrap',
+		
+		/**validate**/
+		validate : '../plugins/validation/jquery.validate',
 		
 		application:'js/application'
 		
@@ -25,13 +31,17 @@ require.config({
         'actual' : {deps:['jquery']},
         'antiscroll' : {deps:['jquery']},
         'totop' : {deps:['jquery']},
-        'breadcrumb' : {deps:['jquery']}
+        'breadcrumb' : {deps:['jquery']},
+        'datatables' : {deps:['jquery']},
+        'datatables_bootstrap':{deps:['datatables']},
+        'validate' : {deps:['jquery']}
     }
 });
 	
 require(['angular','angularRoute',
 		 'bootstrap','qtip','actual',
 		 'antiscroll','totop','breadcrumb',
+		 'datatables_bootstrap','validate',
 		 'cookie','application','app'
 ],function(angular){
 	Application.init();

@@ -5,8 +5,7 @@ define(['angular'], function(){
 	var comm = angular.module('CommDirectives',[]);
 	
 	//面包屑 
-	comm.directive('breadCrumb', function(){
-		
+	comm.directive('breadCrumbs', function(){
 		return function(scope, element, attr, ctrl){
 			$(element).jBreadCrumb({
 	            endElementsToLeaveOpen: 0,
@@ -18,5 +17,6 @@ define(['angular'], function(){
 	        });
 		};
 	});
+	
 		
 });
