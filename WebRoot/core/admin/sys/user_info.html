@@ -1,0 +1,101 @@
+<div class="row-fluid">
+	<div id="jCrumbs" class="breadCrumb module" >
+	    <ul>
+	        <li>
+	            <a href="#"><i class="icon-home"></i></a>
+	        </li>
+	        <li>
+	            <a href="#">用户 管理</a>
+	        </li>
+	        <li>用户信息 </li>
+	    </ul>
+	</div>					  
+	
+	<div class="w-box">
+		<div class="w-box-header">
+			用户列表
+			<div class="pull-right">
+				<a class="btn btn-mini btn-gebo" href="/admin#/user_list" >
+                           	 返回列表
+                   </a>
+			</div>
+		</div>
+		
+		<div class="w-box-content" style="padding-top:10px;">
+			<form class="form-horizontal" ng-submit="addOrUpdate();" novalidate="novalidate">
+				<input type="hidden" ng-model="user.id">
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label"> 昵称: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="user.user_name">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 性别: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="user.gender" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 类型: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="user.type" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 电话号码: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="user.phone" >
+							</div>
+						</div>
+					</div>
+					
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label"> 邮箱: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="user.email">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> qq: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="user.qq" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 出生日期: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="user.birthday" >
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button class="btn btn-primary" type="submit">提 交</button>
+					</div>
+				</div>
+			</form>
+				
+		</div>
+	</div>
+		
+</div>
+

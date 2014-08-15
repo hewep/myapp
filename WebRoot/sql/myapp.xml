@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tables>
+	<table type="">
+		<sql>
+			CREATE TABLE IF NOT EXISTS `category1` (
+			`id` int(10) NOT NULL auto_increment,
+			`pid` int(10) default NULL COMMENT '父ID',
+			`name` varchar(50) default NULL COMMENT '类别名称',
+			`content` text COMMENT '类别内容',
+			`type` varchar(10) default NULL COMMENT '类型',
+			`topic_count` int(10) default NULL COMMENT '发贴数量',
+			`remark` varchar(50) default NULL COMMENT '备注',
+			PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+		</sql>
+
+		<delete>
+			drop table category1
+		</delete>
+
+		<data>
+
+		</data>
+	</table>
+	<table type="">
+		<sql>
+			CREATE TABLE IF NOT EXISTS `category2` (
+			`id` int(10) NOT NULL auto_increment,
+			`pid` int(10) default NULL COMMENT '父ID',
+			`name` varchar(50) default NULL COMMENT '类别名称',
+			`content` text COMMENT '类别内容',
+			`type` varchar(10) default NULL COMMENT '类型',
+			`topic_count` int(10) default NULL COMMENT '发贴数量',
+			`remark` varchar(50) default NULL COMMENT '备注',
+			PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+		</sql>
+		<alter>
+			alter table category3 modify name varchar(19) after pid,
+			modify type varchar(12);
+			alter table category3 drop remark;
+			alter table category3 change name u_name varchar(20);
+			alter table category3 rename to category3;
+		</alter>
+	</table>
+</tables>

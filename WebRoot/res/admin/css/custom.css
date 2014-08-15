@@ -1,0 +1,24 @@
+.center{
+	text-align:"center";
+}
+/*自定义 datatables 样式*/
+.table th,.table td{
+	padding:4px;
+}
+.dataTables_wrapper select{
+	height:25px;
+	padding:2px 6px;
+}
+.dataTables_wrapper div.dataTables_info{
+	padding-top:0px;
+	line-height:25px;
+}
+.dataTables_wrapper table tr:hover td{
+	background-color : #C8E2B1;
+}
+.dataTables_wrapper table tr .check_column{
+	text-align:center;
+}
+.dataTables_wrapper table tbody .select_row td{
+	background-color : #C9E4D6;
+}
