@@ -11,6 +11,7 @@ import com.app.model.front.Category;
 import com.app.model.front.Comment;
 import com.app.model.front.Reply;
 import com.app.model.front.Topic;
+import com.app.plugin.update.UpdateDbPlugin;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -61,6 +62,10 @@ public class AppConfig extends JFinalConfig {
 		
 		C3p0Plugin cp = new C3p0Plugin(loadPropertyFile("jdbc.properties"));
 		me.add(cp);
+		
+		UpdateDbPlugin udp = new UpdateDbPlugin(cp); // 数据库更新插件
+		me.add(udp);
+		
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(cp);
 		me.add(arp);
 		arp.setDialect(new MysqlDialect());

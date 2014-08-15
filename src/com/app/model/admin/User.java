@@ -1,5 +1,6 @@
 package com.app.model.admin;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 
 public class User extends Model<User>{
@@ -11,5 +12,9 @@ public class User extends Model<User>{
 		User user = dao.findFirst("select * from user where (email = ? or user_name=?) and password = ?",
 				new Object[]{email,email, pwd});
 		return user;
+	}
+	
+	public int deleteByIds(String ids){
+		return Db.update("delete from user where id in ("+ids+")");
 	}
 }

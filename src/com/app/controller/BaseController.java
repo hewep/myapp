@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.app.common.page.DataTablePage;
 import com.app.model.admin.User;
 import com.app.util.Const;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.CPI;
 import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
 public class BaseController extends Controller{
@@ -54,4 +56,5 @@ public class BaseController extends Controller{
 		}
 		return record;
 	}
+	
 }

@@ -2,14 +2,15 @@ package com.app.controller.admin;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.app.common.page.DataTablePage;
 import com.app.controller.BaseController;
 import com.app.model.admin.User;
 import com.app.util.AjaxResult;
 import com.app.util.AuthUtils;
 import com.app.util.Const;
 import com.app.util.DateUtils;
-import com.jfinal.aop.ClearInterceptor;
-import com.jfinal.aop.ClearLayer;
+import com.app.validator.admin.UserValidator;
+import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -19,28 +20,68 @@ public class UserController extends BaseController{
 	public void list() throws Exception{
 		AjaxResult result = new AjaxResult(1);
 		int pageNumber = this.getParaToInt("pageNumber", 1);
-		int pageSize = this.getParaToInt("pageSize", 10);
+		int pageSize = this.getParaToInt("pageSize", 1);
 		Page<User> page = User.dao.paginate(pageNumber, pageSize, "select *", "from user");
 		
-		result.setData("data", page);
-		
-		this.renderJson(result.toJson());
+		//result.setData("data", page.getList());
+		System.out.println(new DataTablePage(page).toJson());
+		this.renderJson(new DataTablePage(page).toJson());
 		
 	}
 	
-	@ClearInterceptor(ClearLayer.ALL)	// 跳过鉴权
-	public void addOrUpdate() throws Exception{
+	@Before(UserValidator.class)
+	public void addOrUpdate(){
 		AjaxResult result = new AjaxResult(1,"注册成功");
 		try {
-			User user0 = User.dao.findFirst("select * from user where email = ?", this.getPara("email",""));
-			if(user0 == null){
-				User user = this.getModel(User.class).setAttrs(this.getParamMap());
-				user.set("password", DigestUtils.md5Hex(user.getStr("password")));
+			User user = this.getModel(User.class).setAttrs(this.getParamMap());
+			String userId = user.get("id", "");
+			if(StrKit.notBlank(userId)){
+				user.update();
+			}else{
+				user.set("password", DigestUtils.md5Hex(Const.DEFAULT_PWD));
 				user.set("register_time", DateUtils.getCurrDate());
 				user.save();
-			}else{
-				result.setMsg(0, "此邮箱已注册");
 			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setMsg(0, "注册失败："+e.getMessage());
+		}
+		this.renderJson(result.toJson());
+	}
+	
+	public void findById(){
+		AjaxResult result = new AjaxResult(1, "");
+		String userId = this.getPara("user_id", "");
+		User user = User.dao.findById(userId);
+		result.setData("data", user);
+		this.renderJson(result.toJson());
+	}
+	
+	public void delById() throws Exception{
+		AjaxResult result = new AjaxResult(1, "");
+		String ids = this.getPara("ids", "");
+		try {
+			int count = User.dao.deleteByIds(ids);
+			System.out.println(count);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			result.setFailure("删除失败:"+e.getMessage());
+		}
+		this.renderJson(result.toJson());
+	}
+	
+	/**用户注册**/
+	//@ClearInterceptor(ClearLayer.ALL)	// 跳过鉴权
+	@Before(UserValidator.class)
+	public void register() throws Exception{
+		AjaxResult result = new AjaxResult(1,"注册成功");
+		try {
+			User user = this.getModel(User.class).setAttrs(this.getParamMap());
+			user.set("password", DigestUtils.md5Hex(user.getStr("password")));
+			user.set("register_time", DateUtils.getCurrDate());
+			user.save();
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setMsg(0, "注册失败："+e.getMessage());
@@ -50,17 +91,7 @@ public class UserController extends BaseController{
 		}
 	}
 	
-	public void findById(){
-		AjaxResult result = new AjaxResult(1, "");
-		//User user = User.dao.findById(id);
-	}
-	
-	public void delById() throws Exception{
-
-	}
-	
 	/*** 更新用户基本信息 , 修改密码 ***/
-	// 更新用户信息
 	public void updateUser(){
 		AjaxResult result = new AjaxResult(1, "修改成功");
 		try {
@@ -74,7 +105,6 @@ public class UserController extends BaseController{
 		}
 		this.renderJson(result.toJson());
 	}
-	// 修改密码
 	public void updatePassword(){
 		AjaxResult result = new AjaxResult(1, "修改成功");
 		try {

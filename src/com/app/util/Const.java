@@ -2,6 +2,7 @@ package com.app.util;
 
 public class Const {
 	/**用户常量**/
+	public static String DEFAULT_PWD = "000000";			// 默认登录密码
 	public static String ONLINE_USER_LIST = "online_user_list"; // 在线用户列表
 	public static String CURRENT_USER = "current_user";			// 当前用户
 	public static String AUTH_TOKEN = "auth_token";				// 用户登录秘钥
