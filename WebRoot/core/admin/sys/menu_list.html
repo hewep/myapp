@@ -1,0 +1,47 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div id="jCrumbs" class="breadCrumb module" >
+		    <ul>
+		        <li>
+		            <a href="#"><i class="icon-home"></i></a>
+		        </li>
+		        <li>
+		            <a href="#">用户 管理</a>
+		        </li>
+		        <li>
+		            	用户列表 
+		        </li>
+		    </ul>
+		</div>					  
+		
+		<div class="w-box">
+			<div class="w-box-header">
+				用户列表
+				<div class="pull-right">
+					<a class="btn btn-mini btn-primary" href="/admin#/user_info" >
+                            <i class="icon-plus icon-white"></i> 新增
+                    </a>
+                    
+                    <a class="btn btn-mini btn-danger" href="javascript:;" ng-click="del();" >
+                            <i class="icon-remove icon-white"></i> 删除
+                    </a>
+				</div>
+			</div>
+				<table id="user_list" class="table table-striped table-bordered table-hover dTableR">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="optional">编号</th>
+							<th class="essential persist">昵称</th>
+							<th class="optional">性别</th>
+							<th class="optional">电话</th>
+							<th class="optional">QQ</th>
+							<th class="essential">生日</th>
+							<th></th>
+						</tr>
+					</thead>
+				</table>
+		</div>
+		
+	</div>
+</div>
