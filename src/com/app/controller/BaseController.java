@@ -45,6 +45,7 @@ public class BaseController extends Controller{
 		}
 	}
 	/**
+	 * 用 BaseModel 中的方法
 	 * Model 类型转化为 Record
 	 * @param model
 	 * @return Record

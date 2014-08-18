@@ -64,7 +64,7 @@ public class CategoryController extends BaseController{
 	private String getCateTree(List<Category> list){
 		Map<Integer, Record> map = new HashMap<Integer, Record>();
 		for (Category category : list) {
-			map.put(category.getInt("id"), this.getRecordFromModel(category));
+			map.put(category.getInt("id"), category.getRecord());
 		}
 		
 		List<Record> records = new ArrayList<Record>();

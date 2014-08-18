@@ -1,11 +1,13 @@
 package com.app.common;
 
 import com.app.controller.IndexController;
+import com.app.controller.admin.RoleController;
 import com.app.controller.admin.UserController;
 import com.app.controller.front.CategoryController;
 import com.app.controller.front.TopicController;
 import com.app.interceptor.AuthInterceptor;
 import com.app.interceptor.CountInterceptor;
+import com.app.model.admin.Role;
 import com.app.model.admin.User;
 import com.app.model.front.Category;
 import com.app.model.front.Comment;
@@ -40,6 +42,8 @@ public class AppConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
 		me.add("/user", UserController.class);
+		me.add("/role", RoleController.class);
+		
 		me.add("/topic", TopicController.class);
 		me.add("/category", CategoryController.class);
 		
@@ -73,6 +77,7 @@ public class AppConfig extends JFinalConfig {
 		me.add(new EhCachePlugin()); 	// 配置缓存
 		
 		arp.addMapping("user", User.class);
+		arp.addMapping("role", Role.class);
 		arp.addMapping("topic", Topic.class);
 		arp.addMapping("reply", Reply.class);
 		arp.addMapping("category", Category.class);

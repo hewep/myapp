@@ -10,7 +10,7 @@ define(['angular'], function(){
 			init : function(obj, option){	   // 初始化
 				var opt  = {
 						"pagingType":"full_numbers",
-						"lengthMenu":[5,10,15,20,50],
+						"lengthMenu":[1,5,10,15,20,50],
 						"processing": true,
 						"serverSide": true,
 						"dom" : "t<'row'<'span6'l i><'span6'p>>",
@@ -53,9 +53,15 @@ define(['angular'], function(){
 									$(this).addClass("select_row");
 									$(this).siblings().removeClass("select_row");
 								});
-							}).on('',function(){
 								
+								/*var id = obj.attr("id");
+								$("#"+id+"_paginate ul li").click(function(){
+									if($(this).hasClass("disabled") || $(this).hasClass("active")){
+										return false;
+									}
+								});*/
 							}).DataTable(opt);
+				
 				return table;
 				
 			},

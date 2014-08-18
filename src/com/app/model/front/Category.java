@@ -1,8 +1,8 @@
 package com.app.model.front;
 
-import com.jfinal.plugin.activerecord.Model;
+import com.app.model.BaseModel;
 
-public class Category extends Model<Category>{
+public class Category extends BaseModel<Category>{
 	
 	private static final long serialVersionUID = -2998814222448990585L;
 	public static final Category dao = new Category();
