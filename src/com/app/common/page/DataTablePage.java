@@ -7,10 +7,6 @@ import com.jfinal.plugin.activerecord.Page;
 
 public class DataTablePage {
 	private int draw;
-	private int pages;
-	private int start;
-	private int end;
-	private int length;
 	private int recordsTotal;
 	private int recordsFiltered;
 	private List<?> data;
@@ -18,55 +14,17 @@ public class DataTablePage {
 	public DataTablePage() {
 		super();
 	}
-	public DataTablePage(Page<?> page){
-		this.draw = page.getPageNumber();
-		this.pages = page.getTotalPage();
-		this.length = page.getPageSize();
+	public DataTablePage(Page<?> page, int draw){
+		this.draw = draw;
 		this.recordsTotal = page.getTotalRow();
 		this.recordsFiltered = page.getTotalRow();
 		this.setData(page.getList());
-		this.start = (this.draw-1)*this.length;
-		this.end = this.draw * this.length;
-	}
-	public DataTablePage(int page, int pages, int length, int recordsTotal,List<?> data) {
-		super();
-		this.draw = page;
-		this.pages = pages;
-		this.length = length;
-		this.recordsTotal = recordsTotal;
-		this.setData(data);
-		this.start = (this.draw-1)*this.length;
-		this.end = this.draw * this.length;
 	}
 	public int getDraw() {
 		return draw;
 	}
 	public void setDraw(int page) {
 		this.draw = page;
-	}
-	public int getPages() {
-		return pages;
-	}
-	public void setPages(int pages) {
-		this.pages = pages;
-	}
-	public int getStart() {
-		return start;
-	}
-	public void setStart(int start) {
-		this.start = start;
-	}
-	public int getEnd() {
-		return end;
-	}
-	public void setEnd(int end) {
-		this.end = end;
-	}
-	public int getLength() {
-		return length;
-	}
-	public void setLength(int length) {
-		this.length = length;
 	}
 	public int getRecordsTotal() {
 		return recordsTotal;

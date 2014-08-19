@@ -7,8 +7,17 @@ define(['angular'], function(){
 	/**datatables 相关操作**/
 	comm.factory('dataTable', function(){
 		var dataTable =  {
-			init : function(obj, option){	   // 初始化
+			init : function(params, option){	   // 初始化
+				
+				var obj = $("#"+params.id);  
 				var opt  = {
+						"ajax" : {
+							"url":params.url,
+							"data":function(d){
+								return {"draw":d.draw, "pageNumber":d.start/d.length+1,"pageSize":d.length};
+							}
+						},
+						"order":[],
 						"pagingType":"full_numbers",
 						"lengthMenu":[1,5,10,15,20,50],
 						"processing": true,
@@ -36,11 +45,19 @@ define(['angular'], function(){
 						        "sortAscending":  ": activate to sort column ascending",
 						        "sortDescending": ": activate to sort column descending"
 						    }
+						},
+						"createdRow" : function(row, data, dataIndex){
+						    $(row).attr(params.id, data.id);
 						}
+
 				};
 				$.extend(opt, option);
 				
+				if(params.check_box){  // 如果有复选框则添加复选框列
+					opt.columns.unshift({"title":"<input type=checkbox>", "defaultContent":"<input type=checkbox>", "className":"check_column"});
+				}
 				var table = obj.on('init.dt',function(){
+								
 								/**checkbox 事件**/
 								$(this).find("tr th.check_column :checkbox").on("click",function(){
 									obj.find("tr td.check_column :checkbox").attr("checked", this.checked);
@@ -54,12 +71,6 @@ define(['angular'], function(){
 									$(this).siblings().removeClass("select_row");
 								});
 								
-								/*var id = obj.attr("id");
-								$("#"+id+"_paginate ul li").click(function(){
-									if($(this).hasClass("disabled") || $(this).hasClass("active")){
-										return false;
-									}
-								});*/
 							}).DataTable(opt);
 				
 				return table;

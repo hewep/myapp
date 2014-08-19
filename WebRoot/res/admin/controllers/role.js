@@ -6,17 +6,9 @@ define( function(){
 		$scope.roles = {};
 		$scope.role = {};
 		
-		$scope.dtOptions = {
-			"ajax" : {
-				"url":"role/list",
-				"data":function(d){
-					return {"pageNumber":d.start/d.length+1,"pageSize":d.length};
-				}
-			},
+		var dtOptions = {
 			"columnDefs":[{"orderable":false, "targets":[0]}],
-			"order":[],
 			"columns":[
-			      {"title":"<input type=checkbox>", "defaultContent":"<input type=checkbox>", "className":"check_column"},
 			      {"data":"id"},
 			      {"data":"name"},
 			      {"data":"code"},
@@ -32,14 +24,14 @@ define( function(){
 			],
 			"createdRow" : function(row, data, dataIndex){
 			    $(row).attr("role_id", data.id);
-			    
 			    // 重新编译 
 			    $compile(row)($scope);
 			}
 			
 		};
 		
-		var table = dataTable.init($("#role_list"), $scope.dtOptions);
+		var params = {"check_box":true,"id":"role_list", url:"role/list"};
+		var table = dataTable.init(params, dtOptions);
 		
 		$scope.del = function(){
 			var values = dataTable.getCheckedValues($("#role_list"),"role_id");
@@ -66,7 +58,14 @@ define( function(){
 			$scope.role = {};
 		};
 		$scope.edit = function(roleId){
-			alert(roleId);
+			$http({ method:'post',
+				url:"role/findById",
+				params:{"role_id":roleId}
+			}).success(function(result){
+				$scope.role = result.data;
+			}).error(function(){
+				alert("网络连接失败");
+			});
 		};
 		
 		$scope.save = function(){

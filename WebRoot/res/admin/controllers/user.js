@@ -5,16 +5,8 @@ define( function(){
 		
 		$scope.users = {};
 		var option = {
-			"ajax" : {
-				"url":"user/list",
-				"data":function(d){
-					return {"pageNumber":d.draw,"pageSize":d.length};
-				}
-			},
 			"columnDefs":[{"orderable":false, "targets":[0,4,5,7]}],
-			"order":[],
 			"columns":[
-			      {"title":"<input type=checkbox>", "defaultContent":"<input type=checkbox>", "className":"check_column"},
 			      {"data":"id"},
 			      {"data":"user_name"},
 			      {"data":"gender"},
@@ -28,14 +20,12 @@ define( function(){
                        '<i class="icon-edit icon-white"></i> 编辑</a>';
 			       }
 			      }
-			],
-			"createdRow" : function(row, data, dataIndex){
-			    $(row).attr("user_id", data.id);
-			}
-			
+			]
 		};
 		
-		var table = dataTable.init($("#user_list"),option);
+		var params = {"check_box":true, "id":"user_list", url:"user/list"};
+		var table = dataTable.init(params,option);
+		
 		$scope.del = function(){
 			var values = dataTable.getCheckedValues($("#user_list"),"user_id");
 			if(values == ""){

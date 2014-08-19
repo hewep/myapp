@@ -18,14 +18,13 @@ public class UserController extends BaseController{
 	
 	/*** 后台操作函数 ****/
 	public void list() throws Exception{
-		AjaxResult result = new AjaxResult(1);
+		
+		int draw = this.getParaToInt("draw",0); 
 		int pageNumber = this.getParaToInt("pageNumber", 1);
 		int pageSize = this.getParaToInt("pageSize", 1);
 		Page<User> page = User.dao.paginate(pageNumber, pageSize, "select *", "from user");
 		
-		//result.setData("data", page.getList());
-		System.out.println(new DataTablePage(page).toJson());
-		this.renderJson(new DataTablePage(page).toJson());
+		this.renderJson(new DataTablePage(page,draw).toJson());
 		
 	}
 	

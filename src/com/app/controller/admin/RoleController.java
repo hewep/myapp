@@ -4,19 +4,19 @@ import com.app.common.page.DataTablePage;
 import com.app.controller.BaseController;
 import com.app.model.admin.Role;
 import com.app.util.AjaxResult;
-import com.app.validator.admin.UserValidator;
-import com.jfinal.aop.Before;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 
 public class RoleController extends BaseController{
 	
 	public void list() throws Exception{
-		int pageNumber = this.getParaToInt("pageNumber", 1);
+		
+		int draw = this.getParaToInt("draw",0); 
+		int pageNumber = this.getParaToInt("pageNumber", 0);
 		int pageSize = this.getParaToInt("pageSize", 1);
 		Page<Role> page = Role.dao.paginate(pageNumber, pageSize, "select *", "from role");
 		
-		this.renderJson(new DataTablePage(page).toJson());
+		this.renderJson(new DataTablePage(page,draw).toJson());
 		
 	}
 	
