@@ -438,9 +438,8 @@ a.act.disabled:hover,.act[disabled]:hover{color:#AAA;text-shadow:none}
       #kcfinder_iframe {height:500px;margin-bottom:30px;border:1px solid #adaba9}
 
 /* icon list */
-.icon_list_a,.icon_list_b,.icon_list_c,.icon_list_d {list-style: none;margin:0 0 30px}
-.icon_list_a li,.icon_list_b li,.icon_list_d li {padding:4px 0;width:30px;text-align:center;border:1px solid #dcdcdc;float:left;margin:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;-ms-border-radius: 4px;border-radius: 4px}
-.icon_list_c li {padding:4px 0;width:40px;text-align:center;border:1px solid #dcdcdc;float:left;margin:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;-ms-border-radius: 4px;border-radius: 4px}
+.icon_list {list-style: none;margin:0 0 30px}
+.icon_list li {padding:4px 0;width:30px;text-align:center;border:1px solid #dcdcdc;float:left;margin:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;-ms-border-radius: 4px;border-radius: 4px}
 
   /* aditional icons */
       .icon-adt_trash,.icon-adt_atach,.icon-adt_enter {background: url("../img/adt-icons.png") no-repeat 0 0;width:16px;height:16px}
