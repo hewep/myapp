@@ -2,21 +2,20 @@ package test;
 
 
 import java.io.File;
+import java.io.FileWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.junit.Test;
 
-import com.jfinal.config.JFinalConfig;
+import com.app.util.FileUtils;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -33,16 +32,42 @@ public class Client {
 	}
 	@Test
 	public void testPath(){
-		System.out.println(PathKit.getWebRootPath()+"\\sql\\myapp.sql");
+		File dest = new File("D:\\Workspaces\\MyEclipse Professional 2014\\sasp1\\.settings\\org.eclipse.core.resources.prefs");
+		List<File> files = FileUtils.getFiles("D:\\Workspaces\\MyEclipse Professional 2014\\sasp1\\reg", "java");
+		try {
+			FileWriter writer = new FileWriter(dest,true);
+			writer.append("\n");
+			for (File file : files) {
+				String path = file.getCanonicalPath();
+				path = path.substring(path.indexOf("reg")).replace("\\", "/");
+				path = "encoding//"+path+"=GBK";
+				
+				writer.append(path);
+				writer.append("\n");
+			}
+			writer.flush();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	@Test
 	public void testDate(){
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("hh", "kkkk");
-		Map<String, String> map1 = new HashMap<String, String>();
-		map1.putAll(map);
-		map1.put("hh", "22");
-		System.out.println(map.get("hh"));
+		try {
+			
+//			System.out.println(DateUtils.getDateTimeFormat(DateUtils.parseDate("HH:mm","10:11")));
+			Calendar cal = Calendar.getInstance();
+			//cal.add(Calendar.HOUR_OF_DAY, 0.5);
+			
+			//cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+			//System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
 		
 	}
 	@Test
