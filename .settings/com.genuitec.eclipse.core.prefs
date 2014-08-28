@@ -1,3 +1,3 @@
 eclipse.preferences.version=1
-validator.Checked=WebRoot/res/plugins/kindeditor/plugins/code/prettify.js,WebRoot/metronic,WebRoot/res/common,WebRoot/res/js/common/jquery-1.10.1.min.js,WebRoot/res/kindeditor/plugins
+validator.Checked=WebRoot/res/plugins/kindeditor/plugins/code/prettify.js,WebRoot/metronic,WebRoot/res/common,WebRoot/res/kindeditor/plugins,WebRoot/res/js/common/jquery-1.10.1.min.js,WebRoot/res/plugins/code-prettify/prettify.min.js
 validator.Unchecked=

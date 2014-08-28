@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Base64;
 
 import com.app.model.admin.User;
-
+/**
+ * 鉴权工具类
+ * @author hewep
+ */
 public class AuthUtils {
 	/**
 	 * 生成cookie令牌

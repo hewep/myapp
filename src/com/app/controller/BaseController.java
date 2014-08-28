@@ -14,7 +14,11 @@ import com.jfinal.plugin.activerecord.CPI;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-
+/**
+ * 控制器基类
+ * @author Administrator
+ *
+ */
 public class BaseController extends Controller{
 	
 	/******************  获取请求参数 *****************************/

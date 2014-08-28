@@ -13,6 +13,7 @@ define([
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
 			  $routeProvider.when('/', {templateUrl: 'core/admin/topic/category_list.html', controller: category.list})
 			  				.when('/component_icons', {templateUrl:'core/icons.html', controller: null})
+			  				.when('/component_font_icons', {templateUrl:'core/font_icons.html', controller: null})
 			  				.when('/user_list', {templateUrl:'core/admin/sys/user_list.html', controller: user.list})
 			  				.when('/user_info', {templateUrl:'core/admin/sys/user_info.html', controller: user.info})
 			  				.when('/role_list', {templateUrl:'core/admin/sys/role_list.html', controller: role.list})
