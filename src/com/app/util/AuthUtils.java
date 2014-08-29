@@ -42,6 +42,12 @@ public class AuthUtils {
 		return authToken;
 	}
 	
+	/**
+	 * 
+	 * @param authToken
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public static String[] getToken(String authToken) throws UnsupportedEncodingException{
 		byte[] tokenByte = Base64.decodeBase64(authToken);
 		String token = new String(tokenByte,"UTF-8");

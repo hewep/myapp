@@ -16,6 +16,21 @@ import com.jfinal.plugin.activerecord.Record;
 public class TopicController extends BaseController{
 	
 	
+	public void list(){
+		
+		AjaxResult result = new AjaxResult(1);
+		int pageNumber = this.getParaToInt(0,1);
+		int pageSize = this.getParaToInt("pageSize", 10);
+		Page<Topic> topics = Topic.dao.paginate(pageNumber, pageSize, "select *", "from topic");
+		
+		result.setData("page", topics);
+		this.renderJson(result.toJson());
+	}
+	
+	
+	/**
+	 * 更加类别ID 查询 帖子
+	 */
 	public void findByCateId(){
 		int pageNumber = this.getParaToInt(0,1);
 		int categoryId = this.getParaToInt("category_id");

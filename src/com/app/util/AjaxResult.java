@@ -7,11 +7,11 @@ import java.util.Map;
 import com.jfinal.kit.JsonKit;
 
 /**
- * 字段说明
+ * ajax 结果类<br>
  * 状态  status : 0-失败, 1-成功
  * 消息  msg
  * 数据  data 
- * @author Administrator
+ * @author hewep
  */
 public class AjaxResult {
 	private Map<String,Object> result = new LinkedHashMap<String,Object>();
@@ -60,6 +60,10 @@ public class AjaxResult {
 	public void setData(String name, String...arr ){
 		result.put(name, arr);
 	}
+	/**
+	 * 结果对象的 生成 json
+	 * @return String
+	 */
 	public String toJson(){
 		return JsonKit.mapToJson(result, 8);
 	}

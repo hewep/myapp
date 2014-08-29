@@ -1,0 +1,11 @@
+<div class="pagination pagination-right">
+	<ul>
+		<li ng-class="{disabled:page.pageNumber == 1}"><a href="javascript:;" url="{{page.url}}" param="1">首页</a></li>
+		<li ng-class="{disabled:page.pageNumber == 1}"><a href="javascript:;" url="{{page.url}}" param="{{page.pageNumber-1}}">上一页</a></li>
+		<li ng-repeat="item in page.items"  ng-class="{active:page.pageNumber == item}">
+			<a href="javascript:;" url="{{page.url}}" param="{{item}}">{{item}}</a>
+		</li>
+		<li ng-class="{disabled:page.pageNumber == page.totalPage}"><a href="javascript:;" url="{{page.url}}" param="{{page.pageNumber+1}}">下一页</a></li>
+		<li ng-class="{disabled:page.pageNumber == page.totalPage}"><a href="javascript:;" url="{{page.url}}" param="{{page.totalPage}}">末页</a></li>
+	</ul>
+</div>
