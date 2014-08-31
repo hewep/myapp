@@ -15,10 +15,11 @@ require.config({
 		/**datatables**/
 		datatables : '../plugins/datatables/js/jquery.dataTables',
 		datatables_bootstrap : '../plugins/datatables/dataTables.bootstrap',
-		
+		/**zTree*/
+		ztree_core : '../plugins/zTree/js/jquery.ztree.core-3.5',
+		ztree_excheck : '../plugins/zTree/js/jquery.ztree.excheck-3.5',
 		/**validate**/
 		validate : '../plugins/validation/jquery.validate',
-		
 		application:'js/application'
 		
 	},
@@ -34,6 +35,8 @@ require.config({
         'breadcrumb' : {deps:['jquery']},
         'datatables' : {deps:['jquery']},
         'datatables_bootstrap':{deps:['datatables']},
+        'ztree_core' : {deps:['jquery']},
+        'ztree_excheck' : {deps:['ztree_core']},
         'validate' : {deps:['jquery']}
     }
 });
@@ -42,7 +45,7 @@ require(['angular','angularRoute',
 		 'bootstrap','qtip','actual',
 		 'antiscroll','totop','breadcrumb',
 		 'datatables_bootstrap','validate',
-		 'cookie','application','app'
+		 'cookie','application','app','ztree_excheck','ztree_core'
 ],function(angular){
 	Application.init();
 	angular.bootstrap(document, ['adminApp']);

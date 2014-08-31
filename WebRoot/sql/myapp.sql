@@ -93,7 +93,10 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `icon` varchar(100) default NULL,
   `sort` int(11) default NULL,
   `level` int(11) default NULL,
-  `remark` varchar(50) default NULL
+  `remark` varchar(50) default NULL,
+  showflag integer comment '显示标志(1:显示,2:不显示)',
+  istreemenu integer comment '是否是菜单(1:菜单,2:操作按钮)',
+  primary key(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table myapp.menu: ~0 rows (approximately)
@@ -106,7 +109,8 @@ DROP TABLE IF EXISTS `menu_role`;
 CREATE TABLE IF NOT EXISTS `menu_role` (
   `id` int(10) default NULL,
   `menu_id` int(10) default NULL,
-  `role_id` int(10) default NULL
+  `role_id` int(10) default NULL,
+  primary key(menu_id,role_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table myapp.menu_role: ~0 rows (approximately)

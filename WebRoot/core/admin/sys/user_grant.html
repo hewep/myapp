@@ -1,0 +1,40 @@
+<div class="row-fluid">
+	<div id="jCrumbs" class="breadCrumb module" >
+	    <ul>
+	        <li>
+	            <a href="#"><i class="icon-home"></i></a>
+	        </li>
+	        <li>
+	            <a href="#">用户 管理</a>
+	        </li>
+	        <li>用户授权 </li>
+	    </ul>
+	</div>					  
+	
+	<div class="w-box">
+		<div class="w-box-header">
+			权限列表
+			<div class="pull-right">
+				<a class="btn btn-mini btn-gebo" href="/admin#/user_list" >
+                           	 返回列表
+                   </a>
+			</div>
+		</div>
+		
+		<div class="w-box-content" style="padding-top:10px;">
+			<form class="form-horizontal" ng-submit="executeGrant();" novalidate="novalidate">
+				<div class="w-box-content" style="padding-top:10px;">
+					<ul id="grandAuthority" class="ztree"></ul>	
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button class="btn btn-primary" type="submit">提 交</button>
+					</div>
+				</div>
+			</form>
+				
+		</div>
+	</div>
+		
+</div>
+

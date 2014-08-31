@@ -5,10 +5,11 @@ define([
         'controllers/topic/category',
         'controllers/sys/user',
         'controllers/sys/role',
+        'controllers/sys/menu',
         'controllers/topic/topic',
         'common/directives',
         'common/services'
-],function(angular, category, user, role, topic){
+],function(angular, category, user, role, menu, topic){
 	var app =  angular.module('adminApp', ['ngRoute','CommDirectives','CommServices']);
 	
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
@@ -18,9 +19,13 @@ define([
 			  				
 			  				.when('/user_list', {templateUrl:'core/admin/sys/user_list.html', controller: user.list})
 			  				.when('/user_info', {templateUrl:'core/admin/sys/user_info.html', controller: user.info})
+			  				.when('/user_grant', {templateUrl:'core/admin/sys/user_grant.html', controller: user.grant})
 			  				.when('/role_list', {templateUrl:'core/admin/sys/role_list.html', controller: role.list})
 			  				
 			  				.when('/topic_list', {templateUrl:'core/admin/topic/topic_list.html', controller: topic.list})
+			  				
+			  				.when('/menu_list', {templateUrl:'core/admin/sys/menu_list.html', controller: menu.list})
+			  				.when('/menu_info', {templateUrl:'core/admin/sys/menu_info.html', controller: menu.info})
 			  				.otherwise({redirectTo: '/'});
 			  				
 			  	// configure html5		

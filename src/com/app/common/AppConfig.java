@@ -1,14 +1,17 @@
 package com.app.common;
 
 import com.app.controller.IndexController;
+import com.app.controller.admin.MenuController;
 import com.app.controller.admin.RoleController;
 import com.app.controller.admin.UserController;
 import com.app.controller.front.CategoryController;
 import com.app.controller.front.TopicController;
-import com.app.interceptor.AuthInterceptor;
 import com.app.interceptor.CountInterceptor;
+import com.app.model.admin.Menu;
+import com.app.model.admin.MenuRole;
 import com.app.model.admin.Role;
 import com.app.model.admin.User;
+import com.app.model.admin.UserRole;
 import com.app.model.front.Category;
 import com.app.model.front.Comment;
 import com.app.model.front.Reply;
@@ -43,6 +46,7 @@ public class AppConfig extends JFinalConfig {
 		me.add("/", IndexController.class);
 		me.add("/user", UserController.class);
 		me.add("/role", RoleController.class);
+		me.add("/menu", MenuController.class);
 		
 		me.add("/topic", TopicController.class);
 		me.add("/category", CategoryController.class);
@@ -56,7 +60,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-		me.add(new AuthInterceptor());
+		//me.add(new AuthInterceptor());
 		me.add(new CountInterceptor());
 		me.add(new TxByRegex(".*(add|del|edit).*"));
 	}
@@ -78,10 +82,13 @@ public class AppConfig extends JFinalConfig {
 		
 		arp.addMapping("user", User.class);
 		arp.addMapping("role", Role.class);
+		arp.addMapping("menu", Menu.class);
 		arp.addMapping("topic", Topic.class);
 		arp.addMapping("reply", Reply.class);
 		arp.addMapping("category", Category.class);
 		arp.addMapping("comment", Comment.class);
+		arp.addMapping("menu_role", MenuRole.class);
+		arp.addMapping("user_role", UserRole.class);
 		
 		arp.setShowSql(true);
 		

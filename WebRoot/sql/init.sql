@@ -1,0 +1,1 @@
+insert into menu values(1100,1000,'测试菜单','测试管理','admin/menu','',1,1,'测试菜单数据',1,1);

@@ -1,0 +1,142 @@
+<div class="row-fluid">
+	<div id="jCrumbs" class="breadCrumb module" >
+	    <ul>
+	        <li>
+	            <a href="#"><i class="icon-home"></i></a>
+	        </li>
+	        <li>
+	            <a href="#">菜单 管理</a>
+	        </li>
+	        <li>菜单信息 </li>
+	    </ul>
+	</div>					  
+	
+	<div class="w-box">
+		<div class="w-box-header">
+			菜单列表
+			<div class="pull-right">
+				<a class="btn btn-mini btn-gebo" href="/admin#/menu_list" >
+                           	 返回列表
+                   </a>
+			</div>
+		</div>
+		
+		<div class="w-box-content" style="padding-top:10px;">
+			<form class="form-horizontal" ng-submit="addOrUpdate();" novalidate="novalidate">
+				<input type="hidden" ng-model="menu.id">
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label"> 菜单编号: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.id">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 父菜单编号: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.parent_id">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 菜单名称: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.name" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 显示名称: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.title" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 图标名称: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.icon">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 排          序: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.sort" >
+							</div>
+						</div>
+					</div>
+					
+					<div class="span6">
+						
+						<div class="control-group">
+							<label class="control-label"> 级          别: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.level" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 备          注: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.remark" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 是否显示: <span class="required">*</span>
+							</label>
+							<div class="controls">
+<!-- 								<input type="text" class="span6 m-wrap" required -->
+<!-- 									ng-model="menu.showflag"> -->
+								<select class="span6 m-wrap" 
+									ng-model="menu.showflag">
+									<option value="1" selected="selected">是</option>
+									<option value="2">否</option>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 是否是菜单: <span class="required">*</span>
+							</label>
+							<div class="controls">
+									<select class="span6 m-wrap" 
+									ng-model="menu.istreemenu">
+									<option value="1" selected="selected">是</option>
+									<option value="2">否</option>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"> 菜单路径: <span class="required">*</span>
+							</label>
+							<div class="controls">
+								<input type="text" class="span6 m-wrap" required
+									ng-model="menu.url" >
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button class="btn btn-primary" type="submit">提 交</button>
+					</div>
+				</div>
+			</form>
+				
+		</div>
+	</div>
+		
+</div>
+

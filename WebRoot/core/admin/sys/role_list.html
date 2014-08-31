@@ -98,3 +98,23 @@
 		<button type="button" data-dismiss="modal" class="btn">取消</button>
 	</div>
 </div>
+<!-- 授权模块    start -->
+<div id="grant_modal" class="modal hide fade" tabindex="-1"
+	data-width="760">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true"></button>
+		<h3>角色授权</h3>
+	</div>
+
+	<div class="modal-body">
+		<div class="w-box-content" style="padding-top:10px;">
+			<ul id="grandAuthority" class="ztree"></ul>	
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" ng-click="executeGrant();">授权</button>
+		<button type="button" data-dismiss="modal" class="btn">取消</button>
+	</div>
+</div>
+<!-- 授权模块   end -->
