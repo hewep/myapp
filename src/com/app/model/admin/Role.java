@@ -9,6 +9,6 @@ public class Role extends BaseModel<Role>{
 	public static final Role dao = new Role();
 	
 	public int deleteByIds(String ids){
-		return Db.update("delete from user where id in ("+ids+")");
+		return Db.update("delete from role where id in ("+ids+")");
 	}
 }

@@ -60,8 +60,15 @@ public class MenuController extends BaseController{
 		
 		try {
 			
-			Menu menu = this.getModel(Menu.class).setAttrs(this.getParamMap());
-			menu.save();
+			//Menu menu = this.getModel(Menu.class).setAttrs(this.getParamMap());
+			Menu menu = Menu.dao.findById(this.getPara("id"));
+			
+			if(menu != null){
+				menu.setAttrs(this.getParamMap()).update();
+			}else{
+				menu = this.getModel(Menu.class).setAttrs(this.getParamMap());
+				menu.save();
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

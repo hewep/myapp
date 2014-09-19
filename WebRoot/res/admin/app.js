@@ -7,9 +7,10 @@ define([
         'controllers/sys/role',
         'controllers/sys/menu',
         'controllers/topic/topic',
+        'controllers/template/template',
         'common/directives',
         'common/services'
-],function(angular, category, user, role, menu, topic){
+],function(angular, category, user, role, menu, topic, template){
 	var app =  angular.module('adminApp', ['ngRoute','CommDirectives','CommServices']);
 	
 		app.config(['$routeProvider','$locationProvider',  function($routeProvider, $locationProvider) {
@@ -24,6 +25,9 @@ define([
 			  				
 			  				.when('/menu_list', {templateUrl:'core/admin/sys/menu_list.html', controller: menu.list})
 			  				.when('/menu_info', {templateUrl:'core/admin/sys/menu_info.html', controller: menu.info})
+			  				
+			  				.when('/template_list', {templateUrl:'core/admin/template/template_list.html', controller: template.list})
+			  				.when('/template_info', {templateUrl:'core/admin/template/template_info.html', controller: template.info})
 			  				
 			  				.when('/category_list', {templateUrl: 'core/admin/topic/category_list.html', controller: category.list})
 			  				.when('/topic_list', {templateUrl:'core/admin/topic/topic_list.html', controller: topic.list})

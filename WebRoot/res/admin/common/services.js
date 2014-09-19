@@ -47,7 +47,7 @@ define(['angular'], function(){
 						    }
 						},
 						"createdRow" : function(row, data, dataIndex){
-						    $(row).attr(params.id, data.id);
+						    $(row).attr(params.id.substring(0,params.id.lastIndexOf("_"))+"_id", data.id);
 						}
 
 				};
@@ -96,5 +96,4 @@ define(['angular'], function(){
 		return dataTable;
 	});
 	
-		
 });

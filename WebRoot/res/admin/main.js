@@ -12,6 +12,7 @@ require.config({
 		antiscroll:'../plugins/antiscroll/antiscroll',
 		totop:'../plugins/UItoTop/jquery.ui.totop.min',
 		breadcrumb: '../plugins/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min',
+		prettify : '../plugins/code-prettify/prettify.min',
 		/**datatables**/
 		datatables : '../plugins/datatables/js/jquery.dataTables',
 		datatables_bootstrap : '../plugins/datatables/dataTables.bootstrap',

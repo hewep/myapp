@@ -6,6 +6,7 @@ import com.app.controller.admin.RoleController;
 import com.app.controller.admin.UserController;
 import com.app.controller.front.CategoryController;
 import com.app.controller.front.TopicController;
+import com.app.controller.template.TemplateController;
 import com.app.interceptor.CountInterceptor;
 import com.app.model.admin.Menu;
 import com.app.model.admin.MenuRole;
@@ -16,6 +17,7 @@ import com.app.model.front.Category;
 import com.app.model.front.Comment;
 import com.app.model.front.Reply;
 import com.app.model.front.Topic;
+import com.app.model.template.Template;
 import com.app.plugin.update.UpdateDbPlugin;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -47,7 +49,7 @@ public class AppConfig extends JFinalConfig {
 		me.add("/user", UserController.class);
 		me.add("/role", RoleController.class);
 		me.add("/menu", MenuController.class);
-		
+		me.add("/template", TemplateController.class);
 		me.add("/topic", TopicController.class);
 		me.add("/category", CategoryController.class);
 		
@@ -89,6 +91,7 @@ public class AppConfig extends JFinalConfig {
 		arp.addMapping("comment", Comment.class);
 		arp.addMapping("menu_role", MenuRole.class);
 		arp.addMapping("user_role", UserRole.class);
+		arp.addMapping("template", Template.class);
 		
 		arp.setShowSql(true);
 		

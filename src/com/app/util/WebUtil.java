@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * WEB工具类
- * @author 董华健 2012-9-3 下午7:39:43
  */
 public class WebUtil {
-
-	@SuppressWarnings("unused")
 
 	/**
 	 * 获取客户端IP地址

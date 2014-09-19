@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.app.common.page.DataTablePage;
 import com.app.model.admin.User;
+import com.app.render.TemplateFileRender;
 import com.app.util.Const;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.CPI;
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 /**
  * 控制器基类
@@ -21,6 +20,10 @@ import com.jfinal.plugin.activerecord.Record;
  */
 public class BaseController extends Controller{
 	
+	/*** render 模板文件 ****/
+	public void renderTemplateFile(String fileName, String fileContent){
+		this.render(new TemplateFileRender(fileName, fileContent));
+	}
 	/******************  获取请求参数 *****************************/
 	public Map<String, Object> getParamMap(){
 		Map<String, Object> record = new HashMap<String, Object>();
