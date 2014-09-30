@@ -18,7 +18,7 @@
 			<div class="w-box-header">
 				模板配置
 				<div class="pull-right">
-					<a class="btn btn-mini" href="javascript:;" >
+					<a class="btn btn-mini" href="javascript:;" ng-click="batchGenerate();">
                             <i class="icon-hand-right"></i> 生成
                     </a>
 				</div>
@@ -27,16 +27,16 @@
 				
 				<div class="row-fluid">
 					<div class="span4">
-						<label>对应表名</label>
-						<input type="text">
+						<label>模块名称</label>
+						<input type="text" ng-model="param.modelName">
 					</div>
 					<div class="span4">
 						<label>包名</label>
-						<input type="text" class="span10">
+						<input type="text" class="span10" ng-model="param.parentDir">
 					</div>
 					<div class="span4">
 						<label>菜单名称</label>
-						<input type="text" class="span10">
+						<input type="text" class="span10" ng-model="param.menuName">
 					</div>
 				</div>
 			</div>

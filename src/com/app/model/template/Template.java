@@ -1,5 +1,7 @@
 package com.app.model.template;
 
+import java.util.List;
+
 import com.app.model.BaseModel;
 import com.jfinal.plugin.activerecord.Db;
 
@@ -11,5 +13,10 @@ public class Template extends BaseModel<Template>{
 	
 	public int deleteByIds(String ids){
 		return Db.update("delete from template where id in ("+ids+")");
+	}
+	
+	public List<Template> findByIds(String ids){
+		List<Template> templates = dao.find("select * from template where id in ("+ids+")");
+		return templates;
 	}
 }

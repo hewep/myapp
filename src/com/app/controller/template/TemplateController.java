@@ -1,5 +1,7 @@
 package com.app.controller.template;
 
+import java.util.List;
+
 import com.app.common.page.DataTablePage;
 import com.app.controller.BaseController;
 import com.app.model.template.Template;
@@ -61,17 +63,22 @@ public class TemplateController extends BaseController{
 		String templateId = this.getPara("id", "");
 		Template template = Template.dao.clear().findById(templateId);
 		
-		String fileName = "auto_generate.txt";
 		try {
 			if(template !=null){
-				String content = template.get("content","");
-				
-				this.setAttr("template", "hhhh");
-				this.renderTemplateFile(fileName, content);
+				this.setAttr("parentDir", "hewep");
+				this.setAttr("modelName", "TestModel");
+				this.renderTemplateFile(template);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void batchGenerate() {
+		String ids = this.getPara("ids","");
+		List<Template> templates = Template.dao.findByIds(ids);
+		this.setAttrs(this.getParamMap());
+		this.renderTemplateZip(templates, "temp.zip");
 	}
 }

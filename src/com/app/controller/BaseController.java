@@ -2,11 +2,14 @@ package com.app.controller;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.app.jfinal.render.TemplateFileRender;
+import com.app.jfinal.render.TemplateZipRender;
 import com.app.model.admin.User;
-import com.app.render.TemplateFileRender;
+import com.app.model.template.Template;
 import com.app.util.Const;
 import com.google.gson.Gson;
 import com.jfinal.core.Controller;
@@ -21,8 +24,11 @@ import com.jfinal.plugin.activerecord.Record;
 public class BaseController extends Controller{
 	
 	/*** render 模板文件 ****/
-	public void renderTemplateFile(String fileName, String fileContent){
-		this.render(new TemplateFileRender(fileName, fileContent));
+	public void renderTemplateFile(Template template){
+		this.render(new TemplateFileRender(template));
+	}
+	public void renderTemplateZip(List<Template> templates, String fileName){
+		this.render(new TemplateZipRender(templates, fileName));
 	}
 	/******************  获取请求参数 *****************************/
 	public Map<String, Object> getParamMap(){

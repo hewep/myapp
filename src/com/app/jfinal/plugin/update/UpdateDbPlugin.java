@@ -1,4 +1,4 @@
-package com.app.plugin.update;
+package com.app.jfinal.plugin.update;
 
 import java.io.File;
 import java.io.FileOutputStream;

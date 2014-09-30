@@ -1,7 +1,7 @@
 'use strict';
 /* Controllers */
 define( function(){
-	var TemplateListCtrl = ['$scope', '$http','dataTable', function($scope, $http, dataTable){
+	var TemplateListCtrl = ['$scope', '$http','dataTable','$location', function($scope, $http, dataTable, $location){
 		
 		$scope.templates = {};
 		var option = {
@@ -44,6 +44,12 @@ define( function(){
 				alert("网络连接失败");
 			});
 		};
+		
+		$scope.param = {};
+		$scope.batchGenerate = function(){
+			var values = dataTable.getCheckedValues($("#template_list"),"template_id");
+			window.location.href = "template/batchGenerate?ids="+values+"&"+$.param($scope.param);
+		}
 	}];
 	
 	var TemplateInfoCtrl = ['$scope', '$http','$routeParams','$location', function($scope, $http, $routeParams, $location){
