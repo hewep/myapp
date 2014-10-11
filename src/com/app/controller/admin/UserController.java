@@ -8,7 +8,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import com.app.common.bean.ZtreeBean;
 import com.app.common.page.DataTablePage;
 import com.app.controller.BaseController;
-import com.app.model.admin.Menu;
 import com.app.model.admin.MenuRole;
 import com.app.model.admin.Role;
 import com.app.model.admin.User;
@@ -19,9 +18,12 @@ import com.app.util.Const;
 import com.app.util.DateUtils;
 import com.app.validator.admin.UserValidator;
 import com.jfinal.aop.Before;
+import com.jfinal.kit.FileKit;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.upload.UploadFile;
 
 public class UserController extends BaseController{
 	
@@ -137,6 +139,24 @@ public class UserController extends BaseController{
 		} finally{
 			this.renderJson(result.toJson());
 		}
+	}
+	
+	public void uploadImage(){
+		AjaxResult result = new AjaxResult(1, "上传成功");
+		String basePath = PathKit.getWebRootPath();
+		try {
+			UploadFile uploadFile = this.getFile("head_pic", basePath+"/upload/img");
+			String contentType = uploadFile.getContentType();
+			if(!contentType.startsWith("image")){
+				FileKit.delete(uploadFile.getFile());
+				result.setFailure("上传文件必须为图片类型");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			result.setFailure("上传失败");
+		}
+		this.renderJson(result.toJson());
 	}
 	
 	/*** 邮箱 和用户名唯一验证 ***/

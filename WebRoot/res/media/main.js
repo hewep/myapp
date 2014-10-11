@@ -18,6 +18,9 @@ require.config({
 		
 		datepicker:'../plugins/datepicker/bootstrap-datepicker',
 		
+		ajaxfileupload:'../plugins/file-upload/ajaxfileupload',
+		fileupload:'../plugins/file-upload/bootstrap-fileupload',
+		
 		application : 'js/application'
 	},
 	shim: {

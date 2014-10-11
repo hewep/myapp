@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="res/plugins/datepicker/datepicker.css">
+<link rel="stylesheet" type="text/css" href="res/media/css/bootstrap-fileupload.css">
 <style>
 div.radio {
 	margin-right: 3px;
@@ -24,6 +25,7 @@ div.radio, div.radio span, div.radio input {
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#basic_info">基本资料</a></li>
 		<li class=""><a data-toggle="tab" href="#password">密码修改</a></li>
+		<li class=""><a data-toggle="tab" href="#image">修改头像</a></li>
 	</ul>
 	<div class="tab-content">
 		<div id="basic_info" class="tab-pane active">
@@ -135,6 +137,37 @@ div.radio, div.radio span, div.radio input {
 				</div>
 			</form>
 		</div>
+		
+		<div id="image" class="tab-pane">
+			<div class="control-group">
+
+				<label class="control-label">Advanced</label>
+				<div class="controls">
+					<div class="fileupload fileupload-new" data-provides="fileupload">
+						<input type="hidden" >
+						<div class="input-append">
+							<div class="uneditable-input">
+								<i class="icon-file fileupload-exists"></i> <span
+									class="fileupload-preview"></span>
+							</div>
+							<span class="btn btn-file"> 
+								<span class="fileupload-new">选择图片</span>
+								<span class="fileupload-exists">更换</span>
+								<input type="file" class="default" name="head_pic" id="head_pic">
+							</span> 
+							<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
+							
+						</div>
+					</div>
+				</div>
+				<button class="btn green" type="button" ng-click="uploadImage();">上传 &nbsp; </button>
+			</div>
+		</div>
 	</div>
 </div>
-
+<script>
+	require([ 'fileupload','ajaxfileupload' ], function() {
+		
+		
+	});
+</script>

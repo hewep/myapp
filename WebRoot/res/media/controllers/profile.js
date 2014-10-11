@@ -51,6 +51,26 @@ define( function(){
 			});
 		};
 		
+		//修改用户头像
+		$scope.uploadImage = function(){
+			var filePath = $("#head_pic").val();
+			if(!filePath){
+				alert("请选择要上传的图片");return;
+			}
+			$.ajaxFileUpload({
+				url: "user/uploadImage",
+				fileElementId : "head_pic",
+				secureuri: false,
+				dataType: 'json',
+                success: function (data, status) {
+                	alert(data.msg);
+                },
+                error: function (data, status, e){
+                	alert("网络连接失败:"+e);
+                }
+			});
+		};
+		
 		//初始化
 		init();
 		

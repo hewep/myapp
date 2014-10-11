@@ -7,6 +7,7 @@ import com.app.controller.admin.UserController;
 import com.app.controller.front.CategoryController;
 import com.app.controller.front.TopicController;
 import com.app.controller.template.TemplateController;
+import com.app.interceptor.AuthInterceptor;
 import com.app.interceptor.CountInterceptor;
 import com.app.jfinal.plugin.update.UpdateDbPlugin;
 import com.app.model.admin.Menu;
@@ -62,7 +63,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-		//me.add(new AuthInterceptor());
+		me.add(new AuthInterceptor());
 		me.add(new CountInterceptor());
 		me.add(new TxByRegex(".*(add|del|edit).*"));
 	}
