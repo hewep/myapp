@@ -2,9 +2,9 @@
 /* Controllers */
 define( function(){
 	/** 用户信息 **/
-	var UserInfoCtrl = ['$rootScope','$scope', '$http', function($rootScope, $scope, $http){
+	var UserInfoCtrl = ['checkUser','$scope', '$http', function(checkUser, $scope, $http){
 		
-		$scope.user = angular.copy($rootScope.currentUser);
+		$scope.user = angular.copy(checkUser.getUser());
 		
 		// 保存用户 基本信息
 		$scope.saveBasicInfo = function(){
@@ -17,7 +17,7 @@ define( function(){
 				params:$scope.user
 			}).success(function(result){
 				if(result.status == 1){
-					angular.copy($scope.user, $rootScope.currentUser);
+					checkUser.update($scope.user);
 					$("li a[href='#password']").tab('show');
 				}else{
 					alert(result.msg);
@@ -64,6 +64,8 @@ define( function(){
 				dataType: 'json',
                 success: function (data, status) {
                 	alert(data.msg);
+                	alert(data.user);
+                	checkUser.update(angular.fromJson(data.user))
                 },
                 error: function (data, status, e){
                 	alert("网络连接失败:"+e);
@@ -71,8 +73,55 @@ define( function(){
 			});
 		};
 		
-		//初始化
-		init();
+		require([ 'fileupload','ajaxfileupload','jcrop' ], function() {
+			//初始化
+			init();
+			
+		    var jcrop_api,
+		        boundx,
+		        boundy,
+
+		        // Grab some information about the preview pane
+		        $preview = $('#preview-pane'),
+		        $pcnt = $('#preview-pane .preview-container'),
+		        $pimg = $('#preview-pane .preview-container img'),
+
+		        xsize = $pcnt.width(),
+		        ysize = $pcnt.height();
+		    
+		    $('#photo').Jcrop({
+		      onChange: updatePreview,
+		      onSelect: updatePreview,
+		      aspectRatio: xsize / ysize
+		    },function(){
+		      // Use the API to get the real image size
+		      var bounds = this.getBounds();
+		      boundx = bounds[0];
+		      boundy = bounds[1];
+		      // Store the API in the jcrop_api variable
+		      jcrop_api = this;
+		      
+		      jcrop_api.animateTo([0,0,100,100]);
+		      // Move the preview into the jcrop container for css positioning
+		      $preview.appendTo(jcrop_api.ui.holder);
+		    });
+		    
+		    
+		    function updatePreview(c){
+			      if (parseInt(c.w) > 0){
+			        var rx = xsize / c.w;
+			        var ry = ysize / c.h;
+
+			        $(".preview-container img").css({
+			          width: Math.round(rx * boundx) + 'px',
+			          height: Math.round(ry * boundy) + 'px',
+			          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+			          marginTop: '-' + Math.round(ry * c.y) + 'px'
+			        });
+			      }
+			    };
+		});
+		
 		
 		function init(){
 			$("#province").val($scope.user.province);
@@ -80,7 +129,10 @@ define( function(){
 			$("#district").val($scope.user.district);
 		}
 		
+
 	}];
 	
 	return {userInfo: UserInfoCtrl};
 });
+
+

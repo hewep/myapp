@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="res/plugins/datepicker/datepicker.css">
 <link rel="stylesheet" type="text/css" href="res/media/css/bootstrap-fileupload.css">
+<link rel="stylesheet" type="text/css" href="res/plugins/jcrop/jquery.Jcrop.min.css">
 <style>
 div.radio {
 	margin-right: 3px;
@@ -14,6 +15,29 @@ div.radio, div.radio span, div.radio input {
 }
 .radio input[type="radio"]{
 	margin-left:0px;
+}
+
+.jcrop-holder{
+	margin:10px;
+}
+
+.jcrop-holder #preview-pane {
+  display: block;
+  position: absolute;
+  z-index: 2000;
+  top: 10px;
+  right: -280px;
+  padding: 6px;
+  border: 1px rgba(0,0,0,.4) solid;
+  background-color: white;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+  -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
 }
 </style>
 <ul class="breadcrumb">
@@ -160,14 +184,19 @@ div.radio, div.radio span, div.radio input {
 						</div>
 					</div>
 				</div>
+				
 				<button class="btn green" type="button" ng-click="uploadImage();">上传 &nbsp; </button>
+			</div>
+			
+			<div class="control-group" style="text-align:left;">
+				<img ng-src="{{currentUser.pic_url}}" id="photo" alt="[Jcrop Example]" />
+
+				  <div id="preview-pane" >
+				    <div class="preview-container" style="width:100px; height:100px;overflow:hidden">
+				      <img ng-src="{{currentUser.pic_url}}" class="jcrop-preview" alt="Preview" />
+				    </div>
+				  </div>
 			</div>
 		</div>
 	</div>
 </div>
-<script>
-	require([ 'fileupload','ajaxfileupload' ], function() {
-		
-		
-	});
-</script>

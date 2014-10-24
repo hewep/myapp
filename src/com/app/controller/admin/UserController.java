@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import ch.qos.logback.classic.Logger;
+
 import com.app.common.bean.ZtreeBean;
 import com.app.common.page.DataTablePage;
 import com.app.controller.BaseController;
@@ -143,17 +145,25 @@ public class UserController extends BaseController{
 	
 	public void uploadImage(){
 		AjaxResult result = new AjaxResult(1, "上传成功");
-		String basePath = PathKit.getWebRootPath();
+		String headPicPath = PathKit.getWebRootPath()+Const.HEAD_PIC_PATH;
+		
 		try {
-			UploadFile uploadFile = this.getFile("head_pic", basePath+"/upload/img");
+			UploadFile uploadFile = this.getFile("head_pic", headPicPath);
 			String contentType = uploadFile.getContentType();
 			if(!contentType.startsWith("image")){
 				FileKit.delete(uploadFile.getFile());
 				result.setFailure("上传文件必须为图片类型");
 			}
+			
+			String picUrl = Const.HEAD_PIC_PATH +"/"+uploadFile.getFileName();
+			User user = this.getCurrUser().set("pic_url", picUrl);
+			user.update();
+			this.getSession().setAttribute(Const.CURRENT_USER, user);
+			this.setCookie(Const.AUTH_TOKEN, AuthUtils.getCookieAuthToken(this.getRequest(), user), Const.COOKIE_AGE);
+			result.setData("user", user.toJson());
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			logger.error(this.getClass().getName(), e);
 			result.setFailure("上传失败");
 		}
 		this.renderJson(result.toJson());

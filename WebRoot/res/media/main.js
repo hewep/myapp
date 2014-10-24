@@ -20,6 +20,7 @@ require.config({
 		
 		ajaxfileupload:'../plugins/file-upload/ajaxfileupload',
 		fileupload:'../plugins/file-upload/bootstrap-fileupload',
+		jcrop:'../plugins/jcrop/jquery.Jcrop.min',
 		
 		application : 'js/application'
 	},

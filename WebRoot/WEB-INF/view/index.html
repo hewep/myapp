@@ -152,6 +152,12 @@ require([
 			},
 			isLogin: function(){
 				return $rootScope.isLogin;
+			},
+			update: function(user){
+				angular.copy(user, $rootScope.currentUser);;
+			},
+			getUser: function(){
+				return $rootScope.currentUser;
 			}
 		};
 		

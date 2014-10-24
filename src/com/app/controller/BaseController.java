@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.app.jfinal.render.TemplateFileRender;
 import com.app.jfinal.render.TemplateZipRender;
 import com.app.model.admin.User;
@@ -22,6 +25,8 @@ import com.jfinal.plugin.activerecord.Record;
  *
  */
 public class BaseController extends Controller{
+	
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/*** render 模板文件 ****/
 	public void renderTemplateFile(Template template){
