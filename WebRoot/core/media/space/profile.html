@@ -20,7 +20,6 @@ div.radio, div.radio span, div.radio input {
 .jcrop-holder{
 	margin:10px;
 }
-
 .jcrop-holder #preview-pane {
   display: block;
   position: absolute;
@@ -187,15 +186,19 @@ div.radio, div.radio span, div.radio input {
 				
 				<button class="btn green" type="button" ng-click="uploadImage();">上传 &nbsp; </button>
 			</div>
-			
-			<div class="control-group" style="text-align:left;">
-				<img ng-src="{{currentUser.pic_url}}" id="photo" alt="[Jcrop Example]" />
 
-				  <div id="preview-pane" >
-				    <div class="preview-container" style="width:100px; height:100px;overflow:hidden">
-				      <img ng-src="{{currentUser.pic_url}}" class="jcrop-preview" alt="Preview" />
-				    </div>
-				  </div>
+			<div class="control-group" style="text-align:left;">
+				<img ng-src="{{currentUser.pic_url}}" id="photo"
+					alt="[Jcrop Example]" style="height:380px;" />
+
+				<div id="preview-pane">
+					<div class="preview-container"
+						style="width:100px; height:100px;overflow:hidden">
+						<img ng-src="{{currentUser.pic_url}}" class="jcrop-preview"
+							alt="Preview" />
+					</div>
+				</div>
+				<button class="btn green" type="button" ng-click="saveImage();">保存 &nbsp; </button>
 			</div>
 		</div>
 	</div>

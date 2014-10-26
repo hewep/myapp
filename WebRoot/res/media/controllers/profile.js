@@ -51,7 +51,7 @@ define( function(){
 			});
 		};
 		
-		//修改用户头像
+		//上传用户头像
 		$scope.uploadImage = function(){
 			var filePath = $("#head_pic").val();
 			if(!filePath){
@@ -64,7 +64,6 @@ define( function(){
 				dataType: 'json',
                 success: function (data, status) {
                 	alert(data.msg);
-                	alert(data.user);
                 	checkUser.update(angular.fromJson(data.user))
                 },
                 error: function (data, status, e){
@@ -72,6 +71,21 @@ define( function(){
                 }
 			});
 		};
+		// 修改用户头像
+		
+		$scope.saveImage = function(){
+			
+			$http({	method:'post',
+				url:"user/saveImage",
+				params:$scope.size
+			}).success(function(result){
+				alert(result.msg);
+			}).error(function(){
+				alert("网络连接失败");
+			});
+		};
+		
+		$scope.size = {}; // 格式:{"x":0,"y":0,"x2":80,"y2":80,"w":80,"h":80} 
 		
 		require([ 'fileupload','ajaxfileupload','jcrop' ], function() {
 			//初始化
@@ -90,36 +104,39 @@ define( function(){
 		        ysize = $pcnt.height();
 		    
 		    $('#photo').Jcrop({
-		      onChange: updatePreview,
-		      onSelect: updatePreview,
-		      aspectRatio: xsize / ysize
+		        onChange: updatePreview,
+		        onSelect: updatePreview,
+		        aspectRatio: xsize / ysize
 		    },function(){
-		      // Use the API to get the real image size
-		      var bounds = this.getBounds();
-		      boundx = bounds[0];
-		      boundy = bounds[1];
-		      // Store the API in the jcrop_api variable
-		      jcrop_api = this;
+		        // Use the API to get the real image size
+		        var bounds = this.getBounds();
+		        
+		        $scope.size.boundx = boundx = bounds[0];
+		        $scope.size.boundy = boundy = bounds[1];
+		        console.log($scope.size)
+		        jcrop_api = this;
+		        jcrop_api.animateTo([0,0,100,100]);
 		      
-		      jcrop_api.animateTo([0,0,100,100]);
-		      // Move the preview into the jcrop container for css positioning
-		      $preview.appendTo(jcrop_api.ui.holder);
+		        $preview.appendTo(jcrop_api.ui.holder);
 		    });
 		    
 		    
 		    function updatePreview(c){
-			      if (parseInt(c.w) > 0){
-			        var rx = xsize / c.w;
-			        var ry = ysize / c.h;
-
-			        $(".preview-container img").css({
-			          width: Math.round(rx * boundx) + 'px',
-			          height: Math.round(ry * boundy) + 'px',
-			          marginLeft: '-' + Math.round(rx * c.x) + 'px',
-			          marginTop: '-' + Math.round(ry * c.y) + 'px'
-			        });
-			      }
-			    };
+		      if (parseInt(c.w) > 0){
+		        var rx = xsize / c.w;
+		        var ry = ysize / c.h;
+	
+		        $(".preview-container img").css({
+		          width: Math.round(rx * boundx) + 'px',
+		          height: Math.round(ry * boundy) + 'px',
+		          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+		          marginTop: '-' + Math.round(ry * c.y) + 'px'
+		        });
+		        
+		        $.extend($scope.size, c); //  预览大小
+		      }
+		    };
+			
 		});
 		
 		

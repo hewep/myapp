@@ -20,7 +20,12 @@ import org.slf4j.LoggerFactory;
 public class FileUtils {
 
 	private static Logger log = LoggerFactory.getLogger(FileUtils.class);
-
+	
+	
+	public static String getSuffix(File file){
+		String fileName = file.getName();
+		return fileName.substring(fileName.lastIndexOf("."));
+	}
 	/**
 	 * 遍历文件夹中文件(包含文件夹)
 	 * @param filePath

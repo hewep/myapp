@@ -1,7 +1,9 @@
 package com.app.model.admin;
 
+import com.app.util.DateUtils;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Record;
 
 public class User extends Model<User>{
 	
@@ -17,4 +19,5 @@ public class User extends Model<User>{
 	public int deleteByIds(String ids){
 		return Db.update("delete from user where id in ("+ids+")");
 	}
+	
 }
