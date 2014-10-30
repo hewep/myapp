@@ -301,13 +301,27 @@
       // Necessary when crop image is within a hidden element when page is loaded.
       if ($origimg[0].width != 0 && $origimg[0].height != 0) {
         // Obtain dimensions from contained img element.
-        //$origimg.width($origimg[0].width);
-        //$origimg.height($origimg[0].height);
+        var width = $origimg[0].width;
+        var height = $origimg[0].height;
         
-    	var width = $origimg[0].width;
-    	var height = $origimg[0].height;
-        $origimg.width(width*($origimg.height()/height));
-        $origimg.height($origimg.height());
+        // 先 按高度缩放, 再按宽度缩放
+        if(options.showType=="reference"){
+        	
+        	var r_height = parseInt($origimg.attr("h"));
+        	var r_width = parseInt($origimg.attr("w"));
+        	
+        	if(height > r_height){
+        		width = width*(r_height/height);
+        		height = r_height;
+        	}
+        	if(width > r_width){
+        		height = height*(r_width/width);
+        		width = r_width;
+        	}
+        }
+        $origimg.width(width);
+        $origimg.height(height);
+        
       } else {
         // Obtain dimensions from temporary image in case the original is not loaded yet (e.g. IE 7.0). 
         var tempImage = new Image();
@@ -1688,6 +1702,7 @@
     maxSize: [0, 0],
     minSize: [0, 0],
 
+    showType: "auto",   // 显示类型 (auto: 图片实际大小, reference: 参考大小)
     // Callbacks / Event Handlers
     onChange: function () {},
     onSelect: function () {},

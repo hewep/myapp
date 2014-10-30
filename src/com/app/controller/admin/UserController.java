@@ -2,8 +2,8 @@ package com.app.controller.admin;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -145,62 +145,75 @@ public class UserController extends BaseController{
 		}
 	}
 	// 上传头像
-	public void uploadImage(){
-		AjaxResult result = new AjaxResult(1, "上传成功");
-		User user = this.getCurrUser();
-		try {
-			String headPicPath = Const.HEAD_PIC_PATH + "/" + DateUtils.getCurrDate() + "/" + user.getStr("user_name");
-			
-			UploadFile uploadFile = this.getFile("head_pic", PathKit.getWebRootPath() + headPicPath);
-			String contentType = uploadFile.getContentType();
-			if(!contentType.startsWith("image")){
-				FileKit.delete(uploadFile.getFile());
-				result.setFailure("上传文件必须为图片类型");
+		public void uploadImage(){
+			AjaxResult result = new AjaxResult(1, "上传成功");
+			User user = this.getCurrUser();
+			try {
+				
+				String headPicPath = Const.HEAD_PIC_PATH + "/" + DateUtils.getCurrDate() + "/" + user.getStr("user_name");
+				String picUrl = user.get("pic_url", "");
+				if(StrKit.notBlank(picUrl)){
+					headPicPath = picUrl.substring(0, picUrl.lastIndexOf("/"+user.getStr("user_name")));
+				}
+				
+				UploadFile uploadFile = this.getFile("head_pic", PathKit.getWebRootPath() + headPicPath);
+				String contentType = uploadFile.getContentType();
+				if(!contentType.startsWith("image")){
+					FileKit.delete(uploadFile.getFile());
+					result.setFailure("上传文件必须为图片类型");
+				}
+				String suffix = FileUtils.getSuffix(uploadFile.getFile());
+				String fileName = PathKit.getWebRootPath() + headPicPath + "/" + user.getStr("user_name") + suffix;
+				File img = new File(fileName);  // 如果存在 上传的临时图片, 则删除, 重新上传
+				if(img.exists()){
+					img.delete();
+				}
+				uploadFile.getFile().renameTo(new File(fileName));
+				
+				String picPath = headPicPath +"/"+ img.getName();
+				result.setData("pic_path", picPath);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				logger.error(this.getClass().getName(), e);
+				result.setFailure("上传失败");
 			}
-			String suffix = FileUtils.getSuffix(uploadFile.getFile());
-			String fileName = PathKit.getWebRootPath() + headPicPath + "/" + user.getStr("user_name") + suffix;
-			File img = new File(fileName);  // 如果存在 上传的临时图片, 则删除, 重新上传
-			if(img.exists()){
-				img.delete();
-			}
-			uploadFile.getFile().renameTo(new File(fileName));
+			this.renderJson(result.toJson());
+		}
+		
+		public void saveImage(){
+			AjaxResult result = new AjaxResult(1, "保存成功");
+			int x = this.getParaToInt("x", 0);
+			int y = this.getParaToInt("y", 0);
 			
-			String picUrl = headPicPath +"/"+ img.getName();
-			user.set("pic_url", picUrl).update();
-			this.getSession().setAttribute(Const.CURRENT_USER, user);
-			this.setCookie(Const.AUTH_TOKEN, AuthUtils.getCookieAuthToken(this.getRequest(), user), Const.COOKIE_AGE);
-			result.setData("user", user.toJson());
-		} catch (Exception e) {
-			// TODO: handle exception
-			logger.error(this.getClass().getName(), e);
-			result.setFailure("上传失败");
+			int width = this.getParaToInt("w", 0);
+			int height = this.getParaToInt("h", 0);
+			
+			int viewHeight = this.getParaToInt("boundy");
+			String picPath = this.getPara("pic_path");
+			User user = this.getCurrUser();
+			try {
+				String srcImagePath = PathKit.getWebRootPath() + picPath;
+				if(srcImagePath.contains("?")){
+					srcImagePath = srcImagePath.substring(0, srcImagePath.lastIndexOf("?"));
+				}
+				String suffix = srcImagePath.substring(srcImagePath.lastIndexOf("."));
+				String destImagePath = srcImagePath.substring(0, srcImagePath.lastIndexOf("/")+1)+ user.getStr("user_name")+"_100"+suffix;
+				ImageUtils.cut(srcImagePath, destImagePath, x, y, width, height, viewHeight);
+				
+				String picUrl = destImagePath.substring(destImagePath.indexOf("/upload"));
+				user.set("pic_url", picUrl+"?"+new Date().getTime()).update();
+				this.getSession().setAttribute(Const.CURRENT_USER, user);
+				this.setCookie(Const.AUTH_TOKEN, AuthUtils.getCookieAuthToken(this.getRequest(), user), Const.COOKIE_AGE);
+				result.setData("user", user.toJson());
+			} catch (Exception e) {
+				// TODO: handle exception
+				logger.error(this.getClass().getName(), e);
+				result.setFailure("保存失败");
+			}
+			this.renderJson(result.toJson());
+			
 		}
-		this.renderJson(result.toJson());
-	}
-	
-	public void saveImage(){
-		AjaxResult result = new AjaxResult(1, "保存成功");
-		int x = this.getParaToInt("x", 0);
-		int y = this.getParaToInt("y", 0);
-		
-		int width = this.getParaToInt("w", 0);
-		int height = this.getParaToInt("h", 0);
-		
-		int viewHeight = this.getParaToInt("boundy");
-		User user = this.getCurrUser();
-		try {
-			String srcImagePath = PathKit.getWebRootPath() + user.getStr("pic_url");
-			String suffix = srcImagePath.substring(srcImagePath.lastIndexOf("."));
-			String destImagePath = srcImagePath.substring(0, srcImagePath.lastIndexOf("/")+1)+ user.getStr("user_name")+"_1"+suffix;
-			ImageUtils.cut(srcImagePath, destImagePath, x, y, width, height, viewHeight);
-		} catch (Exception e) {
-			// TODO: handle exception
-			logger.error(this.getClass().getName(), e);
-			result.setFailure("上传失败");
-		}
-		this.renderJson(result.toJson());
-		
-	}
 	
 	/*** 邮箱 和用户名唯一验证 ***/
 	public void getByEmail(){
