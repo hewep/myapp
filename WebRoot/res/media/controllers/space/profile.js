@@ -2,7 +2,7 @@
 /* Controllers */
 define( function(){
 	/** 用户信息 **/
-	var UserInfoCtrl = ['checkUser','$scope', '$http', function(checkUser, $scope, $http){
+	var UserInfoCtrl = ['$compile','checkUser','$scope', '$http', function($compile, checkUser, $scope, $http){
 		
 		$scope.user = angular.copy(checkUser.getUser());
 		
@@ -64,7 +64,18 @@ define( function(){
 				dataType: 'json',
                 success: function (data, status) {
                 	alert(data.msg);
-                	checkUser.update(angular.fromJson(data.user))
+                	if(data.status == 1){
+                		if($(".jcrop-holder")){
+                    		$("#pic_cut").empty();
+                    		$("#pic_cut").append(temp);
+                    		$compile($("#pic_cut"))($scope);
+                    	}
+                    	$("#photo").attr("src",data.pic_path+"?"+ new Date().getTime());
+                    	$("#preview-pane img").attr("src",data.pic_path+"?"+ new Date().getTime())
+                    	
+                    	initJcrop();
+                    	$("#pic_cut").show();
+                	}
                 },
                 error: function (data, status, e){
                 	alert("网络连接失败:"+e);
@@ -74,12 +85,14 @@ define( function(){
 		// 修改用户头像
 		
 		$scope.saveImage = function(){
-			
+			$scope.size.pic_path = $("#photo").attr("src");
+			console.log();
 			$http({	method:'post',
 				url:"user/saveImage",
 				params:$scope.size
 			}).success(function(result){
 				alert(result.msg);
+				checkUser.update(angular.fromJson(result.user))
 			}).error(function(){
 				alert("网络连接失败");
 			});
@@ -89,13 +102,21 @@ define( function(){
 		
 		require([ 'fileupload','ajaxfileupload','jcrop' ], function() {
 			//初始化
-			init();
+			initAddress();
 			
-		    var jcrop_api,
-		        boundx,
-		        boundy,
-
-		        // Grab some information about the preview pane
+		});
+		
+		
+		function initAddress(){
+			$("#province").val($scope.user.province);
+			$("#city").val($scope.user.city);
+			$("#district").val($scope.user.district);
+		}
+		
+		var temp = $("#pic_cut").children();  // 临时 图片 剪切dom
+		// 初始化 jcrop
+		function initJcrop(){
+			 var jcrop_api,boundx,boundy,
 		        $preview = $('#preview-pane'),
 		        $pcnt = $('#preview-pane .preview-container'),
 		        $pimg = $('#preview-pane .preview-container img'),
@@ -106,17 +127,16 @@ define( function(){
 		    $('#photo').Jcrop({
 		        onChange: updatePreview,
 		        onSelect: updatePreview,
-		        aspectRatio: xsize / ysize
+		        aspectRatio: xsize / ysize,
+		        showType:"reference" // 根据参考值 等比缩放
 		    },function(){
 		        // Use the API to get the real image size
 		        var bounds = this.getBounds();
 		        
 		        $scope.size.boundx = boundx = bounds[0];
 		        $scope.size.boundy = boundy = bounds[1];
-		        console.log($scope.size)
 		        jcrop_api = this;
 		        jcrop_api.animateTo([0,0,100,100]);
-		      
 		        $preview.appendTo(jcrop_api.ui.holder);
 		    });
 		    
@@ -136,17 +156,7 @@ define( function(){
 		        $.extend($scope.size, c); //  预览大小
 		      }
 		    };
-			
-		});
-		
-		
-		function init(){
-			$("#province").val($scope.user.province);
-			$("#city").val($scope.user.city);
-			$("#district").val($scope.user.district);
 		}
-		
-
 	}];
 	
 	return {userInfo: UserInfoCtrl};

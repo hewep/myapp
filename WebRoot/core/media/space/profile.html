@@ -133,21 +133,21 @@ div.radio, div.radio span, div.radio input {
 			</div>
 			<form ng-submit="updatePassword()" class="form-horizontal" name="passwordForm" novalidate >
 				<div class="control-group">
-					<label class="control-label">原密码: 
+					<label class="control-label">当前密码: 
 					</label>
 					<div class="controls">
 						<input type="password" class="m-wrap" name="old_password" id="old_password" >
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">新密码:
+					<label class="control-label">新的密码:
 					</label>
 					<div class="controls">
 						<input type="password" class="m-wrap" name="new_password" id="new_password"> 
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">重新输入密码:
+					<label class="control-label">确认密码:
 					</label>
 					<div class="controls">
 						<input type="password" class="m-wrap" name="re_password" id="re_password">
@@ -163,38 +163,26 @@ div.radio, div.radio span, div.radio input {
 		
 		<div id="image" class="tab-pane">
 			<div class="control-group">
-
-				<label class="control-label">Advanced</label>
+			
 				<div class="controls">
-					<div class="fileupload fileupload-new" data-provides="fileupload">
-						<input type="hidden" >
-						<div class="input-append">
-							<div class="uneditable-input">
-								<i class="icon-file fileupload-exists"></i> <span
-									class="fileupload-preview"></span>
-							</div>
-							<span class="btn btn-file"> 
-								<span class="fileupload-new">选择图片</span>
-								<span class="fileupload-exists">更换</span>
-								<input type="file" class="default" name="head_pic" id="head_pic">
-							</span> 
-							<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
-							
-						</div>
-					</div>
+					<input type="text" id="pic_name" style="margin-bottom:0px; padding: 6px 10px;" readOnly>
+					<input type="file" name="head_pic" id="head_pic" style="display:none" onchange="pic_name.value=this.value">
+					<button class="btn" type="button" onClick="head_pic.click();">选择文件 </button>
+					
+					<button class="btn green" type="button" ng-click="uploadImage();" style="margin-left:20px;">上传 &nbsp; </button>
 				</div>
 				
-				<button class="btn green" type="button" ng-click="uploadImage();">上传 &nbsp; </button>
 			</div>
 
-			<div class="control-group" style="text-align:left;">
-				<img ng-src="{{currentUser.pic_url}}" id="photo"
-					alt="[Jcrop Example]" style="height:380px;" />
+			<div class="control-group" id="pic_cut" style="text-align:left;display:none;">
+			
+				<img ng-src="{{pic_path}}" id="photo"
+					alt="[Jcrop Example]" h="380" w="400" />
 
 				<div id="preview-pane">
 					<div class="preview-container"
 						style="width:100px; height:100px;overflow:hidden">
-						<img ng-src="{{currentUser.pic_url}}" class="jcrop-preview"
+						<img ng-src="{{pic_path}}" class="jcrop-preview"
 							alt="Preview" />
 					</div>
 				</div>

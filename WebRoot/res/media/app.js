@@ -1,44 +1,28 @@
 'use strict';
 // Declare app level module which depends on filters, and services
-define(['controllers/index',
-        'controllers/topic',
-        'controllers/profile',
-        'controllers/message',
+define([
+        'route-config',
         'common/directives',
         'common/filters'
-],function(index, topic, profile, message){
+],function(routeConfig){
 	var app =  angular.module('myApp', ['ngRoute','ui.router','ngCookies','CommDirectives', 'CommFilters']);
-		/*
-		app.config(['$routeProvider','$locationProvider', '$httpProvider', function($routeProvider, $locationProvider,$httpProvider) {
-			 $routeProvider.when('/', {templateUrl: 'core/media/category.html', controller: index.categorys})
-							.when('/register', {templateUrl: 'core/media/register.html', controller: index.register })
-							.when('/space', {templateUrl: 'core/media/admin/space.html', controller: index.space })
-							
-			  				.when('/topic', {templateUrl:'core/media/topic/topic.html', controller: topic.topic})
-			  				.when('/topic_list/:category_id',{templateUrl:'core/media/topic/topic_list.html', controller:topic.topicList})
-			  				.when('/topic_info/:topic_id',{templateUrl:'core/media/topic/topic_info.html', controller:topic.topicInfo})
-			  				
-			  				.otherwise({redirectTo: '/'});
-			  				
-			  	// configure html5		
-			  	//$locationProvider.html5Mode(true);
-			 	
-			 	// 配置拦截器
-			 	//$httpProvider.interceptors.push('anthInterceptor');
-			}]);*/
 		
-		app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+		app.config(['$stateProvider', '$urlRouterProvider','$compileProvider', '$controllerProvider', function($stateProvider, $urlRouterProvider,$compileProvider, $controllerProvider){
+			/** 初始化routeConfig **/
+			routeConfig.setCompileProvider($compileProvider);
+	        routeConfig.setControllerProvider($controllerProvider);
+	        
 			$urlRouterProvider.otherwise('/home');
-			$stateProvider.state('home',{ url:'/home', templateUrl:'core/media/home.html',controller: index.categorys})
-						  .state('home.register',{url:'/register', templateUrl: 'core/media/register.html', controller: index.register})
-						  .state('home.topic',{url:'/topic',templateUrl:'core/media/topic/topic.html',controller: topic.topic})
-						  .state('home.topic_list',{url:'/topic_list?category_id&category_name', templateUrl:'core/media/topic/topic_list.html', controller:topic.topicList})
-						  .state('home.topic_info',{url:'/topic_info/:topic_id', templateUrl:'core/media/topic/topic_info.html', controller:topic.topicInfo})
+			$stateProvider.state('home',routeConfig.config({ url:'/home', templateUrl:'core/media/home.html',controllerName: "controllers/index", method:"categorys"}))
+						  .state('home.register',{url:'/register', templateUrl: 'core/media/register.html', controllerName: "controllers/index",method:"register"})
+						  .state('home.topic',routeConfig.config({url:'/topic',templateUrl:'core/media/topic/topic.html',controllerName: "controllers/topic",method:"topic"}))
+						  .state('home.topic_list',
+								  routeConfig.config({url:'/topic_list?category_id&category_name',templateUrl:'core/media/topic/topic_list.html', controllerName:"controllers/topic",method:"topicList"}))
+						  .state('home.topic_info',routeConfig.config({url:'/topic_info/:topic_id', templateUrl:'core/media/topic/topic_info.html', controllerName:"controllers/topic",method:"topicInfo"}))
 						  
-						  .state('space',{url:'/space',templateUrl: 'core/media/space.html'})
-						  .state('space.profile',{url:'/profile', templateUrl:'core/media/space/profile.html', controller: profile.userInfo})
-						  .state('space.message_list',{url:'/message_list',templateUrl:'core/media/space/message_list.html', controller:message.messageList});
-						  
+						  .state('space',routeConfig.config({url:'/space',templateUrl: 'core/media/space.html', controllerName:"controllers/space", method:"index"}))
+						  .state('space.profile',routeConfig.config({url:'/profile', templateUrl:'core/media/space/profile.html', controllerName: "controllers/space/profile",method:"userInfo"}))
+						  .state('space.message_list',routeConfig.config({url:'/message_list',templateUrl:'core/media/space/message_list.html', controllerName:"controllers/space/message",method:"messageList"}));;
 						  
 		}]);
 		
@@ -59,3 +43,4 @@ define(['controllers/index',
 		
 	return app;
 });
+
