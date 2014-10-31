@@ -38,12 +38,15 @@ space table(Alternative 2)
   background:#35aa47;
   border-bottom:solid 1px #41b91c;
 }
-.space-head h3 img{
-  width:100px;
-  height:100px;
+.space-head h3 .head-pic{
+  width:80px;
+  height:80px;
   background: #fff;
   padding: 3px;
   margin: 0 8px 10px 0;
+}
+.space-head h3 li img{
+  
 }
 .space-head h4 {
   color:#bac39f;
@@ -177,11 +180,12 @@ space table(Alternative 2)
 		<div class="space-head space-head-active">
 
 			<h3 class="profile-head">
-				<img class="pull-left" ng-src="{{currentUser.pic_url}}" style="width:80px;height:80px;"
-									 alt="{{currentUser.user_name}}" title="{{currentUser.user_name}}"/>
+				<img class="pull-left head-pic" ng-src="{{user.pic_url}}" style="width:80px;height:80px;"
+									 alt="{{user.user_name}}" title="{{user.user_name}}"/>
 				<ul class="pull-left unstyled">
 					<li>{{currentUser.user_name}}</li>
-					<li>{{currentUser.gender}}</li>
+					<li ng-if="user.gender == 1"><img src='/res/media/image/comm/men.png'></li>
+					<li ng-if="user.gender == 0"><img src='/res/media/image/comm/women.png'></li>
 				</ul>
 				<div class="clear"></div>
 			</h3>
@@ -195,12 +199,13 @@ space table(Alternative 2)
 			</h4>
 
 		</div>
-
-		<ul class="space-content unstyled">
+		
+		<ul class="space-content unstyled" ng-if="self">
 			<li><i class="icon-tags"></i><a ui-sref=".profile"> 修改个人资料</a></li>
 			<li><i class="icon-heart"></i><a ui-sref=".message_list"> 空间留言板</a></li>
-
+			<li><i class="icon-heart"></i><a ui-sref=".message_list"> 我的博文</a></li>
 		</ul>
+		
 		<div class="tabbable tabbable-custom">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#tab_1_1">访客统计</a></li>
@@ -225,10 +230,9 @@ space table(Alternative 2)
 		
 		<div class="space-footer">
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-				non libero magna psum olor .</p>
+			<p>你想写点啥...</p>
 
-			<a href="#" class="btn green"> Sign Up <i
+			<a href="#" class="btn green"> 发表文章 <i
 				class="m-icon-swapright m-icon-white"></i>
 
 			</a>
@@ -238,76 +242,8 @@ space table(Alternative 2)
 	</div>
 	
 	<div class="span9 page-content" >
-		<ui-view>
-		<div class="state">
-			<div class="content" id="state" contentEditable=true></div>
-			<div class="tools">
-				<ul class="opts pull-left">
-					<li class="emotion"><a href="javascript:;" id="emotions">表情</a></li>
-					<li class="img"><a href="javascript:insert_images()">图片</a></li>
-				</ul>
-				<button type="button" class="pull-right btn green">发表</button>
-				<div class="clear"></div>
-			</div>
-		</div>
-		
-		<div class="tabbable tabbable-custom">
-			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#tab_2_1">我的动态</a></li>
-				<li class=""><a data-toggle="tab" href="#tab_2_2">系统留言</a></li>
-			</ul>
-			<div class="tab-content">
-				<div id="tab_2_1" class="tab-pane active">
-					<div class=" portfolio-text">
-						<img src="res/media/image/avatar3.jpg" alt="">
-						<div class="portfolio-text-info">
-							<div class="msg">
-								<a href="http://my.oschina.net/u/1177133" target="_blank">@微浪科技</a>：你好，公司紧急招聘java、PHP、测试、前端等诸多岗位岗位，工作地点上海浦东能否留个联系方式，或者加我QQ：2262215948(备注开源)
-							</div>
-							
-							<div class="bottom">
-				    			<span class="pull-left">
-				    				1个月前
-				    			</span>
-				    			<span class="pull-right">
-				    				<a href="javascript:sendmsg(1177133,0)">回复</a> |
-				    				<a href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a> |
-				    				<a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
-				    			</span>
-							</div>
-						</div>
-					</div>
-					<div class=" portfolio-text">
-						<img src="res/media/image/avatar3.jpg" alt="">
-						<div class="portfolio-text-info">
-							<div class="msg">
-								<a href="http://my.oschina.net/u/1177133" target="_blank">@微浪科技</a>：你好，公司紧急招聘java、PHP、测试、前端等诸多岗位岗位，工作地点上海浦东能否留个联系方式，或者加我QQ：2262215948(备注开源)
-							</div>
-							
-							<div class="bottom">
-				    			<span class="pull-left">
-				    				1个月前
-				    			</span>
-				    			<span class="pull-right">
-				    				<a href="javascript:sendmsg(1177133,0)">回复</a> |
-				    				<a href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a> |
-				    				<a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
-				    			</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="tab_2_2" class="tab-pane">
-					<p>Howdy, I'm in Section 2.</p>
-					<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
-						ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-						consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-						velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
-						nostrud exerci tation.</p>
-				</div>
-			</div>
-		</div>
-		</ui-view>
+		<div ui-view="info_center"></div>
+		<div ui-view="info_center1" ></div>
 	</div>
 </div>
 <script>

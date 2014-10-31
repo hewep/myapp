@@ -29,7 +29,7 @@ public class TopicController extends BaseController{
 	
 	
 	/**
-	 * 更加类别ID 查询 帖子
+	 * 根据类别ID 查询 帖子
 	 */
 	public void findByCateId(){
 		int pageNumber = this.getParaToInt(0,1);

@@ -163,5 +163,5 @@ define( function(){
 			alert("网络连接失败");
 		});
 	}];
-	return {topic : TopicCtrl,topicList: TopicListCtrl, topicInfo:TopicInfoCtrl};
+	return {addTopic : TopicCtrl,topicList: TopicListCtrl, topicInfo:TopicInfoCtrl};
 });

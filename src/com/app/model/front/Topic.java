@@ -2,6 +2,8 @@ package com.app.model.front;
 
 import java.util.List;
 
+import com.app.util.Const;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
@@ -22,10 +24,16 @@ public class Topic extends Model<Topic>{
 	 */
 	public Page<Record> paginateByCateId(int pageNumber, int pageSize, int categoryId){
 		Page<Record> topics = Db.paginate(pageNumber, pageSize, 
-						"select a.*,IFNULL(a.view_count, 0) as view_count, IFNULL(a.reply_count,0) as reply_count, b.user_name ", 
+						"select a.*,IFNULL(a.view_count, 0) as view_count, IFNULL(a.reply_count,0) as reply_count, b.user_name, b.pic_url ", 
 						"from topic a "+
 						"left outer join user b on a.user_id = b.id "+
 						"where a.category_id = ? order by a.create_time desc", categoryId);
+		
+		for(Record topic :topics.getList()){
+			if(!StrKit.notBlank(topic.getStr("pic_url"))){
+				topic.set("pic_url", Const.HEAD_PIC_DEFAULT);
+			}
+		}
 		return topics;
 	}
 	/**

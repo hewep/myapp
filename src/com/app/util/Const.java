@@ -39,4 +39,5 @@ public class Const {
 	/**会员 信息常量**/
 	
 	public static String HEAD_PIC_PATH = "/upload/img/head_pic";
+	public static String HEAD_PIC_DEFAULT = "/res/media/image/comm/portrait.gif";
 }
