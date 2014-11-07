@@ -4,7 +4,6 @@ define( function(){
 	// 话题类别
 	var CategoryListCtrl = ['$scope', '$http', function($scope, $http){
 		$scope.categorys = {};
-		
 		$http({	method:'post',
 				url:"category/list?type=tree"
 		}).success(function(result){
@@ -15,7 +14,7 @@ define( function(){
 	}];
 	
 	//用户注册
-	var RegisterCtrl = ['$scope', '$http' ,'$location',function($scope, $http,$location){
+	var RegisterCtrl = ['$scope', '$http' ,'$state',function($scope, $http,$state){
 		$scope.user = {};
 		$scope.register = function(){
 			var rpassword = $("input[name=rpassword]").val();
@@ -26,7 +25,7 @@ define( function(){
 			$http({method:'post',url:"user/register", params:$scope.user}).success(function(result){
 				alert(result.msg);
 				if(result.status == 1){
-					$location.path("/");
+					$state.go("index", null, {reload:true} );
 				}
 			}).error(function(){
 				alert("网络连接失败");

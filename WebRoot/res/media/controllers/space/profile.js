@@ -100,7 +100,7 @@ define( function(){
 		
 		$scope.size = {}; // 格式:{"x":0,"y":0,"x2":80,"y2":80,"w":80,"h":80} 
 		
-		require([ 'fileupload','ajaxfileupload','jcrop' ], function() {
+		require(['ajaxfileupload','jcrop' ], function() {
 			//初始化
 			initAddress();
 			

@@ -2,7 +2,7 @@
 /* Controllers */
 define( function(){
 	//添加话题
-	var TopicCtrl = ['$scope', 'checkUser','$http','$location', function($scope, checkUser, $http, $location){
+	var TopicCtrl = ['$scope', 'checkUser','$http','$state', function($scope, checkUser, $http, $state){
 		$scope.topic = {};
 		$scope.categorys = {};
 		
@@ -26,7 +26,7 @@ define( function(){
 			).success(function(result){
 				
 				if(result.status == 1){
-					$location.path("topic_list/"+result.data.category_id);
+					$state.go("index.topic_list",{category_id: result.data.category_id});
 				}else{
 					alert(result.msg);
 				}
@@ -52,7 +52,7 @@ define( function(){
 	}];
 	
 	// 话题信息 及 回复
-	var TopicInfoCtrl = ['$scope','checkUser', '$http','$location','$stateParams',function($scope, checkUser,$http, $location,$stateParams){
+	var TopicInfoCtrl = ['$scope','checkUser', '$http','$stateParams',function($scope, checkUser,$http, $stateParams){
 		$scope.topic;
 		$scope.replies = [];		// 回复列表
 		
@@ -148,16 +148,16 @@ define( function(){
 	}];
 	
 	// 话题列表信息
-	var TopicListCtrl = ['$scope', '$http','$location','$stateParams', function($scope, $http, $location,$stateParams){
+	var TopicListCtrl = ['$scope', '$http','$stateParams', function($scope, $http, $stateParams){
 		$scope.topics = {};
-		$scope.category_name = $stateParams.category_name;
 		
 		var params = {category_id:$stateParams.category_id};
 		$http({	method:'post',
 			url:"topic/findByCateId",
 			params:params
-		}).success(function(data){
-			var option = {page : data, url:"topic/findByCateId",params:params};
+		}).success(function(result){
+			$scope.category_name = result.category_name;
+			var option = {page : result.datas, url:"topic/findByCateId",params:params};
 			$scope.topics = $.handlePage(option);
 		}).error(function(){
 			alert("网络连接失败");

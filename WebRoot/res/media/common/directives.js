@@ -82,7 +82,10 @@ define(['angular'], function(){
 		    };
 		});
 		
-		/** 前端页面的分页 **/
+		/** 前端页面的分页
+		 *  返回数据格式: {datas:{}}
+		 *  请求路径: url/pageNumber
+		 **/
 		directives.directive('mediaPagination', ['$http',function($http){
 			return {
 				restrict: "AE",
@@ -98,8 +101,8 @@ define(['angular'], function(){
 						$http({	method:'post',
 							url:url+"/"+param,
 							params:scope.page.params
-						}).success(function(data){
-							var option = {page : data, url:url, params:scope.page.params};
+						}).success(function(result){
+							var option = {page : result.datas, url:url, params:scope.page.params};
 							scope.page = $.handlePage(option);
 						}).error(function(){
 							alert("网络连接失败");

@@ -14,4 +14,16 @@ define(['angular'], function(){
 				return $.getDiffDate(text);
 			};
 		});
+		
+		filters.filter('summary', ['$sce',function($sce){
+			return function(text){
+				
+				var html = /(<(.[^>]*)>)/g;
+				var result = text;
+				//if(text.length > 50){
+					result = text.replace(html,"");
+				//}
+				return result;
+			};
+		}]);
 });

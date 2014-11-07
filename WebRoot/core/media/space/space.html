@@ -183,7 +183,7 @@ space table(Alternative 2)
 				<img class="pull-left head-pic" ng-src="{{user.pic_url}}" style="width:80px;height:80px;"
 									 alt="{{user.user_name}}" title="{{user.user_name}}"/>
 				<ul class="pull-left unstyled">
-					<li>{{currentUser.user_name}}</li>
+					<li>{{user.user_name}}</li>
 					<li ng-if="user.gender == 1"><img src='/res/media/image/comm/men.png'></li>
 					<li ng-if="user.gender == 0"><img src='/res/media/image/comm/women.png'></li>
 				</ul>
@@ -228,22 +228,56 @@ space table(Alternative 2)
 			</div>
 		</div>
 		
-		<div class="space-footer">
+		<div class="space-footer" ng-if="self">
 
 			<p>你想写点啥...</p>
 
-			<a href="#" class="btn green"> 发表文章 <i
+			<a href="#" class="btn green" > 发表文章 <i
 				class="m-icon-swapright m-icon-white"></i>
+			</a>
+			
+		</div>
+		
+		<div class="space-footer" ng-if="!self">
 
+			<a href="#message_modal" data-toggle="modal" class="btn green"> 
+				<span ng-if="user.gender == 1">给他留言</span>
+				<span ng-if="user.gender == 0">给她留言</span> 
+				<i class="m-icon-swapright m-icon-white"></i>
 			</a>
 
 		</div>
-
 	</div>
 	
 	<div class="span9 page-content" >
-		<div ui-view="info_center"></div>
-		<div ui-view="info_center1" ></div>
+		<ui-view></ui-view>
+	</div>
+	
+</div>
+	<!--留言-->
+<div id="message_modal" class="modal hide fade" tabindex="-1" style="width:400px;margin-left:-200px;">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<strong>留言</strong>
+	</div>
+
+	<div class="modal-body">
+
+		<div class="row-fluid">
+			<div class="alert alert-error" ng-show="comment_content_error" >
+				请输入评论内容
+			</div>
+			<div class="controls">
+				<textarea class="m-wrap" rows="4"  style="width:355px!important;" ng-model="message.content"></textarea>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal-footer" style="padding:10px 15px;">
+		<button type="button" data-dismiss="modal" class="btn">关闭</button>
+		<button type="button" class="btn green" ng-click="addMessage(2);">提 交</button>
 	</div>
 </div>
 <script>

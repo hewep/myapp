@@ -95,6 +95,7 @@ public class UserController extends BaseController{
 			User user = this.getModel(User.class).setAttrs(this.getParamMap());
 			user.set("password", DigestUtils.md5Hex(user.getStr("password")));
 			user.set("register_time", DateUtils.getCurrDate());
+			user.set("pic_url", Const.HEAD_PIC_DEFAULT);
 			user.save();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,7 +112,7 @@ public class UserController extends BaseController{
 		try {
 			User user = new User().setAttrs(this.getParamMap());
 			user.update();
-			this.getSession().setAttribute(Const.CURRENT_USER, user);
+			this.getSession().setAttribute(Const.CURRENT_USER, user.clear().findById(user.get("id")));
 			this.setCookie(Const.AUTH_TOKEN, AuthUtils.getCookieAuthToken(this.getRequest(), user), Const.COOKIE_AGE);
 		} catch (Exception e) {
 			e.printStackTrace();

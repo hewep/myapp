@@ -128,4 +128,8 @@ public class Client {
 		}
 	    
 	}
+	@Test
+	public void testInt(){
+		System.out.println(Integer.MAX_VALUE);
+	}
 }

@@ -20,7 +20,7 @@
 	<div id="navs_area">
 		<div class="pull-left">
 			<ul>
-				<li><a ui-sref="index">首 页</a></li>
+				<li><a ui-sref="index" ui-sref-opts="{reload:true}">首 页</a></li>
 				<li ><a href="#">讨论区</a></li>
 				<li ><a href="#">博 客</a></li>
 			</ul>
@@ -37,7 +37,7 @@
 					欢迎 {{currentUser.user_name}} :
 				</li>
 				<li >
-					<a ui-sref="space({user_id:currentUser.id})" >我的空间 </a>
+					<a ui-sref="space({user_id:currentUser.id})" ui-sref-opts="{reload:true}" >我的空间 </a>
 				</li>
 				<li >
 					<a href="javascript:;" ng-click="logout()" >退出 </a>
@@ -162,6 +162,7 @@ require([
 		};
 		
 	}]);
+	
 });
 </script>
 </body>

@@ -1,3 +1,9 @@
+<style>
+.tab-content .user-pic{
+	width:55px;
+	height: 55px;
+}
+</style>
 <div class="state">
 	<div class="content" id="state" contentEditable=true></div>
 	<div class="tools">
@@ -5,27 +11,28 @@
 			<li class="emotion"><a href="javascript:;" id="emotions">表情</a></li>
 			<li class="img"><a href="javascript:insert_images()">图片</a></li>
 		</ul>
-		<button type="button" class="pull-right btn green">发表</button>
+		<button type="button" class="pull-right btn green" ng-click="addMessage(1)">发表</button>
 		<div class="clear"></div>
 	</div>
 </div>
 
 <div class="tabbable tabbable-custom">
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#tab_2_1">我的动态</a></li>
-		<li class=""><a data-toggle="tab" href="#tab_2_2">系统留言</a></li>
+		<li class="active"><a data-toggle="tab" href="#tab_state" ng-click="loadMessage(1);">我的动态</a></li>
+		<li class=""><a data-toggle="tab" href="#tab_user" ng-click="loadMessage(2);">用户留言</a></li>
+		<li class=""><a data-toggle="tab" href="#tab_system" ng-click="loadMessage(3);">系统留言</a></li>
 	</ul>
 	<div class="tab-content">
-		<div id="tab_2_1" class="tab-pane active">
-			<div class=" portfolio-text">
-				<img src="res/media/image/avatar3.jpg" alt="">
+		<div id="tab_state" class="tab-pane active">
+			<div class=" portfolio-text" ng-repeat="message in messages.list">
+				<img ng-src="{{user.pic_url}}" alt="" class="user-pic">
 				<div class="portfolio-text-info">
 					<div class="msg">
-						<a href="http://my.oschina.net/u/1177133" target="_blank">@微浪科技</a>：你好，公司紧急招聘java、PHP、测试、前端等诸多岗位岗位，工作地点上海浦东能否留个联系方式，或者加我QQ：2262215948(备注开源)
+						<a ui-sref="space({user_id:user.id})" ng-bind="message.sender_name"></a>：{{message.content}}
 					</div>
 
 					<div class="bottom">
-						<span class="pull-left"> 1个月前 </span> <span class="pull-right">
+						<span class="pull-left"> {{message.create_time | diffDate}} </span> <span class="pull-right">
 							<a href="javascript:sendmsg(1177133,0)">回复</a> | <a
 							href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a>
 							| <a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
@@ -33,30 +40,50 @@
 					</div>
 				</div>
 			</div>
-			<div class=" portfolio-text">
-				<img src="res/media/image/avatar3.jpg" alt="">
-				<div class="portfolio-text-info">
-					<div class="msg">
-						<a href="http://my.oschina.net/u/1177133" target="_blank">@微浪科技</a>：你好，公司紧急招聘java、PHP、测试、前端等诸多岗位岗位，工作地点上海浦东能否留个联系方式，或者加我QQ：2262215948(备注开源)
-					</div>
-
-					<div class="bottom">
-						<span class="pull-left"> 1个月前 </span> <span class="pull-right">
-							<a href="javascript:sendmsg(1177133,0)">回复</a> | <a
-							href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a>
-							| <a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
-						</span>
-					</div>
-				</div>
-			</div>
+			
+			<media-pagination page="messages"></media-pagination>
 		</div>
-		<div id="tab_2_2" class="tab-pane">
-			<p>Howdy, I'm in Section 2.</p>
-			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation
-				ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-				consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-				velit esse molestie consequat. Ut wisi enim ad minim veniam, quis
-				nostrud exerci tation.</p>
+		
+		<div id="tab_user" class="tab-pane">
+			<div class=" portfolio-text" ng-repeat="message in messages.list">
+				<img ng-src="{{message.sender_pic_url}}" alt="" class="user-pic">
+				<div class="portfolio-text-info">
+					<div class="msg">
+						<a ui-sref="space({user_id:message.receiver_id})" target="_blank" ng-if="user.id == message.sender_id" >@ {{message.receiver_name}}</a>
+						<a ui-sref="space({user_id:message.sender_id})" target="_blank" ng-if="user.id == message.receiver_id" ng-bind="message.sender_name"></a>
+						：{{message.content}}
+					</div>
+
+					<div class="bottom">
+						<span class="pull-left"> {{message.create_time | diffDate}} </span> <span class="pull-right">
+							<a href="javascript:sendmsg(1177133,0)">回复</a> | <a
+							href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a>
+							| <a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
+						</span>
+					</div>
+				</div>
+			</div>
+			
+			<media-pagination page="messages"></media-pagination>
+		</div>
+		
+		<div id="tab_system" class="tab-pane">
+			<div class=" portfolio-text" ng-repeat="message in messages.list">
+				<img src="res/media/image/avatar3.jpg" alt="">
+				<div class="portfolio-text-info">
+					<div class="msg">
+						<a href="http://my.oschina.net/u/1177133" ng-bind="{{user.user_name}}"></a>：{{message.content}}
+					</div>
+
+					<div class="bottom">
+						<span class="pull-left"> {{message.create_time | diffDate}} </span> <span class="pull-right">
+							<a href="javascript:sendmsg(1177133,0)">回复</a> | <a
+							href="http://my.oschina.net/u/1579252/admin/msgs?user=1177133">共有1条留言</a>
+							| <a href="javascript:deleteMsgs(1579252,1177133,'微浪科技')">删除</a>
+						</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

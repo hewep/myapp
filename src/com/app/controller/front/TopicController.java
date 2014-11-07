@@ -32,12 +32,16 @@ public class TopicController extends BaseController{
 	 * 根据类别ID 查询 帖子
 	 */
 	public void findByCateId(){
+		AjaxResult result = new AjaxResult(1);
 		int pageNumber = this.getParaToInt(0,1);
 		int categoryId = this.getParaToInt("category_id");
 		
 		Page<Record> topics = Topic.dao.paginateByCateId(pageNumber, 2, categoryId);
+		Category category = Category.dao.findById(categoryId);
+		result.setData("datas", topics);
+		result.setData("category_name", category.get("name"));
 		
-		this.renderJson(topics);
+		this.renderJson(result.toJson());
 	}
 	
 	public void addOrUpdate() throws Exception{
