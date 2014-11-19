@@ -70,12 +70,12 @@ public class TopicController extends BaseController{
 	
 	public void info(){
 		AjaxResult result = new AjaxResult(1);
-		String topicId = this.getPara("topic_id");
-		Topic topic = Topic.dao.findById(topicId);
-		List<Record> replies = topic.getReplies();
+		int topicId = this.getParaToInt("topic_id");
+		Record topic = Topic.dao.getTopic(topicId);
+		List<Record> replies = Topic.dao.getReplies(topicId);
 		
 		// 更新查询次数
-		Topic.dao.updateViewCount(topic);
+		Topic.dao.updateViewCount(topicId);
 		
 		result.setData("topic", topic);
 		result.setData("replies", replies);
@@ -108,7 +108,7 @@ public class TopicController extends BaseController{
 		AjaxResult result = new AjaxResult(1,"评论成功");
 		try {
 			Comment comment = this.getModel(Comment.class).setAttrs(this.getParamMap());
-			comment.set("src_user_id", this.getCurrUser().get("id"));
+			comment.set("sender_id", this.getCurrUser().get("id"));
 			comment.set("create_time", DateUtils.getCurrDateTime());
 			comment.save();
 			result.setData("comment", Comment.dao.getComment(comment.getInt("id")));
@@ -119,5 +119,17 @@ public class TopicController extends BaseController{
 		
 		this.renderJson(result.toJson());
 		
+	}
+	
+	public void findBySearch(){
+		AjaxResult result = new AjaxResult(1,"评论成功");
+		int pageNumber = this.getParaToInt(0,1);
+		String search = this.getPara("search", "");
+		
+		Page<Record> topics = Topic.dao.paginateBySearch(pageNumber, 2, search);
+		result.setData("datas", topics);
+		result.setData("category_name", "搜索");
+		
+		this.renderJson(result.toJson());
 	}
 }

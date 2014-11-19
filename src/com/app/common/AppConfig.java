@@ -5,6 +5,7 @@ import com.app.controller.admin.MenuController;
 import com.app.controller.admin.RoleController;
 import com.app.controller.admin.UserController;
 import com.app.controller.front.CategoryController;
+import com.app.controller.front.CommentController;
 import com.app.controller.front.MessageController;
 import com.app.controller.front.TopicController;
 import com.app.controller.template.TemplateController;
@@ -56,6 +57,7 @@ public class AppConfig extends JFinalConfig {
 		me.add("/topic", TopicController.class);
 		me.add("/category", CategoryController.class);
 		me.add("/message", MessageController.class);
+		me.add("/comment", CommentController.class);
 		
 	}
 

@@ -39,15 +39,15 @@ define(['angular'], function(){
 					var editor = KindEditor.create('textarea[name='+$element.attr('name')+']', {
 		                cssPath : ['/res/plugins/kindeditor/prettify.css'],
 		                items : [
-		                        'source', '|', 'undo', 'redo', '|', 'preview', 'code', 'cut', 
-		                        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright','justifyfull', '|',
-		                        'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent','|', 'subscript',
-		                        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
-		                        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-		                        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
-		                        'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-		                        'link', 'unlink', '|', 'about'
-		                ]
+		                        'source', 'code', 'cut', '|',
+		                        'justifyleft', 'justifycenter', 'justifyright', '|',
+		                        'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent','|', 
+		                         'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+		                        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'bold',
+		                        'italic', 'underline', '|', 'image', 'multiimage',
+		                        'insertfile',  'hr', 'emoticons', 'link' 
+		                ],
+		                minWidth:400
 		            });
 					$scope.editor = editor;
 				});
@@ -138,6 +138,39 @@ define(['angular'], function(){
 		            			area = $(selects[2]).attr("name");
 		            		new PCAS(province,city,area, scope.user.province, scope.user.city, scope.user.district);
 	    				});
+		        }
+		    };
+		});
+		
+		
+		directives.directive('contenteditable', function(){
+			return {
+		        restrict: "A",
+		        require: '?ngModel',
+		            link: function( scope, element, attrs, ngModel) {
+		            	if(!ngModel){
+							return;
+						}
+		            	ngModel.$render = function() {
+	            	      element.html(ngModel.$viewValue || '');
+	            	    };
+
+	            	    // 监听change事件来开启绑定
+	            	    element.on('blur keyup change', function() {
+	            	      scope.$apply(read);
+	            	    });
+	            	    read(); // 初始化
+
+	            	    // 将数据写入model
+	            	    function read() {
+	            	      var html = element.html();
+	            	      // 当我们清空div时浏览器会留下一个<br>标签
+	            	      // 如果制定了strip-br属性，那么<br>标签会被清空
+	            	      if( attrs.stripBr && html == '<br>' ) {
+	            	        html = '';
+	            	      }
+	            	      ngModel.$setViewValue(html);
+	            	    }
 		        }
 		    };
 		});

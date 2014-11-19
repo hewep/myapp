@@ -80,4 +80,34 @@ $(function(){
 			return option.page;
 		}
 	});
+	/**绑定div slide;  option {auto:true 自动触发收起}*/
+	$.fn.extend({
+		bindSlide : function(option){
+			option = {auto:false} || option;
+			var self = $(this);
+			if(self.css("display") == "none"){
+				self.slideDown();
+				
+				if(option.auto){
+					$("body").bind("mousedown", onBodyDown);
+				}
+				return true;
+			}else{
+				self.slideUp("fast");
+				return false;
+			}
+			
+			/**鼠标事件触发**/
+			function onBodyDown(event) {
+				var target = event.srcElement || event.target;
+				if (!(target.id == self.attr("id") || $(target).parents("#"+self.attr("id")).length>0)) {
+					hideMenu();
+				}
+			}
+			function hideMenu() {
+				self.slideUp("fast");
+				$("body").unbind("mousedown", onBodyDown);
+			}
+		}
+	});
 });

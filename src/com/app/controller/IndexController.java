@@ -7,6 +7,8 @@ import com.app.model.admin.User;
 import com.app.util.AjaxResult;
 import com.app.util.AuthUtils;
 import com.app.util.Const;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 
 
 public class IndexController extends BaseController{
@@ -52,4 +54,15 @@ public class IndexController extends BaseController{
 		this.renderJson(result.toJson());
 	}
 	
+	public void account(){
+		AjaxResult result = new AjaxResult(1);
+		Record record = new Record();
+		record.set("site_view_count", Const.SITE_VIEW_ACOUNT);
+		record.set("topic_count", Db.queryLong("select count(1) from topic"));
+		record.set("user_count", Db.queryLong("select count(1) from user"));
+		record.set("newer", Db.findFirst("select user_name,id as user_id from user order by id desc limit 1"));
+		
+		result.setData("info", record);
+		this.renderJson(result.toJson());
+	}
 }

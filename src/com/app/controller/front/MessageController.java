@@ -5,6 +5,7 @@ import com.app.model.front.Message;
 import com.app.util.AjaxResult;
 import com.app.util.DateUtils;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 
 public class MessageController extends BaseController{
 	
@@ -30,12 +31,20 @@ public class MessageController extends BaseController{
 	
 	public void findByUserId(){
 		AjaxResult result = new AjaxResult(1);
-		int userId = this.getCurrUser().get("id");
-		int type = this.getParaToInt("type", 1);
+		
+		Record params = this.getParamMap("user_id", "type");
+		
 		int pageNumber = this.getParaToInt(0,1);
-		Page<Message> messages = Message.dao.paginateByUserId(pageNumber, 2, userId, type);
+		Page<Message> messages = Message.dao.paginateByUserId(pageNumber, 2, params);
 		
 		result.setData("datas", messages);
+		this.renderJson(result.toJson());
+	}
+	
+	public void deleteMessage(){
+		AjaxResult result = new AjaxResult(1);
+		int msgId = this.getParaToInt("msg_id", 0);
+		Message.dao.deleteById(msgId);
 		this.renderJson(result.toJson());
 	}
 }

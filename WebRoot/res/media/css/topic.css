@@ -74,7 +74,6 @@
 	margin-left: 5px;
 }
 .topic .reply .list .answer .body .detail{
-	padding-bottom: 10px;
 	font-size: 10.5pt;
 	min-height: 22px;
 	margin-left: 10px;
@@ -139,6 +138,9 @@
 	border-left: 5px solid #6CE26C;
 	background: #F6F6F6;
 	padding: 5px;
+}
+.reply .list li{
+	margin-bottom:10px;
 }
 .clear {
 	clear: both;

@@ -15,7 +15,7 @@ define([], function () {
     }
 
     function config(option) {
-
+    	option = angular.extend({controller:null, method:null}, option);
         var defer,
             routeDefinition = {};
         

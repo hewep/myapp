@@ -281,6 +281,7 @@ gebo_nav_mouseover = {
 		});
 	}
 };
+
 //* single image colorbox
 gebo_colorbox_single = {
 	init: function() {

@@ -14,8 +14,11 @@ define([
 	        routeConfig.setControllerProvider($controllerProvider);
 	        
 			$urlRouterProvider.otherwise('/index');
-			$stateProvider.state('index',routeConfig.config({ url:'/index', templateUrl:'core/media/index.html',controllerName: "controllers/index", method:"categorys"}))
-						  .state('index.register',routeConfig.config({url:'/register', templateUrl: 'core/media/register.html', controllerName: "controllers/index",method:"register"}))
+			$stateProvider.state('index',routeConfig.config({ url:'/index', templateUrl:'core/media/index.html',controllerName: "controllers/index", method:"index"}))
+						  .state('index.register',routeConfig.config({url:'/register', templateUrl: 'core/media/register.html', controllerName: "controllers/column",method:"register"}))
+						  .state('index.categorys',routeConfig.config({url:'/categorys', templateUrl: 'core/media/topic/category_list.html', controllerName: "controllers/column",method:"categorys"}))
+						  .state('index.search',routeConfig.config({url:'/search', templateUrl: 'core/media/topic/topic_list.html'}))
+						  
 						  .state('index.topic',routeConfig.config({url:'/topic',templateUrl:'core/media/topic/topic.html',controllerName: "controllers/topic",method:"addTopic"}))
 						  .state('index.topic_list',
 								  routeConfig.config({url:'/topic_list?category_id',templateUrl:'core/media/topic/topic_list.html', controllerName:"controllers/topic",method:"topicList"}))

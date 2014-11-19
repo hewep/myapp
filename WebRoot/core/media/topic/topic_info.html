@@ -1,5 +1,13 @@
 <link rel="stylesheet" type="text/css" href="res/media/css/topic.css">
 <link rel="stylesheet" type="text/css" href="res/plugins/code-prettify/prettify.css">
+<style>
+	hr{
+		margin:10px 0px;
+	}
+	.alert{
+		margin-bottom: 10px;
+	}
+</style>
 <div class="row-fluid ">
 	<!-- BEGIN TAB PORTLET-->
 	<div class="portlet box blue tabbable">
@@ -10,25 +18,26 @@
 			</div>
 		</div>
 
-		<div class="portlet-body" style="padding:10px 20px 20px;">
+		<div class="portlet-body" style="padding:5px 15px 20px;">
 			<div class="topic ">
 
-				<div class="question">
-					<div class="title"><h3>{{topic.title}}</h3></div>
-					<hr>
+				<div class="question" style="padding:10px;">
+					<div class="title"><h3 style="margin:0px;">{{topic.title}}</h3></div>
+					<hr style="">
 					<div class="main">
 						<div class="detail" ng-bind-html="topic.content | toHtml" prettify></div>
 						<div class="asker ">
 							<div class="info" title="hewep">
-								<span class="ainfo"> <a
-									href="http://my.oschina.net/u/1579252" class="ShowUserOutline"
-									target="_blank" title="hewep"><img class="user_pic"
-										src="http://static.oschina.net/uploads/user/789/1579252_50.jpg?t=1396164811000"
-										align="absmiddle" alt="hewep" title="hewep"
-										user="1579252"></a>
-								</span> <span class="pinfo"> <a
-									href="http://my.oschina.net/u/1579252" class="Asker-Name"
-									target="_blank">hewep</a><br> <span class="pub_time">发帖于&nbsp;{{topic.create_time | diffDate}}</span><br>
+								<span class="ainfo"> 
+									<a ui-sref="space({user_id: topic.user_id})"
+										target="_blank" title="{{topic.user_name}}">
+									<img class="user_pic" ng-src="{{topic.pic_url}}"
+										align="absmiddle" alt="{{topic.user_name}}" title="{{topic.user_name}}"></a>
+								</span> 
+								<span class="pinfo"> 
+									<a ui-sref="space({user_id: topic.user_id})"
+									target="_blank" title="{{topic.user_name}}">{{topic.user_name}}</a><br> 
+									<span class="pub_time">发帖于&nbsp;{{topic.create_time | diffDate}}</span><br>
 									<span><a href="#answers" class="answer_count">{{topic.reply_count}}</a>回/{{topic.view_count}}阅</span>
 								</span>
 							</div>
@@ -36,13 +45,7 @@
 						</div>
 
 						<div class="tags_toolbars">
-							<div class="Tags" id="tags_nav" style="margin: 15px 0;">
-								<strong>标签：</strong> <a
-									href="http://www.oschina.net/question/tag/angularjs"
-									class="tag project image" data-id="16566"
-									title="HTML的Web框架 AngularJS"><img class="user_pic"
-									src="http://static.oschina.net/uploads/logo/angularjs_DolgI.gif"
-									style="height:18px;" class="prj_logo_18">AngularJS</a>
+							<div class="Tags" id="tags_nav" style="margin-top: 15px;">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -50,20 +53,20 @@
 
 				</div>
 				<hr ng-show="replies.length > 0">
-				<div class="reply alert alert-block alert-info fade in" ng-show="replies.length > 0">
+				<div class="reply" ng-show="replies.length > 0">
 					<ul class="list" >
-						<li class="answer" ng-repeat="reply in replies">
+						<li class="answer alert alert-block alert-info" ng-repeat="reply in replies">
 							<div class="row-fluid ">
 								<div class="span3 user">
-									<span class="user_img"><a
-										href="http://my.oschina.net/arrowing" class="ShowUserOutline"
-										name="AnchorAnswer761708" target="_blank"><img class="user_pic"
-											src="http://static.oschina.net/uploads/user/120/241552_50.jpg?t=1368497625000"
-											align="absmiddle" alt="arrowing" title="arrowing"
-											class="SmallPortrait" user="241552"></a></span> <span
-										class="user_info"> <a
-										href="http://my.oschina.net/arrowing" title="arrowing"
-										target="_blank">arrowing</a> <span class="reply-time">{{reply.create_time | diffDate}}</span>
+									<span class="user_img">
+										<a ui-sref="space({user_id:reply.user_id})" target="_blank">
+											<img class="user_pic" ng-src="{{reply.pic_url}}"
+											align="absmiddle" alt="{{reply.user_name}}" title="{{reply.user_name}}"></a>
+									</span> 
+									<span class="user_info"> 
+										<a ui-sref="space({user_id:reply.user_id})" title="{{reply.user_name}}"
+										target="_blank">{{reply.user_name}}</a> <br>
+										<span class="reply-time">{{reply.create_time | diffDate}}</span>
 									</span>
 									<div class="clear"></div>
 								</div>
@@ -72,23 +75,22 @@
 									<div class="detail" ng-bind-html="reply.content | toHtml" prettify></div>
 									<div class="replies" >
 										<div class="clear"></div>
-										<strong>--- 共有 2 条评论 --- </strong>
 										<ul >
 											<li ng-repeat="comment in reply.comments">
 												<span class="comment_item">
-													<a href="" class="pull-left">{{comment.src_user_name}}</a> 
+													<a href="" class="pull-left">{{comment.sender_name}}</a> 
 													<span>&nbsp;&nbsp; {{comment.content}}</span> 
 													<span> ({{comment.create_time | diffDate}})&nbsp;&nbsp; 
 														<a href="javascript:;" ng-click="showComment(reply, comment);">回复</a>
 													</span>
 												</span>
 												<span class="comment_item" style="margin-left:20px;" ng-repeat="subComment in comment.subComments">
-													<a href="">{{subComment.src_user_name}}{{subComment.id}}</a> 
-													@ <a href="" target="_blank">{{subComment.dest_user_name}}</a>
+													<a href="">{{subComment.sender_name}}{{subComment.id}}</a> 
+													@ <a href="" target="_blank">{{subComment.receiver_name}}</a>
 														: {{subComment.content}}
 													<span class="t"> ({{subComment.create_time | diffDate}})&nbsp;&nbsp; 
 														<span class="opts">
-															<a href="javascript:;" ng-click="showComment(reply, comment, subComment.src_user_id);">回复</a>
+															<a href="javascript:;" ng-click="showComment(reply, comment, subComment.sender_id);">回复</a>
 														</span>
 													</span>
 												</span>	
@@ -99,13 +101,10 @@
 		
 									<div class="votes">
 										<span class="a_toolbar"> 
-											<a href="javascript:;" ng-click="showComment(reply);" >评论(2)</a>| <a
+											<a href="javascript:;" ng-click="showComment(reply);" >评论({{reply.comments.length}})</a>| <a
 											href="/question/answer?question=157976&amp;answer=761708">引用此答案</a>|
-											<a
-											href="javascript:report('http://www.oschina.net/question/1579252_157976#AnchorAnswer761708',761708,17)">举报</a>|
-											<span class="tail">来自 <a
-												href="http://www.oschina.net/mobile" target="_blank">Windows
-													Phone</a></span>
+											<a href="javascript:;" ng-click="">举报</a>
+											
 										</span>
 									</div>
 									

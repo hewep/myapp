@@ -1,4 +1,4 @@
-<div class="pagination pagination-right">
+<div class="pagination pagination-right" ng-if="page.items.length > 0">
 	<ul>
 		<li ng-class="{disabled:page.pageNumber == 1}"><a href="javascript:;" url="{{page.url}}" param="1">首页</a></li>
 		<li ng-class="{disabled:page.pageNumber == 1}"><a href="javascript:;" url="{{page.url}}" param="{{page.pageNumber-1}}">上一页</a></li>

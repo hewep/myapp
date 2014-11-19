@@ -120,21 +120,22 @@ define( function(){
 			});
 		};
 		
-		$scope.showComment = function(reply, comment, dest_user_id){
+		$scope.showComment = function(reply, comment, receiver_id){
 			
 			if(checkUser.isLogin()){
 				$scope.currReply = reply;
 				$scope.currComment = comment;
 				
 				$scope.comment = {};		//  评论
-				$scope.comment.reply_id = reply.id;
+				$scope.comment.type_id = reply.id;
+				$scope.comment.type = 1;    
 				$scope.comment.pid = 0;
 				if(comment){				// 回复评论 的 pid 为 一级评论的 id
 					$scope.comment.pid = comment.id;
-					if(dest_user_id){		// 回复二级评论 则评论的 目标用户 为subComment 的 src_user_id
-						$scope.comment.dest_user_id = dest_user_id;
+					if(receiver_id){		// 回复二级评论 则评论的 目标用户 为subComment 的 src_user_id
+						$scope.comment.receiver_id = receiver_id;
 					}else{
-						$scope.comment.dest_user_id = comment.src_user_id;
+						$scope.comment.receiver_id = comment.sender_id;
 					}
 				}
 				
