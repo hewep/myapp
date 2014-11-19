@@ -60,7 +60,8 @@ public class Client {
 //			System.out.println(DateUtils.getDateTimeFormat(DateUtils.parseDate("HH:mm","10:11")));
 			Calendar cal = Calendar.getInstance();
 			//cal.add(Calendar.HOUR_OF_DAY, 0.5);
-			
+			double a = 2/(float)3;
+			System.out.println(a);
 			//cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 			//System.out.println(cal.get(Calendar.DAY_OF_WEEK));
 		} catch (Exception e) {
