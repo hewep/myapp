@@ -3,13 +3,12 @@ package test;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -80,20 +79,20 @@ public class Client {
 	}
 	@Test
 	public void testMd5(){
-//		System.out.println(DigestUtils.md5Hex("hao123"));
+		System.out.println(DigestUtils.md5Hex("hao123"));
 		
-		try {
-			Class cache = Integer.class.getDeclaredClasses()[0];
-	        Field c = cache.getDeclaredField("cache");
-	        c.setAccessible(true);
-	        Integer[] array = (Integer[]) c.get(cache);
-	        //array[132] = array[136];
-	        
-	        System.out.println(Arrays.toString(array));
-	        System.out.printf("%d",2 + 2); 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		try {
+//			Class cache = Integer.class.getDeclaredClasses()[0];
+//	        Field c = cache.getDeclaredField("cache");
+//	        c.setAccessible(true);
+//	        Integer[] array = (Integer[]) c.get(cache);
+//	        //array[132] = array[136];
+//	        
+//	        System.out.println(Arrays.toString(array));
+//	        System.out.printf("%d",2 + 2); 
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		
 	}
 	@Test
@@ -128,5 +127,9 @@ public class Client {
 			e.printStackTrace();
 		}
 	    
+	}
+	@Test
+	public void testInt(){
+		System.out.println(Integer.MAX_VALUE);
 	}
 }

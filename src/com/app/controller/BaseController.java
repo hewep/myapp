@@ -47,6 +47,14 @@ public class BaseController extends Controller{
 		}
 		return record;
 	}
+	
+	public Record getParamMap(String... paramNames){
+		Record record = new Record();
+		for (String paramName : paramNames) {
+			record.set(paramName, this.getPara(paramName));
+		}
+		return record;
+	}
 	/***gson方式  json 转化为对象  ***/
 	public <T> T fromJson(String json, Type type){
 		Gson gson = new Gson();

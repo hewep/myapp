@@ -5,70 +5,66 @@
 	}
 </style>
 <div class="row-fluid" >
-	<div class="search">
-		<div class="pull-left input-append" style="margin-bottom:0px;">
-			<input class="m-wrap" style="width:400px;" type="text" placeholder="Search Mail">
-			<button class="btn green" type="button">搜 索 &nbsp; <i class="m-icon-swapright m-icon-white"></i></button>
-		</div>
-		<div class="pull-right">
-			<p>我要提问</p>
-			<a ui-sref=".topic" class="btn green">
-				发 贴 &nbsp; <i class="icon-comment-alt"></i>
-			</a>
-		</div>
-		<div class="clear"></div>
-	</div>
-		
-</div>
-
-<div class="row-fluid">
-	<div class="span12">
-		<div class="alert alert-block alert-success fade in" style="margin:0px;padding:2px 4px;">今日:1234 | 昨日:123 | 帖子:22222 | 会员:9888 | 欢迎新会员:aaa</div>
-		<!-- END PAGE TITLE & BREADCRUMB-->
-	</div>
-</div>
-<div class="page-container" >
-	<ui-view>
-		<!-- 默认显示 -->
-		<div class="row-fluid" ng-repeat=" category in categorys">
-			<div class="portlet box green">
-		
-				<div class="portlet-title">
-					<div class="caption"> <i class="fa fa-reorder"></i>
-						{{category.name}}
-					</div>
-					<div class="tools">
-						<a href="javascript:;" class="collapse"></a>
-					</div>
+	<div class="span9">
+		<div class="row-fluid" >
+			<div class="search">
+				<div class="pull-left input-append" style="margin-bottom:0px;">
+					<input class="m-wrap" style="width:200px;" type="text" id="search" placeholder="输入搜索内容">
+					<button class="btn green" type="button" ng-click="search();">搜 索 &nbsp; <i class="m-icon-swapright m-icon-white"></i></button>
 				</div>
-		
-				<div class="portlet-body">
-					<div class="row-fluid" >
-						<div class="span3 responsive"  ng-repeat="subCate in category.subCates" data-tablet="span6" data-desktop="span3">
-		
-							<div class="dashboard-stat blue">
-		
-								<div class="visual">
-									<i class="icon-heart-empty"></i>
-								</div>
-		
-								<div class="details">
-									<div class="number">{{subCate.topic_count}}</div>
-									<div class="desc">{{subCate.name}}</div>
-								</div>
-		
-								<a class="more" ui-sref="index.topic_list({category_id:subCate.id,category_name:subCate.name})">
-									进入
-									<i class="m-icon-swapright m-icon-white"></i>
-								</a>
-							</div>
-		
-						</div>
-					</div>
+				<div class="pull-right">
+					<p>我要提问</p>
+					<a ui-sref=".topic" class="btn green">
+						发 贴 &nbsp; <i class="icon-comment-alt"></i>
+					</a>
 				</div>
+				<div class="clear"></div>
+			</div>
+				
+		</div>
 		
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="alert alert-block alert-success fade in" style="margin:0px;padding:2px 4px;">
+					今日:{{info.site_view_count}} | 帖子:{{info.topic_count}} | 会员:{{info.user_count}} | 欢迎新会员:{{info.newer.user_name}}
+				</div>
 			</div>
 		</div>
+		<div class="page-container" >
+			<ui-view>
+			</ui-view>
+		</div>
+	</div>
+
+	<div class="span3">
+	
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"> <i class="fa fa-reorder"></i>
+					标签
+				</div>
+			</div>
+	
+			<div class="portlet-body">
+				<ul class="unstyled inline sidebar-tags">
+					<li><a href="#"><i class="icon-tags"></i> Business</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Music</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Internet</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Money</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Google</a></li>
+					<li><a href="#"><i class="icon-tags"></i> TV Shows</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Education</a></li>
+					<li><a href="#"><i class="icon-tags"></i> People</a></li>
+					<li><a href="#"><i class="icon-tags"></i> People</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Math</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Photos</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Electronics</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Apple</a></li>
+					<li><a href="#"><i class="icon-tags"></i> Canada</a></li>
+				</ul>
+			</div>
+	
+		</div>
 		
-	</ui-view>
+	</div>
 </div>

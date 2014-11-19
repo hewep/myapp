@@ -2,6 +2,7 @@
 <head>
 <base href="/">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv=X-UA-Compatible content=IE=EmulateIE9>
 <link rel="stylesheet" type="text/css" href="res/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="res/bootstrap/css/bootstrap-responsive.min.css">
 <link rel="stylesheet" type="text/css" href="res/plugins/font-awesome/font-awesome.min.css">
@@ -13,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="res/media/css/comm.css">
 
 <script data-main="res/media/main.js" src="res/require.js" ></script>
+
 </head>
 <body class="page-header-fixed" ng-controller="IndexCtrl">
 <!--導航-->
@@ -20,7 +22,7 @@
 	<div id="navs_area">
 		<div class="pull-left">
 			<ul>
-				<li><a ui-sref="index">首 页</a></li>
+				<li><a ui-sref="index" ui-sref-opts="{reload:true}">首 页</a></li>
 				<li ><a href="#">讨论区</a></li>
 				<li ><a href="#">博 客</a></li>
 			</ul>
@@ -37,7 +39,7 @@
 					欢迎 {{currentUser.user_name}} :
 				</li>
 				<li >
-					<a ui-sref="space({user_id:currentUser.id})" >我的空间 </a>
+					<a ui-sref="space({user_id:currentUser.id})" ui-sref-opts="{reload:true}" >我的空间 </a>
 				</li>
 				<li >
 					<a href="javascript:;" ng-click="logout()" >退出 </a>
@@ -162,6 +164,7 @@ require([
 		};
 		
 	}]);
+	
 });
 </script>
 </body>

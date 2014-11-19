@@ -35,12 +35,12 @@
 						
 						<div class="row-fluid portfolio-block" ng-repeat="topic in topics.list">
 							<div class="span10 portfolio-text">
-								<img class="user_pic" ng-src="{{topic.pic_url}}" alt="" style="width:40px;">
+								<img class="user_pic" ng-src="{{topic.pic_url}}" alt="" >
 								<div class="portfolio-text-info">
 									<strong><a ui-sref="index.topic_info({topic_id:topic.id})" target="_blank">{{topic.title}}</a></strong>
-									<div  ng-bind-html="topic.content | toHtml" prettify></div>
+									<div  ng-bind-html="topic.content | summary | toHtml" prettify></div>
 									<div class="clear"></div>
-									<em class="portfolio-bottom" style="margin-right:3px;display:block;"><i class="icon-rss"></i> <a ui-sref="space({user_id:topic.user_id})">{{topic.user_name }}{{topic.user_id}}</a> 发布于
+									<em class="portfolio-bottom" style="margin-right:3px;display:block;"><i class="icon-rss"></i> <a ui-sref="space({user_id:topic.user_id})">{{topic.user_name }}</a> 发布于
 										{{topic.create_time | diffDate}}
 									</em>
 								</div>

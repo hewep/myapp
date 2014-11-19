@@ -1,43 +1,42 @@
 'use strict';
 /* Controllers */
 define( function(){
-	// 话题类别
-	var CategoryListCtrl = ['$scope', '$http', function($scope, $http){
-		$scope.categorys = {};
+	var IndexCtrl = ['$state','$scope', '$http', function($state, $scope, $http){
 		
 		$http({	method:'post',
-				url:"category/list?type=tree"
+			url:"account"
 		}).success(function(result){
-			$scope.categorys = angular.fromJson(result.data);
+			$scope.info = result.info;
 		}).error(function(){
 			alert("网络连接失败");
 		});
-	}];
-	
-	//用户注册
-	var RegisterCtrl = ['$scope', '$http' ,'$location',function($scope, $http,$location){
-		$scope.user = {};
-		$scope.register = function(){
-			var rpassword = $("input[name=rpassword]").val();
-			if(rpassword != $scope.user.password){
-				alert("密码输入不一致");return;
-			}
-			
-			$http({method:'post',url:"user/register", params:$scope.user}).success(function(result){
-				alert(result.msg);
-				if(result.status == 1){
-					$location.path("/");
-				}
+		
+		//跳转的转台
+		var dest_state = $state.$current.name;
+		if($state.$current.name.indexOf(".") < 0){
+			dest_state = "index.categorys";
+		}
+		
+		$scope.topics = {};
+		$scope.search = function(){
+			var search = $("#search").val();
+			var params = {search:search};
+			$http({	method:'post',
+				url:"topic/findBySearch",
+				params:params
+			}).success(function(result){
+				$scope.category_name = result.category_name;
+				var option = {page : result.datas, url:"topic/findBySearch",params:params};
+				$scope.topics = $.handlePage(option);
+				
+				$state.go("index.search");
 			}).error(function(){
 				alert("网络连接失败");
 			});
 		};
 		
+		$state.go(dest_state);
 	}];
 	
-	var SpaceCtrl = ['$scope', '$http', function($scope, $http){
-		
-		
-	}];
-	return {categorys: CategoryListCtrl, register: RegisterCtrl, space:SpaceCtrl};
+	return {index:IndexCtrl};
 });
