@@ -1,0 +1,38 @@
+<div class="row-fluid">
+	<ul class="breadcrumb">
+		<li><i class="icon-home"></i> <a href="index.html">个人空间</a> <i
+			class="icon-angle-right"></i></li>
+		<li><a href="#">发表文章</a></li>
+	</ul>
+	<!-- BEGIN FORM-->
+	<form ng-submit="save()" name="topicForm">
+		<div class="control-group ">
+			<label class="control-label">标题</label>
+			<div class="controls">
+				<input type="text" class="span12 m-wrap" required name="title" ng-model="blog.title" placeholder="文章标题">
+			</div>
+		</div>
+
+		<div class="control-group ">
+			<label class="control-label">摘要</label>
+			<div class="controls">
+				<textarea type="text" class="span12 m-wrap" ng-model="blog.snippet" placeholder="文章摘要, 言简意赅"></textarea>
+			</div>
+		</div>
+
+		<div class="control-group ">
+			<label class="control-label">内容</label>
+			<div class="controls">
+				<textarea id="content" name="content" init-kind-editor class="span12" style="height:350px;"></textarea>
+			</div>
+		</div>
+
+		<div class="form-actions">
+			<button type="submit" class="btn blue">发表</button>
+			<span >
+				<span class="error_msg" ng-show="topic_content_error">请填写内容</span>
+			</span>
+		</div>
+	</form>
+	<!-- END FORM-->
+</div>
