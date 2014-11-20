@@ -38,7 +38,8 @@ define([
 							  									 method:"messageList"}))
 						  
 						  .state('space.profile',routeConfig.config({url:'/profile', templateUrl:'core/media/space/profile.html', controllerName: "controllers/space/profile",method:"userInfo"}))
-						  .state('space.message_list',routeConfig.config({url:'/message_list',templateUrl:'core/media/space/message_list.html', controllerName:"controllers/space/message",method:"messageList"}));;
+						  .state('space.message_list',routeConfig.config({url:'/message_list',templateUrl:'core/media/space/message_list.html', controllerName:"controllers/space/message",method:"messageList"}))
+						  .state('space.blog',routeConfig.config({url:'/blog',templateUrl:'core/media/space/blog.html', controllerName:"controllers/space/blog",method:"addBlog"}));
 						  
 		}]);
 		
