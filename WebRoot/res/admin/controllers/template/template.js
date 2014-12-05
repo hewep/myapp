@@ -49,22 +49,31 @@ define( function(){
 		$scope.batchGenerate = function(){
 			var values = dataTable.getCheckedValues($("#template_list"),"template_id");
 			window.location.href = "template/batchGenerate?ids="+values+"&"+$.param($scope.param);
-		}
+		};
 	}];
 	
 	var TemplateInfoCtrl = ['$scope', '$http','$routeParams','$location', function($scope, $http, $routeParams, $location){
 		$scope.template = {};
-		
+		var editor;
 		$http({method:'post',
 			  url:"template/findById",
 			  params:{template_id:$routeParams.template_id}
 		}).success(function(result){
 			$scope.template = result.data;
+			$("#editor").text(result.data.content);
+			var suffix = result.data.type;
+			require(['ace'],function(){
+				editor = ace.edit("editor");
+			    editor.setTheme("ace/theme/dawn");
+			    editor.getSession().setMode("ace/mode/"+suffix);
+			});
 		}).error(function(){
 			alert("网络连接失败");
 		});
 		
 		$scope.addOrUpdate = function(){
+			$scope.template.content = editor.getValue();
+			
 			$http({
 				  method:'post',
 				  url:"template/addOrUpdate",
@@ -79,6 +88,7 @@ define( function(){
 				alert("网络连接失败");
 			});
 		};
+		
 	}];
 	
 	return {list : TemplateListCtrl, info : TemplateInfoCtrl};

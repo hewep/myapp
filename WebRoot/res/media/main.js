@@ -5,11 +5,7 @@ require.config({
 		angularRoute : '../lib/angular-route',
 		uiRouter : '../lib/angular-ui-router',
 		angularCookie : '../lib/angular-cookies.min',
-		
-		jquery : '../common/js/jquery.min',
-		jqueryUtils : '../common/js/jquery-utils',
-		region : '../common/js/region',
-		bootstrap : '../bootstrap/js/bootstrap.min',
+		bootstrap : '../lib/bootstrap/js/bootstrap.min',
 		
 		totop:'../plugins/UItoTop/jquery.ui.totop.min',
 		kindEditor : '../plugins/kindeditor/kindeditor',
@@ -21,6 +17,18 @@ require.config({
 		ajaxfileupload:'../plugins/file-upload/ajaxfileupload',
 		fileupload:'../plugins/file-upload/bootstrap-fileupload',
 		jcrop:'../plugins/jcrop/jquery.Jcrop',
+		
+		/**代码编辑器*/
+		cm: '../plugins/codemirror',
+		
+		/**右键菜单*/
+		contextmenu:'../plugins/contextmenu/jquery.contextmenu',
+		/**复制到剪切板*/
+		zclip: '../plugins/zclip/jquery.zclip',
+		
+		jquery : '../common/js/jquery.min',
+		jqueryUtils : '../common/js/jquery-utils',
+		region : '../common/js/region',
 		
 		application : 'js/application'
 	},
@@ -37,13 +45,11 @@ require.config({
         'emotion':{deps:['jquery']},
         
         'datepicker':{deps:['jquery']},
-        
         'jqueryUtils' : {deps:['jquery']}		// jquery 扩展工具
     }
 });
 	
 require(['uiRouter',
-		 'angularRoute',
 		 'angularCookie',
 		 'bootstrap',
 		 'totop',

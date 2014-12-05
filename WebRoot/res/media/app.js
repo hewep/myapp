@@ -5,7 +5,7 @@ define([
         'common/directives',
         'common/filters'
 ],function(routeConfig){
-	var app =  angular.module('myApp', ['ngRoute','ui.router','ngCookies','CommDirectives', 'CommFilters']);
+	var app =  angular.module('myApp', ['ui.router','ngCookies','CommDirectives', 'CommFilters']);
 		
 		app.config(['$stateProvider', '$urlRouterProvider','$compileProvider', '$controllerProvider', 
 		            function($stateProvider, $urlRouterProvider,$compileProvider, $controllerProvider){
@@ -23,7 +23,10 @@ define([
 						  .state('index.topic_list',
 								  routeConfig.config({url:'/topic_list?category_id',templateUrl:'core/media/topic/topic_list.html', controllerName:"controllers/topic",method:"topicList"}))
 						  .state('index.topic_info',routeConfig.config({url:'/topic_info/:topic_id', templateUrl:'core/media/topic/topic_info.html', controllerName:"controllers/topic",method:"topicInfo"}))
-						  
+						  /**在线工具*/
+						  .state('tools',routeConfig.config({url:'/tools', templateUrl:'core/media/tools/tools.html'}))
+						  .state('tools.code_runner',routeConfig.config({url:'/code_runner', templateUrl:'core/media/tools/code_runner.html',controllerName:"controllers/tools/code_runner", method:"codeRuuner"}))
+						  /**我的空间*/
 						  .state('space',routeConfig.config({url:'/space/:user_id',templateUrl: 'core/media/space/space.html', controllerName:"controllers/space/space", method:"index"}))
 						  .state('space.info_center',routeConfig.config({url:'/info_center/:self',
 							  									 templateUrl: function(stateParams){

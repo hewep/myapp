@@ -3,7 +3,7 @@
 -- Server version:               5.0.22-community-nt - MySQL Community Edition (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2014-11-19 17:45:46
+-- Date/time:                    2014-12-05 17:52:09
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -14,6 +14,27 @@
 DROP DATABASE IF EXISTS `myapp`;
 CREATE DATABASE IF NOT EXISTS `myapp` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `myapp`;
+
+
+-- Dumping structure for table myapp.blog
+DROP TABLE IF EXISTS `blog`;
+CREATE TABLE IF NOT EXISTS `blog` (
+  `id` varchar(20) NOT NULL default '',
+  `category_id` int(11) NOT NULL,
+  `user_id` int(11) default NULL,
+  `title` varchar(100) default NULL,
+  `snippet` varchar(500) default NULL COMMENT '文章摘要',
+  `content` text,
+  `tags` varchar(500) default NULL,
+  `create_time` datetime default NULL,
+  `allow_comment` tinyint(4) default '1',
+  `remark` text,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table myapp.blog: ~0 rows (approximately)
+/*!40000 ALTER TABLE `blog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blog` ENABLE KEYS */;
 
 
 -- Dumping structure for table myapp.category
@@ -39,7 +60,11 @@ INSERT INTO `category` (`id`, `pid`, `name`, `content`, `type`, `topic_count`, `
 	(8, 1, '住哪儿', NULL, '服务', NULL, NULL),
 	(9, 2, '世界杯', NULL, '交流', NULL, NULL),
 	(10, 1, '测试1', NULL, NULL, NULL, NULL),
-	(11, 1, '测试2', NULL, NULL, NULL, NULL);
+	(11, 1, '测试2', NULL, NULL, NULL, NULL),
+	(12, 0, '技术', '编程', 'blog', NULL, NULL),
+	(13, 12, 'java', NULL, 'blog', NULL, NULL),
+	(14, 12, '前端开发', NULL, 'blog', NULL, NULL),
+	(15, 0, '关注', NULL, 'blog', NULL, NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
 
@@ -155,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table myapp.message: ~13 rows (approximately)
+-- Dumping data for table myapp.message: ~15 rows (approximately)
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
 INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `content`, `msg_type`, `create_time`, `remark`) VALUES
 	(1, 12, 10, 'BBB', 2, '2014-11-06 11:19:22', NULL),
@@ -171,7 +196,8 @@ INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `content`, `msg_type`, 
 	(11, 8, 10, 'love', 2, '2014-11-07 16:57:00', NULL),
 	(12, 8, NULL, 'vvvv', 1, '2014-11-07 17:00:52', NULL),
 	(13, 8, NULL, 'mmmmmm', 1, '2014-11-14 16:26:43', NULL),
-	(14, 8, NULL, '那你呢', 1, '2014-11-19 16:00:53', NULL);
+	(14, 8, NULL, '那你呢', 1, '2014-11-19 16:00:53', NULL),
+	(15, 8, NULL, '33333', 1, '2014-11-20 09:11:21', NULL);
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 
 
@@ -244,8 +270,8 @@ CREATE TABLE IF NOT EXISTS `template` (
 -- Dumping data for table myapp.template: ~6 rows (approximately)
 /*!40000 ALTER TABLE `template` DISABLE KEYS */;
 INSERT INTO `template` (`id`, `name`, `content`, `type`, `created_time`) VALUES
-	(1, 'java_controller', '<#assign modelNameLower=modelName?uncap_first/>\npackage com.app.controller.template;\n\nimport com.app.common.page.DataTablePage;\nimport com.app.controller.BaseController;\nimport com.app.model.${parentDir}.${modelName};\nimport com.app.util.AjaxResult;\nimport com.jfinal.kit.StrKit;\nimport com.jfinal.plugin.activerecord.Page; \npublic class ${modelName}Controller extends BaseController{\n	public void list() throws Exception{\n		int draw = this.getParaToInt("draw",0); \n		int pageNumber = this.getParaToInt("pageNumber", 1);\n		int pageSize = this.getParaToInt("pageSize", 1);\n		Page<${modelName}> page = ${modelName}.dao.paginate(pageNumber, pageSize, "select *", "from ${modelNameLower}");\n		\n		this.renderJson(new DataTablePage(page,draw).toJson());\n		\n	}\n	\n	public void addOrUpdate(){\n		AjaxResult result = new AjaxResult(1,"添加成功");\n		try {\n			${modelName} ${modelNameLower}= this.getModel(${modelName}.class).setAttrs(this.getParamMap());\n			String ${modelNameLower}Id = ${modelNameLower}.get("id", "");\n			if(StrKit.notBlank(${modelNameLower}Id)){\n				${modelNameLower}.update();\n			}else{\n				${modelNameLower}.save();\n			}\n			\n		} catch (Exception e) {\n			e.printStackTrace();\n			result.setMsg(0, "添加失败："+e.getMessage());\n		}\n		this.renderJson(result.toJson());\n	}\n	\n	public void findById(){\n		AjaxResult result = new AjaxResult(1, "");\n		String ${modelNameLower}Id = this.getPara("${modelNameLower}_id", "");\n		${modelName} ${modelNameLower} = Template.dao.findById(${modelNameLower}Id);\n		result.setData("data", ${modelNameLower});\n		this.renderJson(result.toJson());\n	}\n	\n	public void delById() throws Exception{\n		AjaxResult result = new AjaxResult(1, "");\n		String ids = this.getPara("ids", "");\n		try {\n			int count = ${modelName}.dao.deleteByIds(ids);\n		} catch (Exception e) {\n			// TODO: handle exception\n			e.printStackTrace();\n			result.setFailure("删除失败:"+e.getMessage());\n		}\n		this.renderJson(result.toJson());\n	}\n	\n}', 'java', NULL),
-	(2, 'js_controller', '\'use strict\';\n/* Controllers */\ndefine( function(){\n	var ${modelName}ListCtrl = [\'$scope\', \'$http\',\'dataTable\', function($scope, $http, dataTable){\n		\n		$scope.${modelNameLower}s = {};\n		var option = {\n			"columnDefs":[{"orderable":false, "targets":[0]}],\n			"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],\n			"columns":[\n			      {"data":"id"},\n			      {"data":"name"},\n			      {"data":"type"},\n			      {"data":"created_time"},\n			      {"title":"操作", \n			       "className":"center",\n			       "data" : function(row, type, val, meta){\n			    	   return \'&lt;a class="btn btn-mini btn-warning" href="/admin#/${modelNameLower}_info?${modelNameLower}_id=\'+row.id+\'" &gt;\'+\n                       \'&lt;i class="icon-edit icon-white"&gt;&lt;/i&gt; 编辑&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;\';\n			       }\n			      }\n			]\n		};\n		\n		var params = {"check_box":true, "id":"${modelNameLower}_list", url:"${modelNameLower}/list"};\n		var table = dataTable.init(params,option);\n		\n		$scope.del = function(){\n			var values = dataTable.getCheckedValues($("#${modelNameLower}_list"),"${modelNameLower}_id");\n			if(values == ""){\n				alert("请选择要删除的记录");return;\n			}\n			\n			$http({method:\'post\',\n				  url:"${modelNameLower}/delById",\n				  params:{ids:values}\n			}).success(function(result){\n				if(result.status == 1){\n					table.ajax.reload();\n				}else{\n					alert(result.msg);\n				}\n			}).error(function(){\n				alert("网络连接失败");\n			});\n		};\n	}];\n	\n	var ${modelName}InfoCtrl = [\'$scope\', \'$http\',\'$routeParams\',\'$location\', function($scope, $http, $routeParams, $location){\n		$scope.${modelNameLower} = {};\n		\n		$http({method:\'post\',\n			  url:"${modelNameLower}/findById",\n			  params:{${modelNameLower}_id:$routeParams.${modelNameLower}_id}\n		}).success(function(result){\n			$scope.${modelNameLower} = result.data;\n		}).error(function(){\n			alert("网络连接失败");\n		});\n		\n		$scope.addOrUpdate = function(){\n			\n			$http({\n				  method:\'post\',\n				  url:"${modelNameLower}/addOrUpdate",\n				  params:$scope.${modelNameLower}\n			}).success(function(result){\n				if(result.status == 1){\n					$location.path("/${modelNameLower}_list");\n				}else{\n					alert(result.msg);\n				}\n			}).error(function(){\n				alert("网络连接失败");\n			});\n		};\n		\n	}];\n	\n	return {list : ${modelName}ListCtrl, info : ${modelName}InfoCtrl};\n});', 'js', NULL),
+	(1, 'java_controller', '<#assign modelNameLower=modelName?uncap_first/>\npackage com.app.controller.template;\n\nimport com.app.common.page.DataTablePage;\nimport com.app.controller.BaseController;\nimport com.app.model.${parentDir}.${modelName};\nimport com.app.util.AjaxResult;\nimport com.jfinal.kit.StrKit;\nimport com.jfinal.plugin.activerecord.Page; \npublic class ${modelName}Controller extends BaseController{\n	public void list() throws Exception{\n		int draw = this.getParaToInt("draw",0); \n		int pageNumber = this.getParaToInt("pageNumber", 1);\n		int pageSize = this.getParaToInt("pageSize", 1);\n		Page<${modelName}> page = ${modelName}.dao.paginate(pageNumber, pageSize, "select *", "from ${modelNameLower}");\n		\n		this.renderJson(new DataTablePage(page,draw).toJson());\n		\n	}\n	\n	public void addOrUpdate(){\n		AjaxResult result = new AjaxResult(1,"添加成功");\n		try {\n			${modelName} ${modelNameLower}= this.getModel(${modelName}.class).setAttrs(this.getParamMap());\n			String ${modelNameLower}Id = ${modelNameLower}.get("id", "");\n			if(StrKit.notBlank(${modelNameLower}Id)){\n				${modelNameLower}.update();\n			}else{\n				${modelNameLower}.save();\n			}\n			\n		} catch (Exception e) {\n			e.printStackTrace();\n			result.setMsg(0, "添加失败："+e.getMessage());\n		}\n		this.renderJson(result.toJson());\n	}\n	\n	public void findById(){\n		AjaxResult result = new AjaxResult(1, "");\n		String ${modelNameLower}Id = this.getPara("${modelNameLower}_id", "");\n		${modelName} ${modelNameLower} = Template.dao.findById(${modelNameLower}Id);\n		result.setData("data", ${modelNameLower});\n		this.renderJson(result.toJson());\n	}\n	\n	public void delById() throws Exception{\n		AjaxResult result = new AjaxResult(1, "");\n		String ids = this.getPara("ids", "");\n		try {\n			int count = ${modelName}.dao.deleteByIds(ids);\n		} catch (Exception e) {\n			// TODO: handle exception\n			e.printStackTrace();\n			result.setFailure("删除失败:"+e.getMessage());\n		}\n		this.renderJson(result.toJson());\n	}\n}', 'java', NULL),
+	(2, 'js_controller', '\'use strict\';\n/* Controllers */\ndefine( function(){\n	var ${modelName}ListCtrl = [\'$scope\', \'$http\',\'dataTable\', function($scope, $http, dataTable){\n		\n		$scope.${modelNameLower}s = {};\n		var option = {\n			"columnDefs":[{"orderable":false, "targets":[0]}],\n			"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],\n			"columns":[\n			      {"data":"id"},\n			      {"data":"name"},\n			      {"data":"type"},\n			      {"data":"created_time"},\n			      {"title":"操作", \n			       "className":"center",\n			       "data" : function(row, type, val, meta){\n			    	   return \'&lt;a class="btn btn-mini btn-warning" href="/admin#/${modelNameLower}_info?${modelNameLower}_id=\'+row.id+\'" &gt;\'+\n                       \'&lt;i class="icon-edit icon-white"&gt;&lt;/i&gt; 编辑&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;\';\n			       }\n			      }\n			]\n		};\n		\n		var params = {"check_box":true, "id":"${modelNameLower}_list", url:"${modelNameLower}/list"};\n		var table = dataTable.init(params,option);\n		\n		$scope.del = function(){\n			var values = dataTable.getCheckedValues($("#${modelNameLower}_list"),"${modelNameLower}_id");\n			if(values == ""){\n				alert("请选择要删除的记录");return;\n			}\n			\n			$http({method:\'post\',\n				  url:"${modelNameLower}/delById",\n				  params:{ids:values}\n			}).success(function(result){\n				if(result.status == 1){\n					table.ajax.reload();\n				}else{\n					alert(result.msg);\n				}\n			}).error(function(){\n				alert("网络连接失败");\n			});\n		};\n	}];\n	\n	var ${modelName}InfoCtrl = [\'$scope\', \'$http\',\'$routeParams\',\'$location\', function($scope, $http, $routeParams, $location){\n		$scope.${modelNameLower} = {};\n		\n		$http({method:\'post\',\n			  url:"${modelNameLower}/findById",\n			  params:{${modelNameLower}_id:$routeParams.${modelNameLower}_id}\n		}).success(function(result){\n			$scope.${modelNameLower} = result.data;\n		}).error(function(){\n			alert("网络连接失败");\n		});\n		\n		$scope.addOrUpdate = function(){\n			\n			$http({\n				  method:\'post\',\n				  url:"${modelNameLower}/addOrUpdate",\n				  params:$scope.${modelNameLower}\n			}).success(function(result){\n				if(result.status == 1){\n					$location.path("/${modelNameLower}_list");\n				}else{\n					alert(result.msg);\n				}\n			}).error(function(){\n				alert("网络连接失败");\n			});\n		};\n		\n	}];\n	\n	return {list : ${modelName}ListCtrl, info : ${modelName}InfoCtrl};\n});', 'javascript', NULL),
 	(3, 'html_list', '<div class="row-fluid">\n	<div class="span12">\n		<div id="jCrumbs" class="breadCrumb module" >\n		    <ul>\n		        <li>\n		            <a href="#"><i class="icon-home"></i></a>\n		        </li>\n		        <li>\n		            <a href="#">${menuName} 管理</a>\n		        </li>\n		        <li>\n		            	${menuName}列表 \n		        </li>\n		    </ul>\n		</div>					  \n		\n		<div class="w-box">\n			<div class="w-box-header">\n				${menuName}列表\n				<div class="pull-right">\n					<a class="btn btn-mini btn-primary" href="/admin#/${modelNameLower}_info" >\n                            <i class="icon-plus icon-white"></i> 新增\n                    </a>\n                    \n                    <a class="btn btn-mini btn-danger" href="javascript:;" ng-click="del();" >\n                            <i class="icon-remove icon-white"></i> 删除\n                    </a>\n				</div>\n			</div>\n				<table id="template_list" class="table table-striped table-bordered table-hover dTableR">\n					<thead>\n						<tr>\n							<th></th>\n							<th class="optional">编号</th>\n							<th class="essential persist">名称</th>\n							<th class="optional">类型</th>\n							<th class="optional">创建时间</th>\n							<th></th>\n						</tr>\n					</thead>\n				</table>\n		</div>\n		\n	</div>\n</div>', 'html', NULL),
 	(4, 'html_info', '<div class="row-fluid">\n	\n	<div class="w-box">\n		<div class="w-box-header">\n			${menuName}信息\n			<div class="pull-right">\n				<a class="btn btn-mini btn-gebo" href="/admin#/${modelNameLower}_list" >\n                           	 返回列表\n                   </a>\n			</div>\n		</div>\n		\n		<div class="w-box-content" style="padding-top:10px;">\n			<form class="form-horizontal"  novalidate="novalidate">\n				<input type="hidden" ng-model="${modelNameLower}.id">\n				<div class="row-fluid">\n					<div class="span6">\n						<div class="control-group">\n							<label class="control-label"> 名称: <span class="required">*</span>\n							</label>\n							<div class="controls">\n								<input type="text" class="span6 m-wrap" required\n									ng-model="template.name">\n							</div>\n						</div>\n					</div>\n					<div class="span6">\n						<div class="control-group">\n							<label class="control-label"> 类型: <span class="required">*</span>\n							</label>\n							<div class="controls">\n								<input type="text" class="span6 m-wrap" required\n									ng-model="template.type" >\n							</div>\n						</div>\n					</div>\n				</div>\n				\n			</form>\n				\n		</div>\n		\n		<div style="margin-top:10px;text-algin:right;">\n			<button class="btn btn-primary" ng-click="addOrUpdate();">提 交</button>\n		</div>\n	</div>\n		\n</div>', 'html', NULL),
 	(5, 'java_model', 'package com.app.model.${parentDir};\n\nimport com.app.model.BaseModel;\nimport com.jfinal.plugin.activerecord.Db;\n\npublic class ${modelName} extends BaseModel<${modelName}>{\n\n	private static final long serialVersionUID = 186684748419693891L;\n	\n	public static final ${modelName} dao = new ${modelName}();\n	\n	public int deleteByIds(String ids){\n		return Db.update("delete from ${modelNameLower} where id in ("+ids+")");\n	}\n}', 'java', NULL),
@@ -286,7 +312,7 @@ INSERT INTO `topic` (`id`, `category_id`, `user_id`, `title`, `tags`, `content`,
 	(12, 5, 8, 'ccc', 'ss', 'sdfsdfsdf', 3, NULL, '2014-10-31 10:48:59', NULL),
 	(13, 5, 8, 'vvv', 's', 'sdf', 3, NULL, '2014-11-04 13:56:19', NULL),
 	(14, 5, 10, 'nn', NULL, 'eee', NULL, NULL, '2014-11-04 15:30:12', NULL),
-	(15, 5, 10, 'ffff', NULL, 'sss', 68, 2, '2014-11-04 15:35:06', NULL);
+	(15, 5, 10, 'ffff', NULL, 'sss', 69, 2, '2014-11-04 15:35:06', NULL);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 
 

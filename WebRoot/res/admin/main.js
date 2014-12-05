@@ -3,12 +3,14 @@ require.config({
 	paths : {
 		angular : '../lib/angular',
 		angularRoute : '../lib/angular-route',
+		bootstrap : '../lib/bootstrap/js/bootstrap.min',
+		
 		jquery : '../common/js/jquery.min',
-		bootstrap : '../bootstrap/js/bootstrap.min',
-		qtip: '../plugins/qtip2/jquery.qtip.min',	
-		colorbox: '../plugins/colorbox/jquery.colorbox.min',
 		cookie:'../common/js/jquery.cookie.min',
 		actual:'../common/js/jquery.actual.min',
+		
+		qtip: '../plugins/qtip2/jquery.qtip.min',	
+		colorbox: '../plugins/colorbox/jquery.colorbox.min',
 		antiscroll:'../plugins/antiscroll/antiscroll',
 		totop:'../plugins/UItoTop/jquery.ui.totop.min',
 		breadcrumb: '../plugins/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min',
@@ -19,6 +21,8 @@ require.config({
 		/**zTree*/
 		ztree_core : '../plugins/zTree/js/jquery.ztree.core-3.5',
 		ztree_excheck : '../plugins/zTree/js/jquery.ztree.excheck-3.5',
+		/**ace*/
+		ace : '../plugins/ace-build/ace',
 		/**validate**/
 		validate : '../plugins/validation/jquery.validate',
 		application:'js/application'

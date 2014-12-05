@@ -3,18 +3,17 @@
 <base href="/">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv=X-UA-Compatible content=IE=EmulateIE9>
-<link rel="stylesheet" type="text/css" href="res/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="res/bootstrap/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" type="text/css" href="res/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="res/lib/bootstrap/css/bootstrap-responsive.min.css">
 <link rel="stylesheet" type="text/css" href="res/plugins/font-awesome/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="res/media/css/glyphicons.css">
 <link rel="stylesheet" type="text/css" href="res/media/css/style.css">
 <link rel="stylesheet" type="text/css" href="res/media/css/style-metro.css">
 <link rel="stylesheet" type="text/css" href="res/media/css/search.css">
-<link rel="stylesheet" type="text/css" href="res/plugins/kindeditor/default/default.css">
 <link rel="stylesheet" type="text/css" href="res/media/css/comm.css">
+<link rel="stylesheet" type="text/css" href="res/plugins/kindeditor/default/default.css">
 
 <script data-main="res/media/main.js" src="res/require.js" ></script>
-
 </head>
 <body class="page-header-fixed" ng-controller="IndexCtrl">
 <!--導航-->
@@ -25,6 +24,7 @@
 				<li><a ui-sref="index" ui-sref-opts="{reload:true}">首 页</a></li>
 				<li ><a href="#">讨论区</a></li>
 				<li ><a href="/res/media/blog/index.htm" target="_blank">博 客</a></li>
+				<li ><a ui-sref="tools" ui-sref-opts="{reload:true}">在线工具</a></li>
 			</ul>
 		</div>
 		<div class="pull-right" ng-show="!isLogin">

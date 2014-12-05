@@ -1,0 +1,150 @@
+<style>
+[class^="tool-"],[class*=" tool-"] {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	margin-top: 1px;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("res/media/module/tools/icons.png");
+	background-repeat: no-repeat;
+}
+.tool-js{
+	background-position: 0px 0;
+}
+.tool-css{
+	background-position: -50px 0;
+}
+.thumbnail{
+	padding:10px;
+	border: 2px solid #ccc;
+}
+.thumbnail .hd [class^="tool-"]{
+	float:left;
+	margin-right:5px;
+}
+
+.thumbnail .ft .more{
+	clear: both;
+	display: block;
+	padding: 5px 10px 5px 10px;
+	text-transform: uppercase;
+	font-weight: 300;
+	font-size: 11px;
+	color: #000;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	background-color:#eee;
+}
+.thumbnail .ft {
+	clear:both;
+	margin-top:5px;
+	border-top: 1px solid #DDD;
+}
+.thumbnail .ft .more i{
+	float: right;
+	
+}
+</style>
+<div class="row-fluid" >
+	<div class="span9">
+		<div class="page-container" >
+			<ui-view>
+			<div class="row-fluid">
+				<div class="span4">
+					<div class="thumbnail">
+						<div class="hd">
+							<a target="_blank" href="" class="tool-js"></a>
+							<h5>
+								<a target="_blank" href="/coderunner/">javaScript工具</a>
+							</h5>
+							<div class="item-desc">在线js美化,混淆</div>
+						</div>
+						<div class="ft">
+							<a class="more" href="">
+							进入 <i class="m-icon-swapright"></i>
+							</a>
+						</div>
+
+					</div>
+				</div>
+				
+				<div class="span4">
+					<div class="thumbnail">
+						<div class="hd">
+							<a target="_blank" href="" class="tool-js"></a>
+							<h5>
+								<a target="_blank" href="/coderunner/">javaScript工具</a>
+							</h5>
+							<div class="item-desc">在线js美化,混淆</div>
+						</div>
+						<div class="ft">
+							<a class="more" href="">
+							进入 <i class="m-icon-swapright"></i>
+							</a>
+						</div>
+
+					</div>
+				</div>
+				
+				<div class="span4">
+					<div class="thumbnail">
+						<div class="hd">
+							<a target="_blank" href="" class="tool-js"></a>
+							<h5>
+								<a target="_blank" href="/coderunner/">javaScript工具</a>
+							</h5>
+							<div class="item-desc">在线js美化,混淆</div>
+						</div>
+						<div class="ft">
+							<a class="more" href="">
+							进入 <i class="m-icon-swapright"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			</ui-view>
+		</div>
+	</div>
+
+	<div class="span3">
+	
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"> <i class="fa fa-reorder"></i>
+					常用工具
+				</div>
+			</div>
+			<div class="portlet-body">
+				<ul class="unstyled inline sidebar-tags">
+					<li><a ui-sref=".code_runner"><i class="icon-tags"></i> 在线代码运行</a></li>
+					<li><a href="#"><i class="icon-tags"></i> SQL代码格式化</a></li>
+					<li><a href="#"><i class="icon-tags"></i> 正则表达式</a></li>
+					<li><a href="#"><i class="icon-tags"></i> 智能机器人</a></li>
+					<li><a href="#"><i class="icon-tags"></i> 英语单词查询</a></li>
+					<li><a href="#"><i class="icon-tags"></i> MD5加密</a></li>
+					<li><a href="#"><i class="icon-tags"></i> 邮政编码查询</a></li>
+				</ul>
+			</div>
+	
+		</div>
+		
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"> <i class="fa fa-reorder"></i>
+					资源整合
+				</div>
+			</div>
+			<div class="portlet-body">
+				<ul class="unstyled inline sidebar-tags">
+					<li><a href="#"><i class="icon-tags"></i> web插件</a></li>
+					<li><a href="#"><i class="icon-tags"></i> 关注网站</a></li>
+				</ul>
+			</div>
+	
+		</div>
+	</div>
+</div>
