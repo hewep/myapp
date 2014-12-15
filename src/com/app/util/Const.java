@@ -1,6 +1,9 @@
 package com.app.util;
 
 public class Const {
+	/***/
+	public static String WEB_SIT = "http://localhost:82";
+	public static String BLOG_PATH = "/upload/img/blog";
 	/**用户常量**/
 	public static String DEFAULT_PWD = "000000";			// 默认登录密码
 	public static String ONLINE_USER_LIST = "online_user_list"; // 在线用户列表
@@ -40,4 +43,5 @@ public class Const {
 	
 	public static String HEAD_PIC_PATH = "/upload/img/head_pic";
 	public static String HEAD_PIC_DEFAULT = "/res/media/image/comm/portrait.gif";
+	
 }

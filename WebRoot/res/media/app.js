@@ -3,9 +3,10 @@
 define([
         'route-config',
         'common/directives',
-        'common/filters'
+        'common/filters',
+        'common/services'
 ],function(routeConfig){
-	var app =  angular.module('myApp', ['ui.router','ngCookies','CommDirectives', 'CommFilters']);
+	var app =  angular.module('myApp', ['ui.router','ngCookies','CommDirectives', 'CommFilters', 'CommServices']);
 		
 		app.config(['$stateProvider', '$urlRouterProvider','$compileProvider', '$controllerProvider', 
 		            function($stateProvider, $urlRouterProvider,$compileProvider, $controllerProvider){
@@ -42,7 +43,9 @@ define([
 						  
 						  .state('space.profile',routeConfig.config({url:'/profile', templateUrl:'core/media/space/profile.html', controllerName: "controllers/space/profile",method:"userInfo"}))
 						  .state('space.message_list',routeConfig.config({url:'/message_list',templateUrl:'core/media/space/message_list.html', controllerName:"controllers/space/message",method:"messageList"}))
-						  .state('space.blog',routeConfig.config({url:'/blog',templateUrl:'core/media/space/blog.html', controllerName:"controllers/space/blog",method:"addBlog"}));
+						  .state('space.blog',routeConfig.config({url:'/blog/:blog_id',templateUrl:'core/media/space/blog.html', controllerName:"controllers/space/blog",method:"add"}))
+						  .state('space.blog_info',routeConfig.config({url:'/blog_info/:blog_id',templateUrl:'core/media/space/blog_info.html', controllerName:"controllers/space/blog",method:"info"}))
+						  .state('space.blog_list',routeConfig.config({url:'/blog_list',templateUrl:'core/media/space/blog_list.html', controllerName:"controllers/space/blog",method:"list"}));
 						  
 		}]);
 		

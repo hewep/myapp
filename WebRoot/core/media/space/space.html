@@ -227,10 +227,10 @@ space table(Alternative 2)
 		<ul class="space-content unstyled" ng-if="self">
 			<li><i class="icon-tags"></i><a ui-sref=".profile"> 修改个人资料</a></li>
 			<li><i class="icon-heart"></i><a ui-sref=".message_list"> 空间留言板</a></li>
-			<li><i class="icon-heart"></i><a ui-sref=".message_list"> 我的博客</a></li>
+			<li><i class="icon-heart"></i><a ui-sref=".blog_list"> 我的博客</a></li>
 		</ul>
 		<ul class="space-content unstyled" ng-if="!self">
-			<li><i class="icon-heart"></i><a ui-sref=".message_list"> 全部博客</a></li>
+			<li><i class="icon-heart"></i><a ui-sref=".blog_list"> 全部博客</a></li>
 		</ul>
 		
 		<div class="tabbable tabbable-custom">
@@ -259,7 +259,7 @@ space table(Alternative 2)
 
 			<p>你想写点啥...</p>
 
-			<a ui-sref=".blog" class="btn green" > 发表文章 <i
+			<a ui-sref=".blog({blog_id:0})" ui-sref-opts="{reload:true}" class="btn green" > 发表文章 <i
 				class="m-icon-swapright m-icon-white"></i>
 			</a>
 			

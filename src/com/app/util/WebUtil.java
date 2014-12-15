@@ -31,7 +31,10 @@ public class WebUtil {
 		}
 		return ip;
 	}
-
+	
+	public static String getRealServerURL(HttpServletRequest request){
+		return request.getScheme() + "://" + request.getRemoteAddr() + ":" + request.getServerPort();
+	}
 	/**
 	 * 获取请求路径
 	 * 

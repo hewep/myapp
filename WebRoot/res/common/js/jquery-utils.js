@@ -23,6 +23,15 @@ $(function(){
 		}
 	});
 	
+	//首字母大写
+	String.prototype.toCapUpperCase = function(){
+		if(this == ''){
+			return '';
+		}
+		
+		return this.substring(0,1).toUpperCase()+this.substring(1);
+	};
+	
 	$.extend({
 		getDiffDate : function(time){
 			var times = "";

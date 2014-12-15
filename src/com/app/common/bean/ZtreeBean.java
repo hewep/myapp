@@ -32,6 +32,36 @@ public class ZtreeBean {
 	private boolean open;
 	
 	private boolean checked;
+	
+	public ZtreeBean(){
+		
+	}
+	public ZtreeBean(String id, String pId, String name) {
+		super();
+		this.id = id;
+		this.pId = pId;
+		this.name = name;
+	}
+	
+	
+	public ZtreeBean(String id, String pId, String name, boolean open) {
+		super();
+		this.id = id;
+		this.pId = pId;
+		this.name = name;
+		this.open = open;
+	}
+	
+	public ZtreeBean(String id, String pId, String name, boolean open,
+			boolean checked) {
+		super();
+		this.id = id;
+		this.pId = pId;
+		this.name = name;
+		this.open = open;
+		this.checked = checked;
+	}
+
 
 	/**
 	 * @return the id

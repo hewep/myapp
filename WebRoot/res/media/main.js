@@ -9,7 +9,6 @@ require.config({
 		
 		totop:'../plugins/UItoTop/jquery.ui.totop.min',
 		kindEditor : '../plugins/kindeditor/kindeditor',
-		prettify : '../plugins/code-prettify/prettify.min',
 		emotion:'../plugins/emotions/emotion',		// qq表情
 		
 		datepicker:'../plugins/datepicker/bootstrap-datepicker',
@@ -18,6 +17,11 @@ require.config({
 		fileupload:'../plugins/file-upload/bootstrap-fileupload',
 		jcrop:'../plugins/jcrop/jquery.Jcrop',
 		
+		/**代码着色*/
+		prettify : '../plugins/code-prettify/prettify.min',
+		shCore: '../plugins/syntaxhighlighter/scripts/shCore',
+		shBrushJScript: '../plugins/syntaxhighlighter/scripts/shBrushJScript',
+		shBrushJava: '../plugins/syntaxhighlighter/scripts/shBrushJava',
 		/**代码编辑器*/
 		cm: '../plugins/codemirror',
 		
@@ -25,6 +29,9 @@ require.config({
 		contextmenu:'../plugins/contextmenu/jquery.contextmenu',
 		/**复制到剪切板*/
 		zclip: '../plugins/zclip/jquery.zclip',
+		/**zTree*/
+		ztree_core : '../plugins/zTree/js/jquery.ztree.core-3.5',
+		ztree_excheck : '../plugins/zTree/js/jquery.ztree.excheck-3.5',
 		
 		jquery : '../common/js/jquery.min',
 		jqueryUtils : '../common/js/jquery-utils',
@@ -44,6 +51,7 @@ require.config({
         'totop' : {deps:['jquery']},
         'emotion':{deps:['jquery']},
         
+        'shBrushJScript':{deps:['shCore']},
         'datepicker':{deps:['jquery']},
         'jqueryUtils' : {deps:['jquery']}		// jquery 扩展工具
     }

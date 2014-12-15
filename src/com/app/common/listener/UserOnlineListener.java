@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
-import com.app.model.admin.User;
+import com.app.admin.model.User;
 import com.app.util.Const;
 
 public class UserOnlineListener implements HttpSessionBindingListener,Serializable{

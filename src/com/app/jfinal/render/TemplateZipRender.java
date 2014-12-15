@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.app.model.template.Template;
+import com.app.admin.model.template.Template;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
 

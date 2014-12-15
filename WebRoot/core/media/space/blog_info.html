@@ -1,0 +1,39 @@
+<link rel="stylesheet" type="text/css" href="res/plugins/syntaxhighlighter/styles/shCoreDefault.css">
+<link rel="stylesheet" type="text/css" href="res/media/css/space/blog-common.css">
+<ul class="breadcrumb">
+	<li><i class="icon-home"></i> <a href="index.html">个人空间</a> <i
+		class="icon-angle-right"></i></li>
+	<li><a href="#">博客</a></li>
+</ul>
+
+<div class="blog">
+	<div class="blog-title">
+		<h2>
+			<span class="icon" style="background:#44ac57;" title="原创博客">原</span>
+			<span class="icon" style="background:#fd6245;" title="个人博客列表置顶博客">顶</span>
+			<span ng-bind="blog.title"></span>
+		</h2>
+		<div class="blog-stat">
+			发表于5天前(2014-12-05 13:47)&nbsp;&nbsp; 阅读（<span class="g">78</span>）&nbsp;|&nbsp;评论（<a
+				href="#comments"><span class="g">0</span></a>） |&nbsp;收藏 （<span
+				class="g" id="favorite_count">8</span>）
+		</div>
+		<div class="tvote" onclick="vote(352736)"
+			title="都有0个人赞过了，你也来赞一下吧！不会扣积分哦！">
+			<em class="vote">赞</em><em class="num vote_count">0</em>
+		</div>
+	</div>
+	
+	<div class="blog-snippet">
+		<em class="corner">摘要</em> <span ng-bind="blog.snippet"></span>
+		<div class="BlogTags">
+			<a href="http://www.oschina.net/search?scope=blog&amp;q=javascript"
+				class="tag" ng-bind="blog.tags"></a>
+		</div>
+	</div>
+	<div class="blog-content" ng-bind-html="blog.content | toHtml"></div>
+	<div class="blog-links">
+		<ul>
+		</ul>
+	</div>
+</div>

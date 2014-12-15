@@ -1,6 +1,6 @@
 'use strict';
 
-/* Directives */
+/* service */
 define(['angular'], function(){
 	var comm = angular.module('CommServices',[]);
 	

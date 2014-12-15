@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import javax.servlet.http.HttpSession;
 
-import com.app.model.admin.User;
+import com.app.admin.model.User;
 
 /**
  * TODO 在线用户管理类.

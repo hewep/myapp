@@ -1,14 +1,16 @@
 <link rel="stylesheet" type="text/css" href="res/plugins/codemirror/lib/codemirror.css">
+<link rel="stylesheet" id="cm_theme" type="text/css" href="res/plugins/codemirror/theme/blackboard.css">
+<link rel="stylesheet" type="text/css" href="res/plugins/codemirror/addon/fold/foldgutter.css">
 <link rel="stylesheet" type="text/css" href="res/plugins/contextmenu/jquery.contextmenu.css">
 <style>
 .runner-toolbar{
 	margin-bottom:2px;
 }
 .runner-panel{
-	border:1px solid #ccc;
+	border:2px solid #ccc;
 }
 .runner-result{
-	border-left:2px solid #aaa;
+	border-left:1px solid #aaa;
 	height:300px;
 	overflow:auto;
 	padding:5px 10px 5px 0px;
@@ -24,6 +26,8 @@
 				<option value="js" data-mode="javascript">JavaScript</option>
 				<option value="java" data-mode="java">Java</option>
 			</select>
+			<span>主题:</span>
+			<select style="margin-bottom:0px;width:100px;" ng-model="currTheme" ng-options="theme for theme in themes" ng-change="changeTheme();"></select>
 			<button id="copy" class="btn blue" type="button">
 				<i class="icon-copy"></i> 复制(<u>C</u>opy)
 			</button>
@@ -32,10 +36,10 @@
 			</button>
 		</div>
 		<div class="row-fluid runner-panel">
-			<div class="span8 runner-code">
-				<textarea id="code" name="code"></textarea>
+			<div class="span8 runner-code" style="width:70%;">
+				<textarea id="code" code-mirror ng-model="code"></textarea>
 			</div>
-			<div class="span4 runner-result">
+			<div class="span4 runner-result" style="margin-left:0px;width:30%;">
 				<div id="result" style="height:100%;width:100%;"></div>
 			</div>
 		</div>

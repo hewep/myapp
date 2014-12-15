@@ -8,7 +8,7 @@ import com.jfinal.kit.JsonKit;
 
 /**
  * ajax 结果类<br>
- * 状态  status : 0-失败, 1-成功
+ * 状态  status  0:失败, 1:成功<br>
  * 消息  msg
  * 数据  data 
  * @author hewep

@@ -33,32 +33,4 @@ define(['angular'], function(){
 		};
 	});
 	
-	comm.directive('prettify', function(){
-		return {
-			require : '?^ngModel',
-			link : function(scope, element, attrs, ngModel){
-				if(!ngModel){
-					return;
-				}
-				
-				ngModel.$render = function() {
-				    //element.text(ngModel.$viewValue || '');
-					$("#test").val(ngModel.$viewValue || '');
-				};
-				
-				 // 监听change事件来开启绑定
-			    $(element).on('blur keyup change', function(e) {
-			    	scope.$apply(read);
-			    });
-			    read(); // 初始化
-			    
-			    // 将数据写入model
-			    function read() {
-			    	var text = $("#test").val();
-			        ngModel.$setViewValue(text);
-			    }
-			}
-		}
-		
-	});
 });

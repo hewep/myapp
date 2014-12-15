@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href="res/media/css/space/blog-common.css">
+<ul class="breadcrumb">
+	<li><i class="icon-home"></i> <a href="index.html">个人空间</a> <i
+		class="icon-angle-right"></i></li>
+	<li><a href="#">博客列表</a></li>
+</ul>
+<div class="blog-list">
+	<ul>
+		<li class="blog" ng-repeat="blog in blogs">
+			<div class="blog-title">
+					<h2>
+						<span class="icon original" title="原创博客">原</span>
+						<span class="icon recommend" title="首页推荐过的博客">荐</span>
+						<span class="icon bear" title="个人博客列表置顶博客">顶</span>
+						<a ui-sref="space.blog_info({blog_id:blog.id})" ng-bind="blog.title"></a>
+					</h2>
+					<div class="blog-snippet">
+						<span ng-bind="blog.snippet"></span>
+					</div>
+					<div class="blog-stat" ng-if="self">
+						发表于{{blog.create_time | diffDate}}({{blog.create_time}})&nbsp;&nbsp; 阅读（<span class="g">85</span>）&nbsp;|&nbsp;评论（<a
+							href="#comments"><span class="g">0</span></a>） |&nbsp;收藏 （<span
+							class="g" id="favorite_count">8</span>） 
+						<span class="admin">
+							<a ui-sref="space.blog({blog_id:blog.id})">编辑</a>&nbsp;|&nbsp;
+							<a href="javascript:;" ng-click="deleteBlog(blog.id);">删除</a>
+						</span>
+					</div>
+					<div class="outline" ng-if="!self">
+						<span class="catalog"> 分类: <a href="?catalog=589"
+							ng-bind="blog.category_name"></a>
+						</span> <span class="stat">统计: 186评/73480阅/36赞</span> <span class="stat">统计:
+							186评/73480阅/36赞</span>
+					</div>
+			</div>
+			
+			<span class="date"><em>18</em>2009-02</span>
+		</li>
+	</ul>
+	<div ng-if="blogs.length == 0">还没发表博文</div>
+</div>

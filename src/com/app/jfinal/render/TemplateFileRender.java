@@ -11,7 +11,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.app.model.template.Template;
+import com.app.admin.model.template.Template;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
 

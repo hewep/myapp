@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="res/plugins/zTree/css/zTreeStyle/zTreeStyle.css">
 <div class="row-fluid">
 	<ul class="breadcrumb">
 		<li><i class="icon-home"></i> <a href="index.html">个人空间</a> <i
@@ -9,7 +10,7 @@
 		<div class="control-group ">
 			<label class="control-label">标题</label>
 			<div class="controls">
-				<input type="text" class="span12 m-wrap" required name="title" ng-model="blog.title" placeholder="文章标题">
+				<input type="text" class="span12 m-wrap" name="title" ng-model="blog.title" placeholder="文章标题">
 			</div>
 		</div>
 
@@ -23,20 +24,21 @@
 		<div class="control-group ">
 			<label class="control-label">内容</label>
 			<div class="controls">
-				<textarea id="content" name="content" init-kind-editor class="span12" style="height:350px;"></textarea>
+				<kind-editor ng-model="blog.content" file="blog/upload"></kind-editor>
 			</div>
 		</div>
 		<div class="control-group ">
 			<label class="control-label">标签</label>
 			<div class="controls">
-				<input type="text" class="span12 m-wrap" required name="tags" ng-model="blog.tags" placeholder="标签">
+				<input type="text" class="span12 m-wrap" name="tags" ng-model="blog.tags" placeholder="标签">
 			</div>
 		</div>
 		<div class="control-group ">
-			<label class="control-label">分类</label>
-			<div class="controls">
-				<select></select>
+			<label class="control-label pull-left">分类</label>
+			<div class="controls pull-left">
+				<ul id="cates_tree" class="ztree"></ul>
 			</div>
+			<div class="clear"></div>
 		</div>
 		<div class="form-actions">
 			<button type="submit" class="btn blue">发表</button>

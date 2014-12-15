@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.app.model.admin.User;
+import com.app.admin.model.User;
 /**
  * 鉴权工具类
  * @author hewep
